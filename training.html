@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blacktide Field Sales Playbook & Training Manual | Fort Collins, CO</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0F172A;
+      --navy-card: #1E293B;
+      --glacier: #F8FAFC;
+      --glacier-muted: #CBD5E1;
+      --glacier-dim: #94A3B8;
+      --teal: #0284C7;
+      --teal-bright: #38BDF8;
+      --coral: #E11D48;
+      --coral-bright: #FB7185;
+      --amber: #F59E0B;
+      --emerald: #059669;
+      --emerald-bright: #34D399;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #070B14;
+      color: var(--glacier);
+      font-family: var(--font);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 295px;
+      background: rgba(15, 23, 42, 0.96);
+      border-right: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+    }
+    .brand-title {
+      font-size: 19px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .brand-sub {
+      font-size: 12px;
+      color: var(--teal-bright);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 18px;
+    }
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-link {
+      display: block;
+      padding: 9px 13px;
+      border-radius: 10px;
+      color: var(--glacier-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .nav-link:hover, .nav-link.active {
+      background: rgba(2, 132, 199, 0.18);
+      color: var(--teal-bright);
+      border-left: 3px solid var(--teal-bright);
+    }
+    .quick-launch-box {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .launch-btn {
+      display: block;
+      text-align: center;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      color: #fff;
+      background: var(--teal);
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .launch-btn.secondary { background: var(--emerald); }
+
+    .main-content {
+      flex: 1;
+      max-width: 980px;
+      padding: 36px 42px 80px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .main-content { padding: 24px 18px 60px; }
+    }
+    .banner-card {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.24), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+    .chapter-card {
+      background: rgba(30, 41, 59, 0.72);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 26px;
+      scroll-margin-top: 24px;
+    }
+    .chapter-eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal-bright);
+      margin-bottom: 6px;
+    }
+    h1 { font-size: 32px; font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+    h2 { font-size: 24px; font-weight: 800; margin-bottom: 14px; color: var(--glacier); }
+    h3 { font-size: 18px; font-weight: 800; margin: 18px 0 8px; color: var(--teal-bright); }
+    p { font-size: 15.5px; color: var(--glacier-muted); margin-bottom: 12px; }
+    ul, ol { padding-left: 22px; margin-bottom: 14px; color: var(--glacier-muted); }
+    li { margin-bottom: 7px; }
+    strong { color: var(--glacier); }
+
+    .alert-box {
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 16px 0;
+      border-left: 4px solid var(--coral);
+      background: rgba(225, 29, 72, 0.12);
+    }
+    .alert-box.emerald {
+      border-left-color: var(--emerald-bright);
+      background: rgba(5, 150, 105, 0.14);
+    }
+    .alert-box.amber {
+      border-left-color: var(--amber);
+      background: rgba(245, 158, 11, 0.14);
+    }
+
+    .script-dialogue {
+      background: #0B111E;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 14px 0;
+      font-size: 15.5px;
+    }
+    .speaker-you { color: var(--emerald-bright); font-weight: 800; }
+    .speaker-them { color: #FBBF24; font-weight: 800; }
+    .stage-dir { color: var(--teal-bright); font-style: italic; font-size: 14px; }
+
+    .flashcard {
+      background: #0F172A;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .flashcard:hover { border-color: var(--teal-bright); }
+    .flashcard-q {
+      font-weight: 800;
+      color: #FBBF24;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .flashcard-a {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--glacier);
+    }
+    .flashcard.open .flashcard-a { display: block; }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .tier-box {
+      background: #0F172A;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .tier-box.target {
+      border: 2px solid var(--emerald-bright);
+      background: rgba(5, 150, 105, 0.12);
+    }
+    .copy-ad-btn {
+      background: rgba(2, 132, 199, 0.25);
+      border: 1px solid var(--teal-bright);
+      color: var(--teal-bright);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: rgba(15,23,42,0.7);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .checklist-item input { width: 18px; height: 18px; accent-color: var(--emerald-bright); }
+
+    @media print {
+      body { background: #fff !important; color: #0F172A !important; display: block !important; }
+      .sidebar { display: none !important; }
+      .main-content { max-width: 100% !important; padding: 10px !important; }
+      .chapter-card, .banner-card, .tier-box, .script-dialogue {
+        background: #fff !important;
+        color: #0F172A !important;
+        border: 1px solid #CBD5E1 !important;
+        break-inside: avoid;
+      }
+      p, li, strong, h1, h2, h3 { color: #0F172A !important; }
+      .flashcard-a { display: block !important; color: #0F172A !important; }
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div>
+      <div class="brand-title">💧 BLACKTIDE</div>
+      <div class="brand-sub">Fort Collins Field Sales Playbook</div>
+      <ul class="nav-list">
+        <li><a href="#facts" class="nav-link active">⚡ Fast-Facts &amp; Numbers Cheat Sheet</a></li>
+        <li><a href="#part1" class="nav-link">Part 1: FoCo Water Intel Report</a></li>
+        <li><a href="#part2" class="nav-link">Part 2: SpringWell vs. Pro Systems</a></li>
+        <li><a href="#filters" class="nav-link">Part 3: Filter Costs &amp; DIY Swaps</a></li>
+        <li><a href="#part3" class="nav-link">Part 4: Word-for-Word Door Script</a></li>
+        <li><a href="#part4" class="nav-link">Part 5: Kitchen Sink Demo Theater</a></li>
+        <li><a href="#part5" class="nav-link">Part 6: 2-Tier Pricing &amp; Close</a></li>
+        <li><a href="#part6" class="nav-link">Part 7: FoCo &amp; Windsor Ad Copy</a></li>
+        <li><a href="#checklist" class="nav-link">Pre-Door Bag &amp; iPad Checklist</a></li>
+      </ul>
+    </div>
+
+    <div class="quick-launch-box">
+      <div style="font-size: 12px; font-weight: 800; color: var(--glacier-muted); text-transform: uppercase;">Live Field Tools</div>
+      <a href="./index.html" class="launch-btn">🖥️ Open Kitchen-Table Deck</a>
+      <a href="./sink.html" class="launch-btn secondary">📱 Open Sink Companion Link</a>
+      <button onclick="window.print()" class="launch-btn" style="background:#334155;">🖨️ Save / Print Full PDF Manual</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="banner-card">
+      <div class="chapter-eyebrow">Fred Caldero • Northern Colorado Battle Plan</div>
+      <h1>Blacktide Water Co. — Fort Collins Door-to-Door &amp; Kitchen-Table Training Manual</h1>
+      <p style="margin-bottom: 0; color: var(--glacier);">
+        Selling water in <strong>Fort Collins, Colorado</strong> is completely different from selling water in Phoenix, Texas, or Florida. If you use a generic national water script in FoCo, you will get doors slammed in your face all day long because homeowners believe the <strong>"Rocky Mountain Water Myth"</strong>—they think their tap water flows straight from a melting glacier into their glass. Study every section below before knocking your first block.
+      </p>
+    </div>
+
+    <!-- FAST FACTS CHEAT SHEET (FOR PDF & QUICK MEMORIZATION) -->
+    <section class="chapter-card" id="facts" style="border-color: rgba(52, 211, 153, 0.45);">
+      <div class="chapter-eyebrow" style="color: var(--emerald-bright);">⚡ Printable Memory Sheet • All Numbers &amp; Facts At A Glance</div>
+      <h2>The 60-Second Fast-Facts Cheat Sheet (Every Stat You Have to Remember)</h2>
+      <div class="tier-grid">
+        <div class="tier-box">
+          <div style="font-size:13px; font-weight:800; color:var(--coral-bright); text-transform:uppercase; margin-bottom:6px;">1. Bottled Water &amp; Microplastics</div>
+          <ul style="font-size:14px; padding-left:18px; margin-bottom:0;">
+            <li><strong>240,000 plastic particles per liter:</strong> Average micro- and nanoplastics found in 1 liter of bottled water (~90% are nanoplastics small enough to cross cell walls).</li>
+            <li><strong>93% of bottled brands tested positive</strong> for microplastic contamination.</li>
+            <li><strong>4.5x Heart Attack / Stroke / Death Rate:</strong> 2024 medical study on patients with microplastics detected in artery plaque.</li>
+            <li><strong>Human Tissue Detection:</strong> Detected in human blood, lungs, brain tissue, and placentas.</li>
+            <li><strong>60 Million plastic bottles</strong> thrown away daily in the U.S. (under 30% recycled).</li>
+            <li><strong>The Money Trap:</strong> Family of 4 spends <strong>$45–$84/mo</strong> ($2,700–$5,040 over 5 yrs) paying <strong>$10–$12/gallon</strong> vs. <strong>~$0.04/gallon</strong> with Blacktide whole-house filtration.</li>
+          </ul>
+        </div>
+
+        <div class="tier-box">
+          <div style="font-size:13px; font-weight:800; color:var(--teal-bright); text-transform:uppercase; margin-bottom:6px;">2. Fort Collins &amp; NoCo Tap Water Chemistry</div>
+          <ul style="font-size:14px; padding-left:18px; margin-bottom:0;">
+            <li><strong>Water Sources:</strong> Cache la Poudre River (Cameron Peak wildfire ash/organic runoff) + Horsetooth Reservoir (seasonal algae blooms / Geosmin lake-dirt taste).</li>
+            <li><strong>Free Chlorine (~1.3 mg/L):</strong> Pool-level disinfectant (swimming pools run 1.0–3.0 mg/L). Absorbs into fingers in 15 seconds and turns into chemical steam in every hot shower.</li>
+            <li><strong>TTHMs (~31 ppb):</strong> Total Trihalomethanes — <strong>46x above EWG health guideline</strong> (EPA legal limit 80 ppb).</li>
+            <li><strong>HAA5 (~22 ppb):</strong> Haloacetic Acids — <strong>21x above EWG health guideline</strong> (EPA legal limit 60 ppb). Both tied to long-term cancer risk.</li>
+            <li><strong>FoCo City Hardness &amp; TDS:</strong> Naturally soft (1.5–3 GPG) and low TDS (50–110 ppm) — <strong>DO NOT pitch a softener or test TDS in FoCo city limits!</strong></li>
+            <li><strong>Hard Water Zones (Wellington 80549, Windsor 80550, Timnath 80547, Wells):</strong> 12–25+ GPG rock hardness, 400–800+ ppm TDS, wastes <strong>$40–$60/mo</strong> in extra soap/detergent.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 1 -->
+    <section class="chapter-card" id="part1">
+      <div class="chapter-eyebrow">Part 1 • Know Your Territory</div>
+      <h2>The Fort Collins Water Intel Report</h2>
+      <p>Before you knock a single door, know the local water chemistry better than the city engineers. Fort Collins gets its water from two sources: <strong>The Cache la Poudre River</strong> and <strong>Horsetooth Reservoir</strong>.</p>
+
+      <div class="alert-box">
+        <h3 style="margin-top:0; color: var(--coral-bright);">🚨 1. The Crucial Trap: DO NOT Test Hardness or TDS in Fort Collins City Limits!</h3>
+        <p>Unlike 85% of America, Fort Collins municipal water is <strong>naturally very soft</strong> (around 1.5 to 3 grains per gallon) and has <strong>very low TDS</strong> (Total Dissolved Solids are usually only 50–110 ppm).</p>
+        <ul style="margin-bottom:0;">
+          <li><strong>The Mistake:</strong> If you pull out a TDS meter or hardness strips in Old Town or South Fort Collins, the water will pass with flying colors. The homeowner will say, <em>"See! Our water is amazing, get out of my house."</em></li>
+          <li><strong>The Exception:</strong> If you drive 15 minutes north to <strong>Wellington (80549)</strong>, east to <strong>Severance / Timnath (80547) / Windsor (80550)</strong>, or knock on <strong>rural well-water homes</strong> in Laporte or Bellvue, the water is <em>horrific</em>—super hard, high TDS (400–800+ ppm), and full of sulfates and iron. Save your hardness/TDS tests (and switch your presentation deck to <strong>Hard Water Mode</strong>) for those areas.</li>
+        </ul>
+      </div>
+
+      <h3>2. What IS Wrong With Fort Collins City Water? (Your Selling Ammo)</h3>
+      <ol>
+        <li><strong>Heavy Chlorine (~1.3 mg/L):</strong> To kill bacteria and algae from Horsetooth Reservoir, the city pumps heavy free chlorine into the lines.</li>
+        <li><strong>Cancer-Linked Disinfection Byproducts (TTHMs &amp; HAA5s):</strong> When chlorine mixes with burned forest runoff and organic plant matter in the Poudre River, it creates chemical gases called <strong>Trihalomethanes (TTHMs)</strong> and <strong>Haloacetic Acids (HAA5)</strong>. According to the Environmental Working Group (EWG), Fort Collins water tests <strong>21x to 46x+ above the recommended health guideline</strong> for these carcinogenic byproducts.</li>
+        <li><strong>The "Horsetooth Dirt Taste" (Geosmin):</strong> Every late summer and fall, algae blooms in Horsetooth create compounds called Geosmin and MIB that make tap water smell and taste like lake bottom dirt.</li>
+        <li><strong>Fluoride &amp; Dissolved Minerals at the Kitchen Tap:</strong> Fort Collins adds <strong>Fluoride</strong> to municipal water, which whole-house carbon tanks do not remove—making the Kitchen Under-Sink RO combo the complete 1-2 punch.</li>
+      </ol>
+    </section>
+
+    <!-- PART 2: SPRINGWELL VS OTHER SYSTEMS -->
+    <section class="chapter-card" id="part2">
+      <div class="chapter-eyebrow">Part 2 • Equipment &amp; Supplier Strategy</div>
+      <h2>Is SpringWell the Best System for the Money, or Are There Better Options?</h2>
+      <p>Here is the honest breakdown of your hardware options as a local water dealer in Fort Collins:</p>
+
+      <div class="tier-grid">
+        <div class="tier-box target">
+          <div style="font-size:12px; font-weight:800; color:var(--emerald-bright); text-transform:uppercase;">1. Best Consumer-Recognized Brand</div>
+          <div style="font-size:18px; font-weight:800; margin:4px 0;">SpringWell CF1 + Under-Sink RO</div>
+          <ul style="font-size:14px; padding-left:18px; margin-bottom:0;">
+            <li><strong>Why It Wins:</strong> #1 rated online in 2026 (WaterFilterGeek 4.8/5, AquaVerdict 92/100). Flows at <strong>9 GPM</strong> (beats Aquasana Rhino's 7 GPM), uses high-grade Coconut Shell Catalytic Carbon + KDF-55 media, lasts <strong>1,000,000 gallons (~10 years)</strong>, and carries a <strong>Lifetime Tank &amp; Valve Warranty</strong>.</li>
+            <li><strong>What to Watch Out For ("The Google Check"):</strong> Because SpringWell sells direct-to-consumer online, a homeowner can Google the raw tank price. Always position your offer as the <strong>"Blacktide Mountain-Pure Turnkey System"</strong> (powered by SpringWell vessels + custom copper/PEX 3-valve bypass manifold + licensed Fort Collins master plumber + 10-year local leak &amp; labor warranty).</li>
+          </ul>
+        </div>
+
+        <div class="tier-box">
+          <div style="font-size:12px; font-weight:800; color:var(--teal-bright); text-transform:uppercase;">2. Best Wholesale Pro Alternative (Zero Google Shopping)</div>
+          <div style="font-size:18px; font-weight:800; margin:4px 0;">Clack WS1 + Enpress Vortech Catalytic Carbon Tank</div>
+          <ul style="font-size:14px; padding-left:18px; margin-bottom:0;">
+            <li><strong>Why Pros Love It:</strong> If you open a wholesale trade account through your plumber at a local distributor (like <strong>WinSupply, Ferguson, Charger Water, or Hellenbrand</strong>), you can buy an unbranded 10x54" Vortech tank loaded with 1.5 cu. ft. of Catalytic Carbon + KDF-55 and a commercial <strong>Clack WS1</strong> head or bypass valve for <strong>~$450 to $650 wholesale</strong>.</li>
+            <li><strong>Zero Price-Shopping:</strong> Clack strictly bans online sales on Amazon/Google. You put your own <strong>Blacktide Water Co.</strong> vinyl decal on the tank, and the homeowner cannot price-shop your equipment online!</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>3. How Other Retail Brands Compare (If Homeowners Ask):</h3>
+      <ul>
+        <li><strong>Aquasana Rhino (EQ-1000):</strong> Well-known retail brand, but drops water pressure to <strong>7 GPM</strong> (vs. SpringWell's 9 GPM) and only lasts 600,000–1,000,000 gallons with a 10-year warranty instead of Lifetime.</li>
+        <li><strong>Pentair Pelican (PC600 / PC1000):</strong> Solid carbon system owned by Pentair, higher equipment cost than SpringWell for the same catalytic carbon + KDF-55 media.</li>
+        <li><strong>APEC ROES-50 / Waterdrop G3P600 (Under-Sink RO Alternatives):</strong> Both are fantastic under-sink RO units you can pair with any whole-house carbon tank.</li>
+      </ul>
+    </section>
+
+    <!-- PART 3: FILTER REPLACEMENT COSTS & DIY GUIDE -->
+    <section class="chapter-card" id="filters">
+      <div class="chapter-eyebrow" style="color: var(--emerald-bright);">Part 3 • Filter Costs &amp; DIY Maintenance</div>
+      <h2>What Do Replacement Filters Cost &amp; Can You or the Customer Swap Them Without a Plumber?</h2>
+
+      <div class="alert-box emerald">
+        <h3 style="margin-top:0; color: var(--emerald-bright);">✅ YES! Neither You Nor the Homeowner EVER Needs a Plumber to Change Filters!</h3>
+        <p style="margin-bottom:0;">Once your licensed plumber installs the system on Day 1, <strong>every filter change is 100% tool-free or uses a simple plastic hand wrench and takes under 3 minutes</strong>. You can either teach the customer how to do it themselves in 2 minutes at the end of the install (which homeowners LOVE because they don't feel locked into a contract), OR offer an optional <strong>$149/year Blacktide Annual Filter Service</strong> where you stop by for 10 minutes yourself and pocket ~$110 pure profit!</p>
+      </div>
+
+      <div class="tier-grid">
+        <div class="tier-box">
+          <div style="font-size:12px; font-weight:800; color:var(--teal-bright); text-transform:uppercase;">Tier 1 Filter Maintenance (Whole-House)</div>
+          <div style="font-size:18px; font-weight:800; margin:4px 0;">Whole-House Filter Costs &amp; How to Swap</div>
+          <ul style="font-size:14px; padding-left:18px; margin-bottom:0;">
+            <li><strong>Main Catalytic Carbon / KDF Tank:</strong> <strong>$0 for 10 Years</strong> (1,000,000-gallon media life—zero annual maintenance).</li>
+            <li><strong>5-Micron Sediment Pre-Filter Cartridge (4.5" x 10" Big Blue):</strong>
+              <ul>
+                <li><strong>SpringWell Retail Cost:</strong> ~$25–$35</li>
+                <li><strong>Universal Bulk Cost (Pentek / Hydronix 4.5x10" 5-Micron Polyspun):</strong> Only <strong>$12 to $18 each</strong> (it's a standard industry size!).</li>
+                <li><strong>Swap Schedule:</strong> Every 6 to 9 months.</li>
+                <li><strong>How You or the Customer Swaps It (2 Minutes):</strong> Turn the bypass valve on top of the filter housing to "OFF", press the red pressure-relief button, untwist the blue housing bowl with the included plastic wrench, drop in the new white cartridge, and twist it back hand-tight. Zero plumbing required.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="tier-box">
+          <div style="font-size:12px; font-weight:800; color:var(--emerald-bright); text-transform:uppercase;">Tier 2 Filter Maintenance (Kitchen Sink RO)</div>
+          <div style="font-size:18px; font-weight:800; margin:4px 0;">Under-Sink RO Filter Costs &amp; How to Swap</div>
+          <ul style="font-size:14px; padding-left:18px; margin-bottom:0;">
+            <li><strong>Stages 1, 2 &amp; 4 (Sediment + Carbon Pre/Post Pack):</strong>
+              <ul>
+                <li><strong>Cost:</strong> <strong>~$45 to $65 per year</strong> for the filter pack.</li>
+                <li><strong>Swap Schedule:</strong> Every 6 to 12 months.</li>
+              </ul>
+            </li>
+            <li><strong>Stage 3 (75 GPD Reverse Osmosis Membrane):</strong>
+              <ul>
+                <li><strong>Cost:</strong> <strong>~$40 to $49</strong>.</li>
+                <li><strong>Swap Schedule:</strong> Every <strong>24 to 36 months (2–3 years)</strong>.</li>
+              </ul>
+            </li>
+            <li><strong>How You or the Customer Swaps It (60 Seconds — Like Changing a Lightbulb):</strong> SpringWell's under-sink RO uses <strong>twist-and-lock encapsulated cartridges</strong> with built-in auto-shutoff valves. You don't even have to turn off the water under the sink—twist the old cartridge 1/4 turn to the left, pull it out, push the new cartridge in, and twist 1/4 turn to the right. Done in 60 seconds!</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 4 -->
+    <section class="chapter-card" id="part3">
+      <div class="chapter-eyebrow">Part 4 • Door-to-Door Mastery</div>
+      <h2>Your Word-for-Word Fort Collins Door Script</h2>
+      <p>Three golden rules at the porch:</p>
+      <ul>
+        <li><strong>Never say "Takes 15 minutes":</strong> Say <strong>"Takes 90 seconds / 2 minutes."</strong> Once they see the chlorine cup test turn bright yellow, <em>they</em> will keep you for 20 minutes.</li>
+        <li><strong>Use a real anchor street or neighborhood expansion angle:</strong> Never invent a fake neighbor name if you don't have one on that block.</li>
+        <li><strong>Never pitch prices or discounts on the doormat:</strong> Price on the porch = automatic "No." At the door, you are ONLY selling the <strong>90-second kitchen sink test</strong>.</li>
+      </ul>
+
+      <div class="script-dialogue">
+        <p class="stage-dir">[Knock firmly, step back 4 feet down the steps, glance at your iPad/clipboard, smile warmly]</p>
+        <p><span class="speaker-you">YOU:</span> "Hey there! How’s it going? I’m Fred with Blacktide Water here in FoCo—don't worry, you're not in trouble, I’ll be super quick. Are you guys the homeowners here?"</p>
+        <p><span class="speaker-them">THEM:</span> "Yeah, what's this about?"</p>
+        <p><span class="speaker-you">YOU:</span> "Perfect. So we’re actually setting up an install right around the corner on [Nearby Street] in January for the [Last Name] family. When we tested their tap water last week, their chlorine and runoff byproducts from Horsetooth tested way higher than normal for this zip code."</p>
+        <p class="stage-dir">[Point casually toward their kitchen]</p>
+        <p style="margin-bottom:0;"><span class="speaker-you">YOU:</span> "Since our trucks are already going to be in the neighborhood next month, we're checking the surrounding homes to see if it’s an issue with the whole street main or just their line. It takes literally 90 seconds right at your kitchen faucet, totally free, and I’ll show you the exact levels right in front of you. You got two minutes so I can check your tap real quick?"</p>
+      </div>
+
+      <h3>Interactive Objection Flashcards (Tap to Flip &amp; Drill Yourself)</h3>
+      <div class="flashcard" onclick="this.classList.toggle('open')">
+        <div class="flashcard-q">
+          <span>Objection #1: "Fort Collins has great water, we're good."</span>
+          <span>Tap to Reveal Answer ▾</span>
+        </div>
+        <div class="flashcard-a">
+          <strong>YOU:</strong> <em>"Totally! We actually have some of the softest mountain water in the state. The issue isn't the mountain water—it's that since the Cameron Peak fire and the Horsetooth algae blooms, the city has had to pump almost triple the chlorine into the lines to treat the runoff. That’s what spiked at your neighbor's house. Let’s just take a 60-second peek at your kitchen sink so you know for sure, cool?"</em> [Turn slightly and gesture toward the door]
+        </div>
+      </div>
+
+      <div class="flashcard" onclick="this.classList.toggle('open')">
+        <div class="flashcard-q">
+          <span>Objection #2: "Why are you offering a deal?" (Once inside)</span>
+          <span>Tap to Reveal Answer ▾</span>
+        </div>
+        <div class="flashcard-a">
+          <strong>YOU:</strong> <em>"When our master plumber brings the rig out here in January, half of our cost is mobilization, permits, and parts staging. If we can knock out two or three homes in the same neighborhood on the same route, we waive the entire $800 installation fee and pass the fleet discount straight to you in exchange for putting a small Blacktide yard sign out front for two weeks."</em>
+        </div>
+      </div>
+
+      <div class="flashcard" onclick="this.classList.toggle('open')">
+        <div class="flashcard-q">
+          <span>Objection #3: "How much are replacement filters and do I have to pay a plumber?"</span>
+          <span>Tap to Reveal Answer ▾</span>
+        </div>
+        <div class="flashcard-a">
+          <strong>YOU:</strong> <em>"Great question—that's the best part. The main whole-house tank lasts a million gallons, so you don't touch it for 10 years. The sediment pre-filter is only about $20 twice a year, and the under-sink RO cartridges twist out like a lightbulb in 60 seconds for about $50 a year. You never need a plumber—I’ll show you how to twist them off by hand in two minutes on install day, or I can swing by once a year and swap them for you."</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 5 -->
+    <section class="chapter-card" id="part4">
+      <div class="chapter-eyebrow">Part 5 • Kitchen Sink Theater</div>
+      <h2>The 3-Step Fort Collins Kitchen Sink Demo</h2>
+      <p>As soon as you step up to the sink, tap <strong>"📱 QR / Sink Link"</strong> in the bottom bar of your presentation deck and let the homeowner scan it with their phone so they follow along on <a href="./sink.html" style="color:var(--teal-bright);">sink.html</a> while you run the drops!</p>
+
+      <h3>Step 1: The "Skin Absorption" Chlorine Trick (The Ultimate Closer)</h3>
+      <ol>
+        <li>Take <strong>two clear plastic cups</strong>. Fill both halfway with their cold kitchen tap water.</li>
+        <li><strong>Say:</strong> <em>"Okay, these are both identical cups of your tap water. Can you do me a favor? Stick two fingers into this left cup and swirl them around for 15 seconds."</em> (Have the wife or husband swirl their fingers in Cup A).</li>
+        <li>Take your <strong>OTO Chlorine Drops</strong> (yellow) or <strong>DPD Powder Packets</strong> (bright pink). Put 4 drops into <strong>Cup B</strong> (untouched tap water) and 4 drops into <strong>Cup A</strong> (the cup their fingers were in).</li>
+        <li><strong>The Result:</strong> Cup B turns <strong>bright yellow/pink</strong>. Cup A stays <strong>100% crystal clear!</strong></li>
+      </ol>
+      <div class="script-dialogue">
+        <p><span class="speaker-you">THE SCRIPT:</span> "Wait... why did this cup turn bright yellow with pool chlorine, and the one you touched stay completely clear? Where did the chlorine go?"</p>
+        <p class="stage-dir">(Pause and let them say: "Into my fingers?!")</p>
+        <p style="margin-bottom:0;"><span class="speaker-you">YOU:</span> "It went straight into your fingers in 15 seconds. Chlorine is designed to bind to organic matter instantly. Your skin is your body’s largest organ. Even if you use a fridge filter or Brita to drink, every time you or your kids take a 10-minute hot shower, your pores open up and your body absorbs more chlorine and chemical steam than if you drank 8 glasses of pool water. Ever notice how dry and itchy your skin gets here in the winter? Everyone blames the Colorado air—it’s actually the hot chlorinated water stripping your skin."</p>
+      </div>
+
+      <h3>Step 2: The EWG Zip Code Shock (For the Analytical Homeowner)</h3>
+      <p>On their phone (via <a href="./sink.html" style="color:var(--teal-bright);">sink.html</a>) or your iPad, open <code>ewg.org/tapwater</code> for their Fort Collins zip code (<code>80525</code>, <code>80521</code>, <code>80524</code>, <code>80526</code>, <code>80528</code>).</p>
+      <div class="script-dialogue">
+        <p style="margin-bottom:0;"><span class="speaker-you">THE SCRIPT:</span> "Look what it says under Potential Effect for HAA5 (21x limit) and TTHMs (46x limit): Cancer risk. And look how it gets there: 'Formed when disinfectant (chlorine) reacts with organic matter in water.' Because of the Poudre River wildfire runoff, our water has ash and organic matter. When the city hits it with chlorine, it creates these byproducts in your pipes. And look right here—what does this independent database say removes it? Carbon filtration and Reverse Osmosis. That's literally the exact two things we install."</p>
+      </div>
+
+      <h3>Step 3: The Freezer Ice Cube Smell Test</h3>
+      <p>Have them grab a handful of ice cubes from their freezer, drop them in a dry cup, and smell them. Freezing concentrates trapped gases and Horsetooth Geosmin odor so they can immediately smell the stale chemical scent.</p>
+    </section>
+
+    <!-- PART 6: SIMPLE 2-TIER PRICING -->
+    <section class="chapter-card" id="part5">
+      <div class="chapter-eyebrow">Part 6 • Simple 2-Tier Pricing &amp; Closing</div>
+      <h2>Your 2-Tier Pricing Setup (Whole-House vs. Whole-House + Kitchen Sink RO)</h2>
+      <p>Keep it dead simple at the kitchen table—only show <strong>Two Tiers</strong> so the homeowner never gets decision paralysis:</p>
+
+      <div class="tier-grid">
+        <div class="tier-box">
+          <div style="font-size:12px; font-weight:800; color:var(--teal-bright); text-transform:uppercase;">Tier 1 • Whole-House Only (Minus Kitchen Sink RO)</div>
+          <div style="font-size:19px; font-weight:800; margin:4px 0;">Whole-House Clean Water System (CF1)</div>
+          <div style="font-size:14px; color:var(--glacier-muted); margin-bottom:10px;">Main-Line 4-Stage Carbon/KDF Tank + 5-Micron Pre-Filter (Every Shower, Bath, Laundry &amp; Faucet)</div>
+          <div style="font-size:15px; color:var(--glacier-muted);">Standard Price: <strong>$127/mo</strong> (or $5,999 cash)</div>
+          <div style="font-size:22px; font-weight:800; color:var(--teal-bright); margin-top:4px;">January Neighbor Route: $2,695 <span style="font-size:15px; color:var(--glacier);">(~$65/mo)</span></div>
+          <div style="font-size:13px; color:var(--glacier-dim); margin-top:6px;">Hard Water Zone (+ Softener): $167/mo standard or $4,295 (~$99/mo) on Neighbor Route</div>
+        </div>
+
+        <div class="tier-box target">
+          <div style="font-size:12px; font-weight:800; color:var(--emerald-bright); text-transform:uppercase;">Tier 2 • Most Popular Target Sale ★</div>
+          <div style="font-size:19px; font-weight:800; margin:4px 0;">Whole-House + Kitchen Sink RO Combo</div>
+          <div style="font-size:14px; color:var(--glacier-muted); margin-bottom:10px;">Complete Whole-House System PLUS Dedicated Kitchen Under-Sink Reverse Osmosis Drinking Faucet</div>
+          <div style="font-size:15px; color:var(--glacier-muted);">Standard Price: <strong>$152/mo</strong> (or $7,199 cash)</div>
+          <div style="font-size:22px; font-weight:800; color:var(--emerald-bright); margin-top:4px;">January Neighbor Route: $3,895 <span style="font-size:15px; color:var(--glacier);">(~$89/mo)</span></div>
+          <div style="font-size:13px; color:var(--glacier-dim); margin-top:6px;">Hard Water Zone (+ Softener + RO): $192/mo standard or $4,995 (~$115/mo) on Neighbor Route</div>
+        </div>
+      </div>
+
+      <h3>Word-for-Word "January Neighbor" 2-Tier Close:</h3>
+      <div class="script-dialogue">
+        <p style="margin-bottom:0;"><span class="speaker-you">YOU:</span> "We keep our options super simple—just two ways to set up your home. Tier 1 does the entire house—every shower, bathtub, and washing machine—so 99.9% of that chlorine and Horsetooth runoff is gone before it enters your pipes. Tier 2 adds the dedicated Reverse Osmosis drinking faucet right at your kitchen sink for ultra-pure coffee, ice cubes, and drinking water. Because we're already bringing our master plumber's truck out here in January for your neighbor, if you pair your install on the same route and let us put a small Blacktide yard sign out front for 14 days, we waive the $800 install fee and drop Tier 1 to $65/mo ($2,695) or the full Combo with the kitchen sink RO to $89/mo ($3,895). Do you guys want the kitchen sink drinking tap included, or just the whole-house system?"</p>
+      </div>
+      <p style="font-weight:800; color:#FBBF24; text-align:center;">🤫 (STOP TALKING AND WAIT FOR THEM TO CHOOSE TIER 1 OR TIER 2.)</p>
+    </section>
+
+    <!-- PART 7 -->
+    <section class="chapter-card" id="part6">
+      <div class="chapter-eyebrow">Part 7 • Inbound Lead Generation</div>
+      <h2>Local Facebook &amp; Instagram Ads for Northern Colorado</h2>
+      <p>Target Homeowners, Ages 30–65 within a 15-mile radius. Tap the copy buttons below to paste directly into Meta Ads Manager or GoHighLevel Ad Launcher:</p>
+
+      <div class="script-dialogue" id="ad1Box">
+        <div style="font-size:13px; font-weight:800; color:var(--teal-bright); text-transform:uppercase; margin-bottom:6px;">Ad #1: Fort Collins / Horsetooth 2-Cup Chlorine Video Ad (80521, 80524, 80525, 80526, 80528)</div>
+        <p><strong>Headline:</strong> ⚠️ Fort Collins Homeowners: Is This In Your Tap Water?</p>
+        <p id="ad1Copy">Everyone in Fort Collins thinks we have pure Rocky Mountain water... until they see this 15-second test at their kitchen sink. 😳
+
+Ever since the Poudre Canyon wildfires and seasonal algae blooms in Horsetooth Reservoir, municipal chlorine and disinfection byproducts (TTHMs) in zip codes 80521, 80524, 80525, and 80528 have spiked up to 46x the EWG health guidelines.
+
+Ever wonder why your skin and hair are so dry after a shower, or why your tap water smells like a pool in the winter and dirt in the late summer?
+
+This month, Blacktide Water Co. (locally owned right here in FoCo) is giving away 15 FREE In-Home Water Purity & Chlorine Tests ($150 value). In 5 minutes, we'll show you the exact chemical breakdown coming out of your kitchen faucet—zero pressure, zero obligation.
+
+👇 Tap 'Learn More' to grab one of the 15 free test slots for your home this week!</p>
+        <button class="copy-ad-btn" onclick="copyText('ad1Copy', this)">📋 Copy Ad #1 Text</button>
+      </div>
+
+      <div class="script-dialogue" id="ad2Box">
+        <div style="font-size:13px; font-weight:800; color:#FBBF24; text-transform:uppercase; margin-bottom:6px;">Ad #2: Wellington (80549), Windsor (80550) &amp; Timnath (80547) Hard Water Model Home Ad</div>
+        <p><strong>Headline:</strong> Wellington &amp; Windsor Homeowners: Sick of Crusty Faucets &amp; Bad Tasting Water?</p>
+        <p id="ad2Copy">Living in Northern Colorado is amazing—until you see what the local hard water does to your dishwasher, plumbing, appliances, and coffee maker.
+
+Blacktide Water Co. is looking for 5 Model Homes in Wellington, Timnath, and Windsor this January to install our flagship Whole-House Filtration & Softening systems at our Contractor Fleet Rate (save up to $1,400 + Free Installation).
+
+✅ Zero Chlorine, Disinfection Byproducts, or Chemical Steam
+✅ Protect your expensive appliances & plumbing from rock scale
+✅ Bottled-quality mountain water from every single tap in your house
+
+Tap 'Get Offer' below to see if your address qualifies and book a free 5-minute water test!</p>
+        <button class="copy-ad-btn" onclick="copyText('ad2Copy', this)">📋 Copy Ad #2 Text</button>
+      </div>
+    </section>
+
+    <!-- CHECKLIST -->
+    <section class="chapter-card" id="checklist">
+      <div class="chapter-eyebrow" style="color: var(--emerald-bright);">Pre-Appointment Readiness</div>
+      <h2>Fred’s Daily Door-to-Door Bag &amp; iPad Checklist</h2>
+      <label class="checklist-item"><input type="checkbox" /> <span>20+ Clear Plastic Cups (for the 2-Cup 15-Second Finger Chlorine Test)</span></label>
+      <label class="checklist-item"><input type="checkbox" /> <span>Fresh OTO Liquid Chlorine Drops (yellow) or DPD #1 Rapid Dissolve Packets (bright pink)</span></label>
+      <label class="checklist-item"><input type="checkbox" /> <span>Hardness Drops + TDS Digital Meter (Keep in pocket ONLY for Wellington, Windsor, Timnath, or rural wells!)</span></label>
+      <label class="checklist-item"><input type="checkbox" /> <span>iPad / Laptop charged 100% with <strong>Blacktide Deck</strong> open &amp; GHL Webhook configured</span></label>
+      <label class="checklist-item"><input type="checkbox" /> <span>Know the exact anchor street name &amp; zip code (`80525`, `80521`, `80528`, etc.) before knocking</span></label>
+    </section>
+  </main>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text);
+      const old = btn.textContent;
+      btn.textContent = '✓ Copied to Clipboard!';
+      setTimeout(() => btn.textContent = old, 1800);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,2882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Blacktide Water Treatment | Fort Collins, CO</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0F172A;
+      --navy-card: #1E293B;
+      --navy-light: #334155;
+      --glacier: #F8FAFC;
+      --glacier-muted: #CBD5E1;
+      --glacier-dim: #94A3B8;
+      --teal: #0284C7;
+      --teal-bright: #38BDF8;
+      --teal-glow: rgba(2, 132, 199, 0.35);
+      --coral: #E11D48;
+      --coral-bright: #FB7185;
+      --coral-glow: rgba(225, 29, 72, 0.25);
+      --amber: #F59E0B;
+      --emerald: #059669;
+      --emerald-bright: #34D399;
+      --emerald-glow: rgba(5, 150, 105, 0.35);
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #060A12;
+      color: var(--glacier);
+      font-family: var(--font-main);
+      overflow: hidden;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app-shell {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 20%, #13203B 0%, #070B14 100%);
+    }
+
+    .stage-viewport {
+      position: relative;
+      width: min(100vw, 177.78vh);
+      height: min(100vh, 56.25vw);
+      max-width: 1600px;
+      max-height: 900px;
+      background: var(--navy);
+      border-radius: 16px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 1100px), (max-height: 750px) {
+      .stage-viewport {
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+      }
+    }
+
+    /* Top Header Bar */
+    .top-bar {
+      height: 58px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 30;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -0.02em;
+      color: var(--glacier);
+    }
+
+    .brand-logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--teal) 0%, #0369A1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px var(--teal-glow);
+    }
+
+    .brand-loc {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--glacier-dim);
+      padding-left: 12px;
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .top-status-pills {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-pill-link {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      background: rgba(30, 41, 59, 0.9);
+      color: var(--glacier-muted);
+      border: 1px solid rgba(255,255,255,0.14);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .top-pill-link:hover {
+      border-color: var(--teal-bright);
+      color: #fff;
+    }
+
+    .mode-pill-indicator {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(2, 132, 199, 0.16);
+      color: var(--teal-bright);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      transition: all 0.25s ease;
+    }
+
+    body.hard-mode .mode-pill-indicator {
+      background: rgba(245, 158, 11, 0.16);
+      color: #FBBF24;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    /* Slides Deck Container */
+    .slides-wrapper {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 26px 42px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(40px) scale(0.99);
+      transition: opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+                  visibility 0.42s;
+      pointer-events: none;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .slide-eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal-bright);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-headline {
+      font-size: clamp(26px, 2.9vw, 42px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: var(--glacier);
+      margin-bottom: 8px;
+    }
+
+    .slide-subheadline {
+      font-size: clamp(18px, 1.4vw, 21px);
+      font-weight: 500;
+      color: var(--glacier-muted);
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .body-text, .bullet-list li {
+      font-size: clamp(18px, 1.32vw, 20px);
+      line-height: 1.42;
+      color: var(--glacier);
+      font-weight: 500;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(30, 41, 59, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 11px 16px;
+      border-radius: 12px;
+    }
+
+    .bullet-dot {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .dot-teal { background: rgba(2, 132, 199, 0.25); color: var(--teal-bright); border: 1px solid var(--teal); }
+    .dot-coral { background: rgba(225, 29, 72, 0.22); color: var(--coral-bright); border: 1px solid var(--coral); }
+    .dot-emerald { background: rgba(5, 150, 105, 0.25); color: var(--emerald-bright); border: 1px solid var(--emerald); }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: center;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .visual-card {
+      background: linear-gradient(160deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .hard-only { display: none !important; }
+    body.hard-mode .hard-only { display: flex !important; }
+    body.hard-mode span.hard-only, body.hard-mode div.hard-only-block { display: block !important; }
+    body.hard-mode .city-only { display: none !important; }
+
+    /* ==========================================
+       SLIDE 1: TITLE SLIDE
+    ========================================== */
+    .slide-1-content {
+      position: relative;
+      z-index: 5;
+      max-width: 920px;
+      margin: auto 0;
+      padding-bottom: 50px;
+    }
+
+    .neighbor-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(2, 132, 199, 0.18);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--teal-bright);
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 18px;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .slide.active .neighbor-badge {
+      animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 4.8vw, 66px);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    .slide.active .hero-title {
+      animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards;
+    }
+
+    .hero-sub {
+      font-size: clamp(20px, 2.1vw, 28px);
+      color: var(--glacier-muted);
+      font-weight: 500;
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    .slide.active .hero-sub {
+      animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+    }
+
+    .fred-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 15px 22px;
+      border-radius: 16px;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    .slide.active .fred-card {
+      animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.48s forwards;
+    }
+
+    .fred-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--emerald) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 19px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .slide1-corner-controls {
+      position: absolute;
+      bottom: 20px;
+      right: 28px;
+      z-index: 15;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .discreet-toggle-btn {
+      background: rgba(15, 23, 42, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--glacier-muted);
+      padding: 9px 15px;
+      border-radius: 10px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .discreet-toggle-btn:hover {
+      border-color: var(--teal-bright);
+      color: #fff;
+    }
+
+    .mountain-waves-svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 230px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .wave-layer-1 { animation: waveDrift 9s ease-in-out infinite alternate; }
+    .wave-layer-2 { animation: waveDrift 13s ease-in-out infinite alternate-reverse; }
+
+    @keyframes waveDrift {
+      0% { transform: translateX(-18px) translateY(0); }
+      100% { transform: translateX(18px) translateY(6px); }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================
+       SLIDE 2: BOTTLED WATER TRAP
+    ========================================== */
+    .bars-stage {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 210px;
+      padding: 16px 24px 0;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+      gap: 28px;
+    }
+
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      flex: 1;
+    }
+
+    .bar-price-tag {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .cost-bar {
+      width: 100%;
+      max-width: 130px;
+      border-radius: 12px 12px 0 0;
+      height: 0;
+      transition: height 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .cost-bar.coral-bar {
+      background: linear-gradient(180deg, var(--coral-bright) 0%, var(--coral) 100%);
+      box-shadow: 0 0 28px var(--coral-glow);
+    }
+
+    .cost-bar.teal-bar {
+      background: linear-gradient(180deg, var(--emerald-bright) 0%, var(--emerald) 100%);
+      box-shadow: 0 0 20px var(--emerald-glow);
+    }
+
+    .slide.active .cost-bar.coral-bar { height: 155px; }
+    .slide.active .cost-bar.teal-bar { height: 14px; }
+
+    .bar-labels {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 10px;
+      gap: 28px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .burned-counter-box {
+      margin-top: 12px;
+      background: rgba(225, 29, 72, 0.14);
+      border: 1px solid rgba(225, 29, 72, 0.45);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .burned-amount {
+      font-size: 25px;
+      font-weight: 800;
+      color: var(--coral-bright);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ==========================================
+       SLIDE 3: MICROPLASTICS IN BOTTLE
+    ========================================== */
+    .micro-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .stat-tile {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--coral-bright);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-desc {
+      font-size: 12px;
+      color: var(--glacier-muted);
+      font-weight: 600;
+    }
+
+    .particle-float { animation: floatParticle 4.5s ease-in-out infinite alternate; }
+    .particle-float-2 { animation: floatParticle 3.2s ease-in-out infinite alternate-reverse; }
+
+    @keyframes floatParticle {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(8px, -12px); }
+    }
+
+    /* ==========================================
+       SLIDE 4: LOCAL TAP WATER REPORT & TEST INPUTS
+    ========================================== */
+    .gauge-block { margin-bottom: 12px; }
+    .gauge-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .gauge-track {
+      position: relative;
+      height: 20px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+
+    .gauge-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      transition: width 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .fill-warning { background: linear-gradient(90deg, var(--teal) 0%, var(--amber) 45%, var(--coral) 100%); }
+    .fill-danger { background: linear-gradient(90deg, var(--amber) 0%, var(--coral) 100%); }
+
+    .gauge-marker {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #fff;
+      z-index: 3;
+    }
+
+    .live-test-inputs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .test-field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--teal-bright);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .test-field input {
+      width: 100%;
+      background: var(--navy-card);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 17px;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+
+    .city-soft-badge {
+      margin-top: 10px;
+      background: rgba(5, 150, 105, 0.16);
+      border: 1px solid var(--emerald);
+      color: var(--emerald-bright);
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ==========================================
+       SLIDE 4B & 5B: HARD WATER ANIMATIONS
+    ========================================== */
+    .scale-wall {
+      transform-origin: center;
+      transform: scaleY(0.15);
+      transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .slide.active .scale-wall { transform: scaleY(1); }
+
+    .damage-callouts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .damage-mini-card {
+      background: rgba(225, 29, 72, 0.1);
+      border: 1px solid rgba(225, 29, 72, 0.3);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--glacier);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lather-bubble {
+      opacity: 0;
+      transform: scale(0.4);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .slide.active .lather-bubble { opacity: 0.9; transform: scale(1); }
+
+    .flow-stream {
+      stroke-dasharray: 10 10;
+      animation: flowDash 0.85s linear infinite;
+    }
+    @keyframes flowDash { to { stroke-dashoffset: -20; } }
+
+    /* ==========================================
+       SLIDE 6: INTERACTIVE SETUP OPTIONS
+    ========================================== */
+    .setup-cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .setup-option-card {
+      background: rgba(30, 41, 59, 0.75);
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .setup-option-card.selected {
+      border-color: var(--teal-bright);
+      background: rgba(2, 132, 199, 0.16);
+      box-shadow: 0 0 28px var(--teal-glow);
+    }
+
+    .setup-option-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--glacier);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ==========================================
+       SLIDE 7: HOW SPRINGWELL STACKS UP
+    ========================================== */
+    .race-bar-wrap { margin-bottom: 14px; }
+    .race-bar-fill {
+      height: 28px;
+      border-radius: 8px;
+      width: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      font-weight: 800;
+      font-size: 14px;
+      transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .flip-card-reveal {
+      background: rgba(30, 41, 59, 0.9);
+      border: 2px dashed rgba(225, 29, 72, 0.5);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .flip-card-reveal.revealed {
+      border-style: solid;
+      border-color: var(--emerald);
+      background: rgba(5, 150, 105, 0.15);
+    }
+
+    /* ==========================================
+       SLIDE 8: STRAIGHTFORWARD PRICING CARDS
+    ========================================== */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      flex: 1;
+      align-items: stretch;
+    }
+
+    .price-close-card {
+      background: linear-gradient(165deg, rgba(30, 41, 59, 0.92) 0%, rgba(15, 23, 42, 0.96) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.14);
+      border-radius: 18px;
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .price-close-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--teal-bright);
+    }
+
+    .price-close-card.selected {
+      border-color: var(--emerald-bright);
+      background: linear-gradient(165deg, rgba(5, 150, 105, 0.18) 0%, rgba(15, 23, 42, 0.96) 100%);
+      box-shadow: 0 0 32px var(--emerald-glow);
+    }
+
+    .hero-monthly-price {
+      font-size: clamp(40px, 4.1vw, 56px);
+      font-weight: 800;
+      color: var(--glacier);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin: 10px 0 4px;
+    }
+
+    .hero-monthly-price span {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--glacier-muted);
+    }
+
+    .cash-price-sub {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--glacier-dim);
+      margin-bottom: 10px;
+    }
+
+    .net-diff-callout {
+      background: rgba(2, 132, 199, 0.18);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--teal-bright);
+    }
+
+    .price-close-card.selected .net-diff-callout {
+      background: rgba(5, 150, 105, 0.25);
+      border-color: var(--emerald-bright);
+      color: var(--emerald-bright);
+    }
+
+    /* ==========================================
+       SLIDE 9: INSTALLATION TIMELINE
+    ========================================== */
+    .timeline-container {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin: auto 0;
+      padding-top: 20px;
+    }
+
+    .timeline-track-line {
+      position: absolute;
+      top: 48px;
+      left: 12%;
+      right: 12%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .timeline-progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--teal-bright) 0%, var(--emerald-bright) 100%);
+      box-shadow: 0 0 16px var(--emerald-glow);
+      transition: width 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+    }
+    .slide.active .timeline-progress-fill { width: 100%; }
+
+    .timeline-step-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .step-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 3px solid var(--teal-bright);
+      color: var(--teal-bright);
+      font-size: 20px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 0 20px var(--teal-glow);
+    }
+
+    /* ==========================================
+       SLIDE 10: INTERACTIVE SUMMARY, SIGNATURE & GHL CRM
+    ========================================== */
+    .summary-close-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 20px;
+      flex: 1;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 16px;
+    }
+
+    .summary-label { color: var(--glacier-muted); font-weight: 600; }
+    .summary-val { font-weight: 800; color: var(--glacier); text-align: right; }
+
+    .crm-inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .crm-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 11px;
+      border-radius: 8px;
+    }
+
+    .sig-pad-wrap {
+      background: #090E1A;
+      border: 1px dashed rgba(56, 189, 248, 0.45);
+      border-radius: 10px;
+      position: relative;
+      height: 92px;
+      margin: 8px 0;
+      touch-action: none;
+    }
+
+    #sigCanvas {
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+      display: block;
+    }
+
+    .sig-clear-btn {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--glacier-dim);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .january-lock-btn {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 2px solid var(--emerald-bright);
+      background: linear-gradient(135deg, var(--emerald) 0%, #047857 100%);
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 22px var(--emerald-glow);
+      transition: all 0.2s ease;
+    }
+
+    .action-btn-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .mini-action-btn {
+      background: rgba(30, 41, 59, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--teal-bright);
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 10px;
+      border-radius: 9px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+    .mini-action-btn:hover {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    /* ==========================================
+       MODALS (QR SHARE & GHL SETTINGS)
+    ========================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 17, 0.82);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-card {
+      background: #131C31;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 18px;
+      max-width: 500px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.75);
+    }
+
+    /* ==========================================
+       SPEAKER NOTES DRAWER & PRESENTER BAR
+    ========================================== */
+    .speaker-notes-drawer {
+      position: absolute;
+      bottom: 64px;
+      left: 28px;
+      right: 28px;
+      background: rgba(15, 23, 42, 0.97);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 14px;
+      padding: 16px 22px;
+      z-index: 40;
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.65);
+      transform: translateY(20px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+    .speaker-notes-drawer.open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .notes-title {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal-bright);
+      margin-bottom: 4px;
+    }
+    .notes-copy {
+      font-size: 17px;
+      line-height: 1.45;
+      color: var(--glacier);
+      font-weight: 500;
+    }
+
+    .presenter-bar {
+      height: 58px;
+      padding: 0 24px;
+      background: rgba(10, 15, 29, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 35;
+      flex-shrink: 0;
+    }
+
+    .bar-left, .bar-center, .bar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--glacier);
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--teal);
+      border-color: var(--teal-bright);
+    }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .nav-btn.primary-next { background: var(--teal); border-color: var(--teal-bright); }
+
+    .slide-counter {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--glacier-muted);
+      min-width: 82px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .subtle-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--glacier-dim);
+      font-family: var(--font-main);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .subtle-btn:hover, .subtle-btn.active-toggle {
+      color: var(--glacier);
+      border-color: var(--teal-bright);
+      background: rgba(2, 132, 199, 0.15);
+    }
+
+    @media print {
+      body { background: #ffffff !important; color: #0F172A !important; overflow: visible !important; height: auto !important; }
+      .app-shell { height: auto !important; background: #ffffff !important; display: block !important; }
+      .top-bar, .presenter-bar, .speaker-notes-drawer, .slide { display: none !important; }
+      .stage-viewport { width: 100% !important; height: auto !important; max-width: none !important; max-height: none !important; box-shadow: none !important; background: #ffffff !important; overflow: visible !important; }
+      #printablePdfSheet { display: block !important; }
+    }
+    #printablePdfSheet {
+      display: none;
+      background: #ffffff;
+      color: #0F172A;
+      padding: 28px 36px;
+      font-family: var(--font-main);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div class="stage-viewport" id="stageViewport">
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="brand-mark">
+          <div class="brand-logo-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F8FAFC" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+            </svg>
+          </div>
+          <span>BLACKTIDE</span>
+          <span class="brand-loc">Fort Collins, CO • Fred Caldero</span>
+        </div>
+        <div class="top-status-pills">
+          <a href="./sink.html" class="top-pill-link" title="Homeowner Sink Demo Companion">📱 Sink Link</a>
+          <a href="./training.html" class="top-pill-link" title="Fort Collins Sales Training Playbook">📘 Training Book</a>
+          <span class="mode-pill-indicator" id="topModeBadge">City Water (Soft) • 10 Slides</span>
+        </div>
+      </header>
+
+      <!-- Slides Deck -->
+      <main class="slides-wrapper" id="slidesWrapper">
+
+        <!-- =====================================================
+             SLIDE 1: TITLE SLIDE
+        ====================================================== -->
+        <section class="slide active" data-slide-id="1"
+          data-notes-city="Thanks for letting me come by and test your water. I live right here in town, and I started Blacktide because I got tired of seeing big national water companies treat neighbors like a sales target. We just looked at your real numbers on the meter and drops. In the next five minutes, I'll show you what those numbers mean for your family, put the exact price on paper, and let you decide."
+          data-notes-hard="Thanks for letting me come by and test your water. I live right here in town, and I started Blacktide because I got tired of seeing big national water companies treat neighbors like a sales target. We just looked at your real numbers on the meter and drops. In the next five minutes, I'll show you what those numbers mean for your family, put the exact price on paper, and let you decide.">
+          <div class="slide-1-content">
+            <div class="neighbor-badge">
+              <span>●</span> Fort Collins Local Water Report &amp; Kitchen-Table Estimate
+            </div>
+            <h1 class="hero-title">Clean Water for Your Whole Home.</h1>
+            <p class="hero-sub">Straight numbers. Local install. No two-hour sales pitch.</p>
+            <div class="fred-card">
+              <div class="fred-avatar">FC</div>
+              <div>
+                <div style="font-size: 20px; font-weight: 800; color: var(--glacier);">Blacktide | Fort Collins, CO</div>
+                <div style="font-size: 16px; color: var(--teal-bright); font-weight: 600;">Fred Caldero, Local Neighbor &amp; Installer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide1-corner-controls">
+            <button class="discreet-toggle-btn" onclick="openQrModal()">
+              <span>📱</span> Send Sink Link to Homeowner
+            </button>
+            <button class="discreet-toggle-btn" id="slide1ModeBtn" onclick="toggleWaterMode()">
+              <span id="slide1ModeDot" style="color: var(--teal-bright);">●</span>
+              <span id="slide1ModeText">Mode: City Water (Soft)</span>
+            </button>
+          </div>
+
+          <svg class="mountain-waves-svg" viewBox="0 0 1440 240" preserveAspectRatio="none">
+            <path d="M0,180 L180,95 L340,155 L540,55 L740,145 L960,40 L1180,130 L1340,75 L1440,125 L1440,240 L0,240 Z" fill="rgba(2, 132, 199, 0.08)"/>
+            <path class="wave-layer-2" d="M-40,175 C240,125 460,215 740,160 C1020,105 1220,195 1480,155 L1480,240 L-40,240 Z" fill="rgba(2, 132, 199, 0.16)"/>
+            <path class="wave-layer-1" d="M-40,198 C300,150 580,235 900,180 C1150,140 1320,205 1480,185 L1480,240 L-40,240 Z" fill="rgba(56, 189, 248, 0.22)"/>
+          </svg>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 2: THE BOTTLED WATER TRAP
+        ====================================================== -->
+        <section class="slide" data-slide-id="2"
+          data-notes-city="Before we even look at your tap, look at what you're already spending at King Soopers or Costco. A family of four easily spends $45 to $84 a month lugging heavy cases of plastic bottles—that's ten to twelve bucks a gallon, and thousands of dollars gone over a few years. Whole-house filtered water costs about four cents a gallon. You're already paying for a water system; you just don't own it yet."
+          data-notes-hard="Before we even look at your tap, look at what you're already spending at King Soopers or Costco. A family of four easily spends $45 to $84 a month lugging heavy cases of plastic bottles—that's ten to twelve bucks a gallon, and thousands of dollars gone over a few years. Whole-house filtered water costs about four cents a gallon. You're already paying for a water system; you just don't own it yet.">
+          <div>
+            <div class="slide-eyebrow">The Bottled Water Trap</div>
+            <h2 class="slide-headline">You’re Already Paying for Clean Water.</h2>
+          </div>
+
+          <div class="split-grid">
+            <div>
+              <ul class="bullet-list">
+                <li>
+                  <span class="bullet-dot dot-coral">$</span>
+                  <span><strong>Family of four bottled water spend:</strong> $45 to $84/month ($2,700–$5,040 over 5 years)</span>
+                </li>
+                <li>
+                  <span class="bullet-dot dot-coral">!</span>
+                  <span><strong>Bottled water cost:</strong> $10 to $12 per gallon</span>
+                </li>
+                <li>
+                  <span class="bullet-dot dot-emerald">✓</span>
+                  <span><strong>Whole-house filtered water:</strong> ~4 cents per gallon</span>
+                </li>
+                <li>
+                  <span class="bullet-dot dot-teal">i</span>
+                  <span><strong>Most bottled water</strong> is just filtered city tap water in plastic.</span>
+                </li>
+              </ul>
+
+              <!-- Interactive Household Spend Slider -->
+              <div style="margin-top: 12px; background: rgba(30,41,59,0.75); border: 1px solid rgba(56,189,248,0.3); padding: 12px 16px; border-radius: 12px;">
+                <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:700; margin-bottom:6px;">
+                  <span>Your Estimated Monthly Bottle / Filter Spend:</span>
+                  <span id="bottleSpendLabel" style="color:var(--teal-bright); font-weight:800;">$65 / month</span>
+                </div>
+                <input type="range" id="bottleSpendSlider" min="25" max="140" step="5" value="65" style="width:100%; accent-color: var(--teal-bright);" oninput="updateBottleSlider(this.value)" />
+              </div>
+            </div>
+
+            <div class="visual-card">
+              <div style="font-size: 14px; font-weight: 700; color: var(--glacier-muted); text-transform: uppercase; letter-spacing: 0.06em; text-align: center;">
+                Cost Per Gallon &amp; Monthly Spend Comparison
+              </div>
+              <div class="bars-stage">
+                <div class="bar-col">
+                  <div class="bar-price-tag" style="color: var(--coral-bright);">$10–$12 / gal<br><span style="font-size:13px; color:var(--glacier-muted);">($45–$84/mo)</span></div>
+                  <div class="cost-bar coral-bar"></div>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-price-tag" style="color: var(--emerald-bright);">~$0.04 / gal<br><span style="font-size:13px; color:var(--glacier-muted);">(Every Tap)</span></div>
+                  <div class="cost-bar teal-bar"></div>
+                </div>
+              </div>
+              <div class="bar-labels">
+                <div style="flex:1; color: var(--coral-bright);">Grocery Store Cases</div>
+                <div style="flex:1; color: var(--emerald-bright);">Blacktide Whole-House</div>
+              </div>
+              <div class="burned-counter-box">
+                <div>
+                  <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--glacier-muted);">5-Year Money Burned on Plastic</div>
+                  <div style="font-size: 13px; color: var(--glacier-dim);">Zero equity • Heavy cases every week</div>
+                </div>
+                <div class="burned-amount" id="burnedCounter">$2,700 – $5,040</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 3: WHAT'S INSIDE THE BOTTLE
+        ====================================================== -->
+        <section class="slide" data-slide-id="3"
+          data-notes-city="And it's not just the money. Researchers tested bottled water and found around 240,000 micro and nanoplastic particles in a single liter. Ninety-three percent of the bottles tested had them. Doctors have now found those same plastic particles in human blood, lungs, brains, and placentas. A 2024 medical study showed people with microplastics in their artery plaque had about four-and-a-half times the rate of heart attacks, strokes, and deaths. You think drinking 240,000 plastic particles a liter is good for you? Meanwhile, Americans throw away 60 million bottles a day."
+          data-notes-hard="And it's not just the money. Researchers tested bottled water and found around 240,000 micro and nanoplastic particles in a single liter. Ninety-three percent of the bottles tested had them. Doctors have now found those same plastic particles in human blood, lungs, brains, and placentas. A 2024 medical study showed people with microplastics in their artery plaque had about four-and-a-half times the rate of heart attacks, strokes, and deaths. You think drinking 240,000 plastic particles a liter is good for you? Meanwhile, Americans throw away 60 million bottles a day.">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--coral-bright);">What’s Inside the Bottle?</div>
+            <h2 class="slide-headline">Plastic Doesn't Stay in the Bottle.</h2>
+          </div>
+
+          <div class="split-grid">
+            <ul class="bullet-list">
+              <li>
+                <span class="bullet-dot dot-coral">1</span>
+                <span><strong>~240,000</strong> micro and nanoplastic particles per liter of bottled water</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">2</span>
+                <span>Found in <strong>93%</strong> of bottled water tested</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">3</span>
+                <span>Detected in human <strong>blood, lungs, brains, and placentas</strong></span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">4</span>
+                <span><strong>2024 Study:</strong> People with microplastics in artery plaque had <strong>~4.5x</strong> the heart attacks, strokes, and deaths</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">5</span>
+                <span><strong>60 million</strong> bottles thrown away daily in the U.S. (under 30% recycled)</span>
+              </li>
+            </ul>
+
+            <div class="visual-card">
+              <div style="text-align:center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--coral-bright); margin-bottom: 6px;">
+                Microscope Cross-Section: 1 Liter of Bottled Water
+              </div>
+              <svg viewBox="0 0 360 185" style="width: 100%; height: 165px;">
+                <rect x="35" y="45" width="90" height="125" rx="14" fill="rgba(2, 132, 199, 0.15)" stroke="#38BDF8" stroke-width="2"/>
+                <rect x="62" y="22" width="36" height="23" rx="4" fill="rgba(2, 132, 199, 0.25)" stroke="#38BDF8" stroke-width="2"/>
+                <polygon points="105,85 215,35 215,155" fill="rgba(225, 29, 72, 0.14)"/>
+                <circle cx="255" cy="95" r="72" fill="#090D16" stroke="#FB7185" stroke-width="3"/>
+                <g class="particle-float">
+                  <circle cx="230" cy="70" r="4" fill="#FB7185"/>
+                  <circle cx="268" cy="60" r="3" fill="#FBBF24"/>
+                  <circle cx="285" cy="95" r="5" fill="#FB7185"/>
+                  <circle cx="240" cy="115" r="3.5" fill="#38BDF8"/>
+                  <circle cx="265" cy="128" r="4" fill="#FB7185"/>
+                  <circle cx="215" cy="98" r="3" fill="#FBBF24"/>
+                </g>
+                <g class="particle-float-2">
+                  <circle cx="250" cy="88" r="4.5" fill="#FB7185"/>
+                  <circle cx="278" cy="78" r="2.8" fill="#FBBF24"/>
+                  <circle cx="228" cy="125" r="3.2" fill="#FB7185"/>
+                  <circle cx="292" cy="112" r="3.5" fill="#38BDF8"/>
+                  <circle cx="255" cy="52" r="3" fill="#FB7185"/>
+                </g>
+              </svg>
+
+              <div class="micro-stats-grid">
+                <div class="stat-tile">
+                  <div class="stat-num" id="stat240k">240,000</div>
+                  <div class="stat-desc">Plastic Particles / Liter</div>
+                </div>
+                <div class="stat-tile">
+                  <div class="stat-num" id="stat93p">93%</div>
+                  <div class="stat-desc">Bottled Brands Tested Positive</div>
+                </div>
+                <div class="stat-tile">
+                  <div class="stat-num" id="stat45x">4.5x</div>
+                  <div class="stat-desc">Cardiovascular Risk (2024 Study)</div>
+                </div>
+                <div class="stat-tile">
+                  <div class="stat-num" id="stat60m">60M</div>
+                  <div class="stat-desc">Bottles Dumped Daily in U.S.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 4: LOCAL TAP WATER — LEGAL VS. CLEAN
+        ====================================================== -->
+        <section class="slide" data-slide-id="4"
+          data-notes-city="So you turn to the tap. Fort Collins has great mountain snowmelt, and our water is legally safe by EPA standards. Plus, city water is naturally soft, so if anyone tries to sell you a softener on city water, show them the door—you don't need one. But legal is not the same as clean. Because of the Poudre wildfire runoff and Horsetooth algae blooms, the city pumps heavy chlorine—around 1.3 milligrams per liter—which reacts with organic runoff to create disinfection byproducts called HAA5 and TTHMs. They're legal, but 21x to 46x above EWG health guidelines, and long-term studies link them to cancer risk. Every hot shower turns that chlorine into steam you breathe in."
+          data-notes-hard="Here is what your water test just showed us. Not only do you have chlorine and disinfection byproducts—which long-term studies tie to cancer risk—your water in this zone is also loaded with dissolved rock: calcium and magnesium. That hardness is silently coating the inside of your plumbing and appliances every day.">
+          <div>
+            <div class="slide-eyebrow">Local Water Report &amp; Live Kitchen Test</div>
+            <h2 class="slide-headline">Your Tap Water: Legal Isn't the Same as Clean.</h2>
+          </div>
+
+          <div class="split-grid">
+            <ul class="bullet-list city-only">
+              <li>
+                <span class="bullet-dot dot-coral">!</span>
+                <span><strong>Chlorine: ~1.3 mg/L</strong> (Pumped in to treat Horsetooth algae &amp; Poudre wildfire runoff)</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">!</span>
+                <span><strong>Disinfection Byproducts:</strong> HAA5 (~22 ppb) &amp; TTHMs (~31 ppb)</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">!</span>
+                <span><strong>Inside EPA legal limits</strong> — 21x to 46x above EWG health guidelines</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">!</span>
+                <span><strong>Long-term studies</strong> tie disinfection byproducts to increased cancer risk</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>Good News:</strong> Fort Collins city water is naturally soft. You do not need a water softener.</span>
+              </li>
+            </ul>
+
+            <ul class="bullet-list hard-only" style="flex-direction: column;">
+              <li>
+                <span class="bullet-dot dot-coral">!</span>
+                <span><strong>Chlorine &amp; Disinfection Byproducts (HAA5 &amp; TTHMs):</strong> Inside EPA legal limits, but hundreds of times above health guidelines and tied to long-term cancer risk</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">!</span>
+                <span><strong>Plus Hard Water Minerals (Calcium &amp; Magnesium):</strong> Building scale inside your pipes, faucets, and appliances every single day</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-teal">i</span>
+                <span><strong>Double Impact:</strong> Chemical disinfectant steam in every hot shower + rock scale coating your plumbing.</span>
+              </li>
+            </ul>
+
+            <div class="visual-card">
+              <div class="gauge-block">
+                <div class="gauge-header">
+                  <span>Free Chlorine (<span id="gaugeClLabel">1.3</span> mg/L)</span>
+                  <span style="color: var(--coral-bright);">Pool-Level Disinfectant (EPA Max: 4.0)</span>
+                </div>
+                <div class="gauge-track">
+                  <div class="gauge-marker" style="left: 15%;"></div>
+                  <div class="gauge-fill fill-warning" id="gaugeClFill" data-target="65%"></div>
+                </div>
+              </div>
+
+              <div class="gauge-block">
+                <div class="gauge-header">
+                  <span>HAA5 Disinfection Byproducts (~22 ppb)</span>
+                  <span style="color: var(--coral-bright);">21x EWG Health Guideline (EPA Limit: 60)</span>
+                </div>
+                <div class="gauge-track">
+                  <div class="gauge-marker" style="left: 10%;"></div>
+                  <div class="gauge-fill fill-warning" id="gaugeHaaFill" data-target="58%"></div>
+                </div>
+              </div>
+
+              <div class="gauge-block">
+                <div class="gauge-header">
+                  <span>TTHMs Disinfection Byproducts (~31 ppb)</span>
+                  <span style="color: var(--coral-bright);">46x EWG Health Guideline (EPA Limit: 80)</span>
+                </div>
+                <div class="gauge-track">
+                  <div class="gauge-marker" style="left: 10%;"></div>
+                  <div class="gauge-fill fill-warning" id="gaugeTthmFill" data-target="62%"></div>
+                </div>
+              </div>
+
+              <div class="gauge-block hard-only-block hard-only" style="flex-direction: column;">
+                <div class="gauge-header">
+                  <span>Water Hardness (<span id="gaugeGpgLabel">18</span> GPG)</span>
+                  <span style="color: var(--coral-bright);">Severe Scale-Forming Zone</span>
+                </div>
+                <div class="gauge-track">
+                  <div class="gauge-marker" style="left: 20%;"></div>
+                  <div class="gauge-fill fill-danger" id="gaugeGpgFill" data-target="84%"></div>
+                </div>
+              </div>
+
+              <div class="city-soft-badge city-only">
+                <span>✓</span> Fort Collins City Water is Soft — No Softener Needed.
+              </div>
+
+              <div class="live-test-inputs">
+                <div class="test-field">
+                  <label for="inputChlorine">Chlorine (mg/L)</label>
+                  <input type="number" id="inputChlorine" step="0.1" min="0" max="10" value="1.3" oninput="updateTestReadings()" />
+                </div>
+                <div class="test-field">
+                  <label for="inputTds">TDS Meter (ppm)</label>
+                  <input type="number" id="inputTds" step="1" min="0" max="2000" value="85" oninput="updateTestReadings()" />
+                </div>
+                <div class="test-field hard-only" style="flex-direction: column;">
+                  <label for="inputHardness">Hardness (GPG)</label>
+                  <input type="number" id="inputHardness" step="1" min="0" max="60" value="18" oninput="updateTestReadings()" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 4B [HARD WATER MODE ONLY]: WHAT HARD WATER COSTS YOU
+        ====================================================== -->
+        <section class="slide hard-mode-slide" data-slide-id="4B"
+          data-notes-city="Hard water isn't just annoying white crust on your faucets—it's an invisible bill you pay every month."
+          data-notes-hard="Hard water isn't just annoying white crust on your faucets—it's an invisible bill you pay every month. That calcium rock builds up inside your pipes and appliances until they wear out years early. It leaves soap scum on your skin and hair, spots your dishes, and forces you to buy 50% more detergent and soap every month just to get a lather. Treating hard water doesn't just feel better—it protects your home.">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--coral-bright);">What Hard Water Is Quietly Destroying</div>
+            <h2 class="slide-headline">Hard Water Is a Hidden Monthly Bill.</h2>
+          </div>
+
+          <div class="split-grid">
+            <ul class="bullet-list">
+              <li>
+                <span class="bullet-dot dot-coral">1</span>
+                <span><strong>Chokes Pipes &amp; Appliances:</strong> Calcium scale builds up inside valves, showerheads, dishwashers, and washing machines—cutting their lifespan short</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">2</span>
+                <span><strong>Wrecks Skin &amp; Hair:</strong> Hard minerals react with soap to leave an invisible film that dries out skin and dulls hair</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">3</span>
+                <span><strong>Ruins Laundry &amp; Glassware:</strong> White spots on dishes and stiff, faded clothes</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">4</span>
+                <span><strong>Wastes $40–$60/Month:</strong> You use up to 50% more detergent, shampoo, and cleaners just to get things clean</span>
+              </li>
+            </ul>
+
+            <div class="visual-card">
+              <div style="text-align: center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--amber); margin-bottom: 10px;">
+                Cross-Section: Calcium Scale Choking Household Pipe &amp; Showerhead
+              </div>
+              <svg viewBox="0 0 420 175" style="width: 100%; height: 165px;">
+                <rect x="20" y="30" width="300" height="115" rx="8" fill="#1E293B" stroke="#64748B" stroke-width="3"/>
+                <path class="scale-wall" d="M22,33 L318,33 L318,68 C270,74 220,58 170,70 C110,75 65,62 22,68 Z" fill="#FDE68A" stroke="#F59E0B" stroke-width="1.5"/>
+                <path class="scale-wall" d="M22,142 L318,142 L318,106 C265,98 215,112 165,102 C110,96 65,112 22,105 Z" fill="#FDE68A" stroke="#F59E0B" stroke-width="1.5"/>
+                <line class="flow-stream" x1="30" y1="88" x2="315" y2="88" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                <path d="M320,45 L375,25 L375,150 L320,130 Z" fill="#334155" stroke="#94A3B8" stroke-width="2.5"/>
+                <circle cx="378" cy="55" r="4" fill="#FDE68A"/>
+                <circle cx="378" cy="85" r="4" fill="#FDE68A"/>
+                <circle cx="378" cy="115" r="4" fill="#FDE68A"/>
+                <text x="170" y="92" fill="#0F172A" font-size="13" font-weight="800" text-anchor="middle">RESTRICTED FLOW + SCALE ROCK</text>
+              </svg>
+
+              <div class="damage-callouts-grid">
+                <div class="damage-mini-card"><span>⚠️</span> Choked Pipes &amp; Valves</div>
+                <div class="damage-mini-card"><span>🧴</span> Dry, Itchy Skin &amp; Hair</div>
+                <div class="damage-mini-card"><span>🍽️</span> Spotted Dishes &amp; Stiff Laundry</div>
+                <div class="damage-mini-card"><span>💸</span> $40–$60/mo Extra Soap Waste</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 5: THE FIX — WHOLE-HOUSE PROTECTION
+        ====================================================== -->
+        <section class="slide" data-slide-id="5"
+          data-notes-city="Here is the permanent fix: the Blacktide Mountain-Pure System powered by SpringWell commercial-grade CF1 vessels right on your main water line. Instead of a tiny pitcher in the fridge, every single drop entering your home passes through four stages of catalytic carbon and KDF filtration before it ever hits your kitchen sink, your kids' bath, or your washing machine. It flows at 9 gallons a minute so your shower pressure stays strong, and includes custom copper/PEX bypass integration and a lifetime tank and valve warranty."
+          data-notes-hard="Here is the permanent fix: the Blacktide Mountain-Pure System powered by SpringWell CF1 vessels right on your main water line—paired with a high-efficiency softener for your hard water. Every single drop entering your home passes through four stages of filtration and ion-exchange softening before it hits your showers, kitchen sink, or appliances. It flows at 9 gallons a minute with a lifetime warranty.">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--emerald-bright);">The Fix — Blacktide Mountain-Pure Turnkey Buildout</div>
+            <h2 class="slide-headline city-only">Clean Water From Every Tap in the House.</h2>
+            <h2 class="slide-headline hard-only">Clean, Soft Water From Every Tap in the House.</h2>
+          </div>
+
+          <div class="split-grid">
+            <ul class="bullet-list">
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>SpringWell CF1 4-Stage Whole-House Carbon/KDF Filter</strong> <span class="hard-only" style="display:inline; color:var(--teal-bright);">(+ High-Efficiency Salt Water Softener)</span></span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>9 GPM flow rate</strong> — zero noticeable drop in water pressure</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>1,000,000-gallon</strong> media life + custom copper/PEX 3-valve bypass loop</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>Lifetime warranty</strong> on tanks and valves + local Fort Collins support</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span>Removes <strong>99.9% of chlorine, chloramine, Horsetooth odor &amp; disinfection byproducts</strong> <span class="hard-only" style="display:inline; color:var(--emerald-bright);">(plus 97.5% of hardness minerals)</span></span>
+              </li>
+            </ul>
+
+            <div class="visual-card">
+              <div style="text-align: center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 8px;">
+                Animated Whole-House Plumbing Flow • 9 GPM Full Pressure
+              </div>
+              <svg viewBox="0 0 460 250" style="width: 100%; height: 225px;">
+                <text x="15" y="42" fill="#FBBF24" font-size="11" font-weight="700">MAIN LINE IN</text>
+                <line x1="15" y1="55" x2="115" y2="55" stroke="#475569" stroke-width="10" stroke-linecap="round"/>
+                <line class="flow-stream" x1="15" y1="55" x2="115" y2="55" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+
+                <rect x="95" y="45" width="74" height="165" rx="22" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
+                <rect x="114" y="26" width="36" height="20" rx="5" fill="#0284C7"/>
+                <rect x="103" y="75" width="58" height="22" rx="4" fill="rgba(2, 132, 199, 0.35)"/>
+                <rect x="103" y="103" width="58" height="22" rx="4" fill="rgba(56, 189, 248, 0.35)"/>
+                <rect x="103" y="131" width="58" height="22" rx="4" fill="rgba(5, 150, 105, 0.35)"/>
+                <rect x="103" y="159" width="58" height="22" rx="4" fill="rgba(52, 211, 153, 0.4)"/>
+                <text x="132" y="228" fill="#F8FAFC" font-size="12" font-weight="800" text-anchor="middle">SpringWell CF1</text>
+
+                <g id="svgSoftenerGroup" style="opacity: 0.22; transition: opacity 0.3s ease;">
+                  <line x1="169" y1="65" x2="205" y2="65" stroke="#0284C7" stroke-width="8"/>
+                  <rect x="200" y="45" width="68" height="165" rx="20" fill="#0F172A" stroke="#34D399" stroke-width="3"/>
+                  <rect x="217" y="26" width="34" height="20" rx="5" fill="#059669"/>
+                  <rect x="208" y="85" width="52" height="95" rx="8" fill="rgba(5, 150, 105, 0.35)"/>
+                  <text x="234" y="136" fill="#34D399" font-size="10" font-weight="800" text-anchor="middle">ION RESIN</text>
+                  <text x="234" y="228" fill="#34D399" font-size="11" font-weight="800" text-anchor="middle">Salt Softener</text>
+                </g>
+
+                <path d="M268,120 L330,120 M330,55 L330,185 M330,55 L365,55 M330,120 L365,120 M330,185 L365,185" stroke="#0369A1" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <path class="flow-stream" d="M268,120 L330,120 M330,55 L330,185 M330,55 L365,55 M330,120 L365,120 M330,185 L365,185" stroke="#38BDF8" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+                <rect x="368" y="37" width="84" height="36" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+                <text x="410" y="59" fill="#F8FAFC" font-size="11" font-weight="700" text-anchor="middle">🚿 Showers</text>
+
+                <rect x="368" y="102" width="84" height="36" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+                <text x="410" y="124" fill="#F8FAFC" font-size="11" font-weight="700" text-anchor="middle">🚰 Kitchen Tap</text>
+
+                <rect x="368" y="167" width="84" height="36" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+                <text x="410" y="189" fill="#F8FAFC" font-size="11" font-weight="700" text-anchor="middle">🧺 Laundry</text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 5B [HARD WATER MODE ONLY]: WHY SOFT WATER PAYS FOR ITSELF
+        ====================================================== -->
+        <section class="slide hard-mode-slide" data-slide-id="5B"
+          data-notes-city="The first morning after we install this, you'll feel the difference in the shower immediately."
+          data-notes-hard="The first morning after we install this, you'll feel the difference in the shower immediately. Your skin isn't dry, your hair is soft, your dishes come out spotless, and your soap bill drops in half. Better yet, you stop scale from ruining your plumbing and appliances.">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--emerald-bright);">Why Scale-Free Soft Water Pays For Itself</div>
+            <h2 class="slide-headline">Feel the Difference on Day One.</h2>
+          </div>
+
+          <div class="split-grid">
+            <ul class="bullet-list">
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>Cut Soap &amp; Detergent Spend in Half:</strong> Rich lather with half the shampoo, body wash, and laundry soap</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>Protect Your Plumbing &amp; Appliances:</strong> Stops scale buildup dead in its tracks</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>Spot-Free Dishes &amp; Softer Laundry:</strong> Towels come out fluffy; glassware dries crystal clear</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>Better Skin &amp; Hair:</strong> No more dry, itchy "hard water" skin after showers</span>
+              </li>
+            </ul>
+
+            <div class="visual-card">
+              <div style="text-align: center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--emerald-bright); margin-bottom: 10px;">
+                Side-By-Side Soap &amp; Scale Test
+              </div>
+              <svg viewBox="0 0 400 175" style="width: 100%; height: 165px;">
+                <rect x="35" y="25" width="135" height="130" rx="12" fill="rgba(225, 29, 72, 0.1)" stroke="#FB7185" stroke-width="2.5"/>
+                <rect x="38" y="80" width="129" height="72" rx="8" fill="rgba(245, 158, 11, 0.22)"/>
+                <rect x="42" y="74" width="121" height="14" rx="4" fill="#FDE68A"/>
+                <text x="102" y="52" fill="#FB7185" font-size="13" font-weight="800" text-anchor="middle">HARD WATER</text>
+                <text x="102" y="122" fill="#FDE68A" font-size="12" font-weight="700" text-anchor="middle">Sticky Soap Scum</text>
+
+                <rect x="230" y="25" width="135" height="130" rx="12" fill="rgba(5, 150, 105, 0.12)" stroke="#34D399" stroke-width="2.5"/>
+                <rect x="233" y="85" width="129" height="67" rx="8" fill="rgba(56, 189, 248, 0.28)"/>
+                <g class="lather-bubble">
+                  <circle cx="255" cy="76" r="14" fill="#F8FAFC"/>
+                  <circle cx="278" cy="70" r="17" fill="#F8FAFC"/>
+                  <circle cx="305" cy="72" r="16" fill="#F8FAFC"/>
+                  <circle cx="332" cy="77" r="13" fill="#F8FAFC"/>
+                </g>
+                <text x="297" y="46" fill="#34D399" font-size="13" font-weight="800" text-anchor="middle">SOFT WATER</text>
+                <text x="297" y="124" fill="#F8FAFC" font-size="12" font-weight="700" text-anchor="middle">Rich Lather • 50% Less Soap</text>
+              </svg>
+
+              <div class="damage-callouts-grid">
+                <div class="damage-mini-card" style="background:rgba(5,150,105,0.16); border-color:var(--emerald);"><span>🥂</span> Spot-Free Glassware</div>
+                <div class="damage-mini-card" style="background:rgba(5,150,105,0.16); border-color:var(--emerald);"><span>✨</span> Silky Skin &amp; Hair</div>
+                <div class="damage-mini-card" style="background:rgba(5,150,105,0.16); border-color:var(--emerald);"><span>🛡️</span> Protected Plumbing</div>
+                <div class="damage-mini-card" style="background:rgba(5,150,105,0.16); border-color:var(--emerald);"><span>🚰</span> Zero Faucet Crust</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 6: TWO WAYS TO SET UP YOUR HOME
+        ====================================================== -->
+        <section class="slide" data-slide-id="6"
+          data-notes-city="Most families love Option 1 because every tap in the house tastes great and your showers are completely chlorine-free. And if you want ultra-pure drinking water right at your kitchen sink—the kind that strips out dissolved minerals, fluoride, and nitrates for coffee, ice cubes, and cooking—Option 2 adds an under-sink Reverse Osmosis tap right at your sink. That's why most Fort Collins families pair both."
+          data-notes-hard="Most families love Option 1 because every tap in the house tastes great and your showers are completely chlorine-free and scale-free. If you want ultra-pure drinking water right at your kitchen sink—the kind that drops your TDS reading down near zero for coffee, ice cubes, and cooking—Option 2 adds an under-sink Reverse Osmosis tap right at your sink.">
+          <div>
+            <div class="slide-eyebrow">Two Ways to Set Up Your Home</div>
+            <h2 class="slide-headline">Choose Your Level of Pure.</h2>
+          </div>
+
+          <div class="setup-cards-row">
+            <div class="setup-option-card selected" id="setupCard1" onclick="selectSetupPreview(1)">
+              <div class="setup-option-title">
+                <span>Option 1: Whole-House Protection</span>
+                <span style="color: var(--teal-bright);">●</span>
+              </div>
+              <p class="body-text city-only">
+                Clean, chlorine-free water at every tap, shower, and appliance.
+              </p>
+              <p class="body-text hard-only">
+                Clean, chlorine-free and scale-free soft water at every tap, shower, and appliance.
+              </p>
+            </div>
+
+            <div class="setup-option-card" id="setupCard2" onclick="selectSetupPreview(2)">
+              <div class="setup-option-title">
+                <span>Option 2: Whole-House + Kitchen Drinking Water Combo</span>
+                <span style="color: var(--emerald-bright);">★</span>
+              </div>
+              <p class="body-text">
+                Adds an Under-Sink Reverse Osmosis (RO) system at your kitchen sink for ultra-pure drinking, coffee, ice, and cooking water.
+              </p>
+            </div>
+          </div>
+
+          <div class="visual-card" style="padding: 14px 22px;">
+            <svg viewBox="0 0 800 160" style="width: 100%; height: 150px;">
+              <rect x="20" y="18" width="460" height="122" rx="14" fill="rgba(2, 132, 199, 0.16)" stroke="#38BDF8" stroke-width="2.5"/>
+              <text x="45" y="50" fill="#38BDF8" font-size="16" font-weight="800">OPTION 1: WHOLE-HOUSE SYSTEM</text>
+              <text x="45" y="80" fill="#F8FAFC" font-size="15" font-weight="600">✓ Master &amp; Kids' Showers (Zero Chlorine Steam)</text>
+              <text x="45" y="108" fill="#F8FAFC" font-size="15" font-weight="600">✓ All Bathrooms, Laundry &amp; Appliances</text>
+
+              <line class="flow-stream" x1="480" y1="80" x2="530" y2="80" stroke="#34D399" stroke-width="5"/>
+
+              <g id="roDiagramHighlight" style="opacity: 0.38; transition: opacity 0.3s ease;">
+                <rect x="530" y="18" width="250" height="122" rx="14" fill="rgba(5, 150, 105, 0.22)" stroke="#34D399" stroke-width="2.5"/>
+                <text x="550" y="50" fill="#34D399" font-size="15" font-weight="800">+ UNDER-SINK RO TAP</text>
+                <text x="550" y="80" fill="#F8FAFC" font-size="14" font-weight="600">✓ Dedicated Kitchen Faucet</text>
+                <text x="550" y="108" fill="#F8FAFC" font-size="14" font-weight="600">✓ Near-Zero TDS Drinking &amp; Ice</text>
+              </g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 7: HOW SPRINGWELL STACKS UP
+        ====================================================== -->
+        <section class="slide" data-slide-id="7"
+          data-notes-city="You don't have to take my word on the hardware. SpringWell is the top-rated whole-house system of 2026—WaterFilterGeek gave it 4.8 out of 5, and AquaVerdict scored it 92 out of 100. It flows at 9 gallons a minute compared to Aquasana's 7. And unlike national outfits like Culligan, Kinetico, or RainSoft—who hold you hostage at your kitchen table for two hours before dropping an eight- or nine-thousand-dollar quote—I put the exact turnkey installed price right in front of you."
+          data-notes-hard="You don't have to take my word on the hardware. SpringWell is the top-rated whole-house system of 2026—WaterFilterGeek gave it 4.8 out of 5, and AquaVerdict scored it 92 out of 100. It flows at 9 gallons a minute compared to Aquasana's 7. And unlike national outfits like Culligan, Kinetico, or RainSoft—who hold you hostage at your kitchen table for two hours before dropping an eight- or nine-thousand-dollar quote—I put the exact turnkey installed price right in front of you.">
+          <div>
+            <div class="slide-eyebrow">How SpringWell Stacks Up</div>
+            <h2 class="slide-headline">Top-Rated Equipment. Zero Hidden Pricing.</h2>
+          </div>
+
+          <div class="split-grid">
+            <ul class="bullet-list">
+              <li>
+                <span class="bullet-dot dot-emerald">★</span>
+                <span><strong>SpringWell CF1:</strong> Top-Rated Whole-House Filter of 2026 (WaterFilterGeek Editor's Choice <strong>4.8/5</strong>, AquaVerdict <strong>92/100</strong>)</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-teal">⚡</span>
+                <span><strong>Flow Rate:</strong> SpringWell CF1 <strong>9 GPM</strong> vs. Aquasana Rhino <strong>7 GPM</strong></span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-coral">!</span>
+                <span><strong>Big National Brands (Culligan, Kinetico, RainSoft):</strong> Typically run <strong>$4,500–$9,000+</strong> and hide the price until after a 2-hour high-pressure demo</span>
+              </li>
+              <li>
+                <span class="bullet-dot dot-emerald">✓</span>
+                <span><strong>Blacktide Turnkey Package:</strong> Custom copper/PEX manifold, 3-valve bypass, licensed master plumber &amp; printed price upfront.</span>
+              </li>
+            </ul>
+
+            <div class="visual-card">
+              <div style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 10px;">
+                Whole-House Flow Rate Comparison (Gallons Per Minute)
+              </div>
+
+              <div class="race-bar-wrap">
+                <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:700; margin-bottom:5px;">
+                  <span>SpringWell CF1 (Blacktide Standard)</span>
+                  <span style="color: var(--emerald-bright);">9.0 GPM</span>
+                </div>
+                <div class="gauge-track" style="height: 28px;">
+                  <div class="race-bar-fill" id="raceCf1" data-target="92%" style="background: linear-gradient(90deg, var(--teal) 0%, var(--emerald) 100%);">
+                    Full Home Pressure
+                  </div>
+                </div>
+              </div>
+
+              <div class="race-bar-wrap">
+                <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:700; margin-bottom:5px;">
+                  <span>Aquasana Rhino</span>
+                  <span style="color: var(--glacier-dim);">7.0 GPM</span>
+                </div>
+                <div class="gauge-track" style="height: 28px;">
+                  <div class="race-bar-fill" id="raceAquasana" data-target="70%" style="background: #475569;">
+                    22% Slower Flow
+                  </div>
+                </div>
+              </div>
+
+              <div class="flip-card-reveal" id="nationalBrandFlip" onclick="toggleNationalFlip()">
+                <div id="flipFront">
+                  <div style="font-size: 13px; font-weight: 800; color: var(--coral-bright); text-transform: uppercase; margin-bottom: 4px;">
+                    Tap to Reveal: Culligan • Kinetico • RainSoft Playbook
+                  </div>
+                  <div style="font-size: 18px; font-weight: 800; color: var(--glacier);">
+                    2-Hour Kitchen Table Pitch → $4,500 to $9,000+ Quote
+                  </div>
+                </div>
+                <div id="flipBack" style="display: none;">
+                  <div style="font-size: 13px; font-weight: 800; color: var(--emerald-bright); text-transform: uppercase; margin-bottom: 4px;">
+                    The Blacktide Neighbor Promise
+                  </div>
+                  <div style="font-size: 18px; font-weight: 800; color: var(--glacier);">
+                    5-Minute Water Test • Printed Price Upfront • 10-Yr Local Labor Guarantee
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 8: STRAIGHTFORWARD PRICING (INTERACTIVE CLOSE)
+        ====================================================== -->
+        <section class="slide" data-slide-id="8"
+          data-notes-city="Here is the exact investment, plain and simple. Remember: if you're already spending $60 to $80 a month on bottled water, you're already paying most of this every month with nothing to show for it. And if we pair your install on our January neighborhood route and put a small Blacktide yard sign out front for 14 days, you can tap the Fleet Route button right there to apply the neighborhood install waiver. Which of these two setups makes the most sense for your family?"
+          data-notes-hard="Here is the exact investment, plain and simple. Remember: if you're already spending $60 to $80 a month on bottled water—plus $40 to $60 in extra soap and detergent fighting hard water—you're already paying most of this every month with nothing to show for it. Which of these two setups makes the most sense for your family?">
+          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div>
+              <div class="slide-eyebrow" style="color: var(--emerald-bright);">Straightforward Pricing</div>
+              <h2 class="slide-headline">No Games. Here Is What It Costs.</h2>
+              <p class="slide-subheadline" style="margin-bottom: 10px;">Tap an option below to lock in your estimate.</p>
+            </div>
+            <button class="subtle-btn" id="fleetRouteToggleBtn" onclick="toggleFleetPricing()" style="margin-bottom: 12px;">
+              🏷️ Apply January Neighbor Fleet Discount
+            </button>
+          </div>
+
+          <div class="pricing-grid">
+            <!-- Card 1 -->
+            <div class="price-close-card selected" id="priceCard1" onclick="selectPricingOption(1)">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--teal-bright);">OPTION 1</span>
+                  <span id="priceCheck1" style="font-size: 14px; font-weight: 800; color: var(--emerald-bright);">✓ SELECTED</span>
+                </div>
+                <div id="card1Title" style="font-size: 22px; font-weight: 800; margin-top: 4px;">
+                  Whole-House Clean Water (CF1)
+                </div>
+                <div class="hero-monthly-price" id="card1Monthly">
+                  $127<span>/month</span>
+                </div>
+                <div class="cash-price-sub" id="card1Cash">
+                  or $5,999 cash (includes full installation)
+                </div>
+                <p class="body-text" id="card1Desc" style="font-size: 16px; color: var(--glacier-muted);">
+                  SpringWell CF1 4-Stage Whole-House Filter • 9 GPM • 1M-Gallon Capacity • Custom Copper/PEX Bypass &amp; Lifetime Tank Warranty
+                </p>
+              </div>
+              <div class="net-diff-callout" id="card1NetDiff">
+                Net difference after ditching $65/mo bottled water: <strong>~$62/mo (~$2/day)</strong>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="price-close-card" id="priceCard2" onclick="selectPricingOption(2)">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--emerald-bright);">OPTION 2 • MOST COMPLETE</span>
+                  <span id="priceCheck2" style="font-size: 14px; font-weight: 800; color: var(--glacier-dim);">TAP TO SELECT</span>
+                </div>
+                <div id="card2Title" style="font-size: 22px; font-weight: 800; margin-top: 4px;">
+                  The Combo (CF1 + Under-Sink RO)
+                </div>
+                <div class="hero-monthly-price" id="card2Monthly">
+                  $152<span>/month</span>
+                </div>
+                <div class="cash-price-sub" id="card2Cash">
+                  or $7,199 cash (includes full installation)
+                </div>
+                <p class="body-text" id="card2Desc" style="font-size: 16px; color: var(--glacier-muted);">
+                  Whole-House Protection + Dedicated Kitchen Under-Sink Reverse Osmosis Drinking Tap + 10-Yr Local Labor Warranty
+                </p>
+              </div>
+              <div class="net-diff-callout" id="card2NetDiff">
+                Net difference after ditching $65/mo bottled water: <strong>~$87/mo (~$2.85/day)</strong>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 10px; font-size: 15px; font-weight: 700; color: var(--emerald-bright);">
+            ✓ Complete turnkey system + custom copper/PEX bypass installation by a licensed local Fort Collins plumber.
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 9: HOW INSTALLATION WORKS (JANUARY SCHEDULE)
+        ====================================================== -->
+        <section class="slide" data-slide-id="9"
+          data-notes-city="Here is how scheduling works. We are completely booked out through the end of the year. Right now, I'm testing water and locking in our January install calendar. If you want to get your family taken care of, a small deposit today locks in this exact price and holds your spot in January. No second visit needed, and you won't get blown up with sales calls."
+          data-notes-hard="Here is how scheduling works. We are completely booked out through the end of the year. Right now, I'm testing water and locking in our January install calendar. If you want to get your family taken care of, a small deposit today locks in this exact price and holds your spot in January. No second visit needed, and you won't get blown up with sales calls.">
+          <div>
+            <div class="slide-eyebrow">How Installation Works — January Schedule</div>
+            <h2 class="slide-headline">Lock In Your January Install Spot.</h2>
+          </div>
+
+          <div class="timeline-container">
+            <div class="timeline-track-line">
+              <div class="timeline-progress-fill"></div>
+            </div>
+
+            <div class="timeline-step-card">
+              <div class="step-circle">1</div>
+              <div style="font-size: 21px; font-weight: 800; margin-bottom: 8px; color: var(--teal-bright);">Step 1: Today</div>
+              <p class="body-text">Your real water test is complete and your written price is locked.</p>
+            </div>
+
+            <div class="timeline-step-card">
+              <div class="step-circle" style="border-color: var(--amber); color: var(--amber);">2</div>
+              <div style="font-size: 21px; font-weight: 800; margin-bottom: 8px; color: #FBBF24;">Step 2: Year-End Schedule</div>
+              <p class="body-text">We are booked solid through the end of the year.</p>
+            </div>
+
+            <div class="timeline-step-card">
+              <div class="step-circle" style="border-color: var(--emerald-bright); color: var(--emerald-bright);">3</div>
+              <div style="font-size: 21px; font-weight: 800; margin-bottom: 8px; color: var(--emerald-bright);">Step 3: January Install</div>
+              <p class="body-text">A small deposit today locks in today's pricing and reserves your installation date in January.</p>
+            </div>
+          </div>
+
+          <div style="text-align: center; padding: 12px; background: rgba(30, 41, 59, 0.7); border-radius: 12px; font-size: 17px; font-weight: 700; color: var(--glacier-muted);">
+            No second visit needed. No high-pressure follow-up calls.
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SLIDE 10: YOUR WATER. YOUR CALL. (SUMMARY, SIGNATURE & GHL SYNC)
+        ====================================================== -->
+        <section class="slide" data-slide-id="10"
+          data-notes-city="That's the whole picture. You saw your real water numbers with your own eyes, you see the exact monthly number, and you know how the install works. Pop your name and best number right here so I can text and email your written estimate and set up your invoice in our system. If you're ready to grab one of our January install spots today, sign right on the pad below and let's get you on the calendar."
+          data-notes-hard="That's the whole picture. You saw your real water numbers with your own eyes, you see the exact monthly number, and you know how the install works. Pop your name and best number right here so I can text and email your written estimate and set up your invoice in our system. If you're ready to grab one of our January install spots today, sign right on the pad below and let's get you on the calendar.">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--emerald-bright);">Kitchen-Table Written Estimate &amp; GoHighLevel CRM Dispatch</div>
+            <h2 class="slide-headline">Your Water. Your Call.</h2>
+          </div>
+
+          <div class="summary-close-grid">
+            <!-- Left Card: Live Estimate Summary -->
+            <div class="visual-card" style="justify-content: space-between; padding: 16px 20px;">
+              <div>
+                <div class="summary-row">
+                  <span class="summary-label">Home Water Test Results</span>
+                  <span class="summary-val" id="sumWaterResults" style="color: var(--coral-bright);">Chlorine: 1.3 mg/L • TDS: 85 ppm (Soft)</span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Selected Home System</span>
+                  <span class="summary-val" id="sumSystemName" style="color: var(--teal-bright);">Whole-House Clean Water (CF1)</span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Monthly / Cash Investment</span>
+                  <span class="summary-val" id="sumPriceVal" style="color: var(--emerald-bright); font-size: 21px;">$127/mo (or $5,999 cash)</span>
+                </div>
+                <div class="summary-row">
+                  <span class="summary-label">Installation Window</span>
+                  <span class="summary-val" id="sumInstallStatus">January Priority Slot (Pending Deposit)</span>
+                </div>
+                <div class="summary-row" style="border-bottom: none;">
+                  <span class="summary-label">Installed By</span>
+                  <span class="summary-val">Fred Caldero • Blacktide (Fort Collins)</span>
+                </div>
+              </div>
+
+              <div>
+                <div style="display:flex; gap:8px; margin-top: 8px;">
+                  <button class="nav-btn" style="flex:1; justify-content:center; padding:7px;" onclick="switchSummaryOption(1)">Option 1</button>
+                  <button class="nav-btn" style="flex:1; justify-content:center; padding:7px;" onclick="switchSummaryOption(2)">Option 2 (RO Combo)</button>
+                </div>
+
+                <div class="action-btn-row">
+                  <button class="mini-action-btn" onclick="window.print()">📄 Save / Print PDF</button>
+                  <button class="mini-action-btn" onclick="sendSmsQuote()">💬 Text Estimate</button>
+                  <button class="mini-action-btn" onclick="openQrModal()">📱 QR to Phone</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Card: Customer Info, Finger Signature Pad & GHL CRM Push -->
+            <div class="visual-card" style="justify-content: space-between; padding: 16px 20px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--teal-bright);">
+                    Homeowner Estimate &amp; GHL Invoice Setup
+                  </span>
+                  <button class="subtle-btn" style="padding:3px 8px; font-size:11px;" onclick="openGhlModal()">⚙️ GHL Setup</button>
+                </div>
+
+                <div class="crm-inputs-grid">
+                  <input type="text" class="crm-input" id="custName" placeholder="Homeowner Full Name *" />
+                  <input type="tel" class="crm-input" id="custPhone" placeholder="Mobile Phone *" />
+                  <input type="email" class="crm-input" id="custEmail" placeholder="Email (For GHL Invoice)" />
+                  <input type="text" class="crm-input" id="custAddress" placeholder="Street Address &amp; Zip" />
+                </div>
+
+                <!-- HTML5 Canvas Finger / Apple Pencil Signature Pad -->
+                <div style="font-size: 11px; font-weight: 700; color: var(--glacier-dim); text-transform: uppercase; margin-top: 8px;">
+                  Homeowner Signature (Locks January Install Price):
+                </div>
+                <div class="sig-pad-wrap">
+                  <canvas id="sigCanvas"></canvas>
+                  <button type="button" class="sig-clear-btn" onclick="clearSignature()">Clear</button>
+                </div>
+              </div>
+
+              <div>
+                <button class="january-lock-btn" id="januaryLockBtn" onclick="submitToGhlAndLock()">
+                  <span id="januaryLockText">🔒 Lock January Slot &amp; Send to GHL CRM</span>
+                </button>
+                <div id="ghlSyncStatus" style="font-size:12px; font-weight:700; color:var(--emerald-bright); text-align:center; margin-top:5px; min-height:16px;"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- =====================================================
+           DEDICATED PRINTABLE PDF SHEET (ESTIMATE + ALL WATER FACTS)
+      ====================================================== -->
+      <section id="printablePdfSheet">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom: 3px solid #0284C7; padding-bottom: 14px; margin-bottom: 18px;">
+          <div>
+            <div style="font-size: 24px; font-weight: 800; color: #0F172A;">BLACKTIDE WATER CO. — FORT COLLINS, CO</div>
+            <div style="font-size: 14px; font-weight: 700; color: #0284C7;">Fred Caldero, Local Neighbor &amp; Water Treatment Specialist</div>
+          </div>
+          <div style="text-align:right; font-size: 13px; color: #334155; font-weight: 600;">
+            <div>Kitchen-Table Water Report &amp; Written Estimate</div>
+            <div id="pdfDateText">January Priority Install Schedule</div>
+          </div>
+        </div>
+
+        <!-- Homeowner & System Summary Box -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+          <div style="border: 1px solid #CBD5E1; border-radius: 10px; padding: 14px;">
+            <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #0284C7; margin-bottom: 6px;">1. Homeowner &amp; Live Tap Water Test</div>
+            <div style="font-size: 14px; margin-bottom: 4px;"><strong>Homeowner:</strong> <span id="pdfCustName">Fort Collins Homeowner</span></div>
+            <div style="font-size: 14px; margin-bottom: 4px;"><strong>Address / Phone:</strong> <span id="pdfCustContact">—</span></div>
+            <div style="font-size: 14px; margin-bottom: 4px;"><strong>Water Test Readings:</strong> <span id="pdfWaterReadings" style="color:#E11D48; font-weight:700;">Chlorine: 1.3 mg/L • TDS: 85 ppm</span></div>
+            <div style="font-size: 13px; color: #475569; margin-top: 6px;">Tested on-site at kitchen faucet by Fred Caldero.</div>
+          </div>
+
+          <div style="border: 2px solid #059669; background: #F0FDF4; border-radius: 10px; padding: 14px;">
+            <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #059669; margin-bottom: 6px;">2. Selected 2-Tier System &amp; Written Price</div>
+            <div style="font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 4px;" id="pdfSelectedSystem">Option 1: Whole-House Clean Water (CF1)</div>
+            <div style="font-size: 20px; font-weight: 800; color: #059669; margin-bottom: 4px;" id="pdfSelectedPrice">$127/mo (or $5,999 cash)</div>
+            <div style="font-size: 13px; color: #334155;">✓ Turnkey installation by licensed local Fort Collins master plumber</div>
+            <div style="font-size: 13px; color: #334155;">✓ Lifetime warranty on tanks &amp; valves + easy twist-off DIY filter swaps</div>
+          </div>
+        </div>
+
+        <!-- Complete Water Facts & Numbers Reference Section -->
+        <div style="border: 1px solid #CBD5E1; border-radius: 10px; padding: 16px; margin-bottom: 16px; background: #F8FAFC;">
+          <div style="font-size: 14px; font-weight: 800; text-transform: uppercase; color: #0F172A; border-bottom: 1px solid #CBD5E1; padding-bottom: 6px; margin-bottom: 10px;">
+            3. Key Water Facts, Lab Numbers &amp; Filter Maintenance Sheet (What You Need to Know)
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size: 13px; line-height: 1.45; color: #1E293B;">
+            <div>
+              <div style="font-weight: 800; color: #E11D48; margin-bottom: 4px;">A. Bottled Water &amp; Microplastic Facts</div>
+              <ul style="padding-left: 18px; margin-bottom: 10px;">
+                <li><strong>~240,000 plastic particles per liter:</strong> Researchers found ~240,000 micro- and nanoplastic particles in a single liter of bottled water (90% nanoplastics small enough to cross cell walls).</li>
+                <li><strong>93% of bottled brands tested positive</strong> for microplastics.</li>
+                <li><strong>4.5x Heart Attack &amp; Stroke Risk:</strong> A 2024 medical study found patients with microplastics in artery plaque had ~4.5x higher risk of heart attack, stroke, or death.</li>
+                <li><strong>Detected in human tissue:</strong> Found in human blood, lungs, brains, and placentas.</li>
+                <li><strong>60 Million bottles dumped daily</strong> in the U.S. (under 30% recycled).</li>
+                <li><strong>The Cost Trap:</strong> A family of 4 spends <strong>$45–$84/mo</strong> ($2,700–$5,040 over 5 yrs) paying <strong>$10–$12/gallon</strong> vs. <strong>~$0.04/gallon</strong> with Blacktide whole-house filtration.</li>
+              </ul>
+
+              <div style="font-weight: 800; color: #0284C7; margin-bottom: 4px;">B. Fort Collins &amp; NoCo Tap Water Facts</div>
+              <ul style="padding-left: 18px;">
+                <li><strong>Sources:</strong> Cache la Poudre River (affected by Cameron Peak wildfire ash/runoff) &amp; Horsetooth Reservoir (seasonal algae blooms / Geosmin dirt taste).</li>
+                <li><strong>Free Chlorine (~1.3 mg/L):</strong> Pumped in to kill algae and bacteria; absorbs into skin in 15 seconds and vaporizes into chemical steam in hot showers.</li>
+                <li><strong>Disinfection Byproducts (TTHMs ~31 ppb / HAA5 ~22 ppb):</strong> Formed when chlorine reacts with wildfire runoff &amp; organic matter. Legal by EPA rules, but <strong>21x to 46x above EWG health guidelines</strong> and linked to long-term cancer risk.</li>
+                <li><strong>City vs. Hard Water Zones:</strong> Fort Collins city water is naturally soft (1.5–3 GPG, 50–110 ppm TDS — no softener needed). Wellington (80549), Windsor (80550), Timnath (80547), and rural wells have severe rock hardness (12–25+ GPG) that chokes pipes and wastes $40–$60/mo in extra soap.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div style="font-weight: 800; color: #059669; margin-bottom: 4px;">C. Two Simple System Tiers &amp; Equipment Specs</div>
+              <ul style="padding-left: 18px; margin-bottom: 10px;">
+                <li><strong>Tier 1 — Whole-House Only (No Kitchen RO):</strong> SpringWell CF1 4-Stage Catalytic Carbon + KDF-55 tank + 5-micron sediment pre-filter on your main water line. Flows at <strong>9 GPM</strong> (vs. Aquasana Rhino's 7 GPM), <strong>1,000,000-gallon capacity</strong> (~10 years), removes 99.9% of chlorine, chloramine, Horsetooth taste, and TTHMs/HAA5s at every shower and bathroom tap.</li>
+                <li><strong>Tier 2 — Whole-House + Kitchen Under-Sink RO Combo:</strong> Adds a dedicated 4-stage Reverse Osmosis system under your kitchen sink with a designer faucet to strip out dissolved solids, fluoride, and nitrates for near-zero TDS drinking, coffee, ice cubes, and cooking water.</li>
+                <li><strong>Top Independent Ratings:</strong> WaterFilterGeek Editor's Choice (4.8/5) &amp; AquaVerdict (92/100) with a Lifetime Warranty on tanks and valves.</li>
+              </ul>
+
+              <div style="font-weight: 800; color: #0F172A; margin-bottom: 4px;">D. Filter Replacement Costs &amp; 3-Minute DIY Swaps (No Plumber Needed!)</div>
+              <ul style="padding-left: 18px;">
+                <li><strong>Main Whole-House Tank:</strong> Zero maintenance for <strong>1,000,000 gallons (~10 years)</strong>.</li>
+                <li><strong>Whole-House 5-Micron Sediment Pre-Filter:</strong> Costs only <strong>~$20–$25</strong> (swap every 6–9 months). Has a built-in shutoff valve—twist the housing off by hand in 2 minutes, drop in the new cartridge, twist back on.</li>
+                <li><strong>Kitchen Under-Sink RO Filters (Tier 2):</strong> Pre/post carbon filters cost <strong>~$45–$65/year</strong> (swap every 6–12 months); RO membrane costs <strong>~$45</strong> (lasts 2–3 years). Twist-and-lock cartridges swap like a lightbulb in 60 seconds without turning off the main house water.</li>
+                <li><strong>Your Choice:</strong> We show you how to swap them yourself in 3 minutes on install day, or Blacktide can handle your annual filter swap for you.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px solid #CBD5E1; padding-top: 10px; font-size: 13px; color: #334155;">
+          <div><strong>Fred Caldero • Blacktide Water Co.</strong> | Fort Collins, Colorado</div>
+          <div>January Priority Installation Guarantee • No 2-Hour Sales Pitch • Upfront Written Pricing</div>
+        </div>
+      </section>
+
+      <!-- Speaker Notes Drawer -->
+      <aside class="speaker-notes-drawer" id="notesDrawer">
+        <div class="notes-title">Fred’s Kitchen-Table Speaker Track (Press N to Toggle)</div>
+        <div class="notes-copy" id="notesCopyText"></div>
+      </aside>
+
+      <!-- Bottom Presenter Bar -->
+      <footer class="presenter-bar">
+        <div class="bar-left">
+          <button class="subtle-btn" id="barModeToggle" onclick="toggleWaterMode()">
+            Mode: City Water (Soft)
+          </button>
+          <button class="subtle-btn" id="notesToggleBtn" onclick="toggleSpeakerNotes()">
+            Speaker Notes
+          </button>
+          <button class="subtle-btn" onclick="openQrModal()">
+            📱 QR / Sink Link
+          </button>
+        </div>
+
+        <div class="bar-center">
+          <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Prev</button>
+          <div class="slide-counter" id="slideCounter">1 / 10</div>
+          <button class="nav-btn primary-next" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+        </div>
+
+        <div class="bar-right">
+          <button class="subtle-btn" onclick="openGhlModal()" title="Configure GoHighLevel Webhook & Invoicing">
+            ⚙️ GHL CRM
+          </button>
+          <button class="subtle-btn" onclick="resetAppointment()" title="Clear customer inputs for next home">
+            Reset
+          </button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MODAL 1: QR CODE & HOMEOWNER SINK COMPANION LINK
+  ====================================================== -->
+  <div class="modal-backdrop" id="qrModal" onclick="if(event.target===this)closeQrModal()">
+    <div class="modal-card" style="text-align:center;">
+      <div style="font-size:13px; font-weight:800; color:var(--teal-bright); text-transform:uppercase; margin-bottom:6px;">
+        Send Interactive Sink Test or Estimate to Homeowner
+      </div>
+      <h3 style="font-size:22px; font-weight:800; margin-bottom:8px;">Scan With Homeowner's Phone Camera</h3>
+      <p style="font-size:14px; color:var(--glacier-muted); margin-bottom:14px;">
+        Opens the interactive <strong>2-Cup Chlorine Trick + EWG Zip Code Checker + Lead Form</strong> on their phone while you run the water test at their kitchen sink.
+      </p>
+      <div style="background:#fff; padding:14px; border-radius:14px; display:inline-block; margin-bottom:14px;">
+        <img id="qrImage" src="" alt="Scan QR Code" style="width:200px; height:200px; display:block;" />
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center; margin-bottom:12px;">
+        <button class="nav-btn" onclick="setQrTarget('sink')">📱 Sink Demo Companion</button>
+        <button class="nav-btn" onclick="setQrTarget('deck')">🖥️ Live Estimate Summary</button>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <input type="text" class="crm-input" id="shareUrlInput" readonly style="text-align:center;" />
+        <button class="nav-btn primary-next" onclick="copyShareUrl()">Copy</button>
+        <button class="nav-btn" onclick="closeQrModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MODAL 2: GOHIGHLEVEL (GHL) CRM & INVOICE INTEGRATION
+  ====================================================== -->
+  <div class="modal-backdrop" id="ghlModal" onclick="if(event.target===this)closeGhlModal()">
+    <div class="modal-card">
+      <div style="font-size:13px; font-weight:800; color:var(--emerald-bright); text-transform:uppercase; margin-bottom:6px;">
+        GoHighLevel (GHL) CRM &amp; Invoicing Connection
+      </div>
+      <h3 style="font-size:21px; font-weight:800; margin-bottom:8px;">Connect Your GHL Sub-Account</h3>
+      <p style="font-size:14px; color:var(--glacier-muted); margin-bottom:14px;">
+        Paste your GoHighLevel <strong>Inbound Webhook URL</strong> (from GHL Automation → Workflow → Inbound Webhook Trigger) and optional <strong>GHL Payment / Deposit Invoice Link</strong>. Saved locally on this iPad/Laptop and automatically syncs any queued offline leads.
+      </p>
+
+      <div style="margin-bottom:12px;">
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--teal-bright); margin-bottom:4px;">
+          1. GHL Inbound Webhook URL (Auto-Creates Contact, Opportunity &amp; Invoice Trigger)
+        </label>
+        <input type="url" class="crm-input" id="ghlWebhookInput" placeholder="https://services.leadconnectorhq.com/hooks/..." />
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--emerald-bright); margin-bottom:4px;">
+          2. GHL Deposit / Invoice Checkout Link (Optional — Opens After Signing)
+        </label>
+        <input type="url" class="crm-input" id="ghlInvoiceUrlInput" placeholder="https://link.fastpaydirect.com/payment-link/..." />
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span id="offlineQueueCount" style="font-size:12px; color:var(--glacier-dim);">0 offline leads queued</span>
+        <div style="display:flex; gap:10px;">
+          <button class="nav-btn" onclick="closeGhlModal()">Cancel</button>
+          <button class="nav-btn primary-next" onclick="saveGhlSettings()">Save &amp; Sync GHL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // APPLICATION STATE
+    // ==========================================
+    const state = {
+      hardWaterMode: false,
+      fleetDiscountMode: false,
+      currentSlideIndex: 0,
+      selectedOption: 1,
+      januaryLocked: false,
+      notesOpen: false,
+      chlorine: 1.3,
+      tds: 85,
+      hardness: 18,
+      monthlyBottleSpend: 65,
+      hasSignature: false
+    };
+
+    const PRICING = {
+      city: {
+        1: {
+          title: 'Tier 1: Whole-House Clean Water (Minus Kitchen RO)',
+          monthly: 127,
+          cash: '$5,999',
+          fleetMonthly: 65,
+          fleetCash: '$2,695 (January Neighbor Route)',
+          desc: 'SpringWell CF1 4-Stage Whole-House Filter on Main Line • Every Shower, Bath & Laundry Tap • 9 GPM • 1M-Gallon Capacity • Lifetime Tank Warranty'
+        },
+        2: {
+          title: 'Tier 2: Whole-House + Kitchen Sink RO Combo',
+          monthly: 152,
+          cash: '$7,199',
+          fleetMonthly: 89,
+          fleetCash: '$3,895 (January Neighbor Route — Retail $5,295)',
+          desc: 'Complete Whole-House System + Dedicated Kitchen Under-Sink Reverse Osmosis Drinking Faucet for Coffee, Ice & Cooking'
+        }
+      },
+      hard: {
+        1: {
+          title: 'Tier 1: Whole-House Clean + Soft Water (Minus Kitchen RO)',
+          monthly: 167,
+          cash: '$7,899',
+          fleetMonthly: 99,
+          fleetCash: '$4,295 (January Neighbor Route)',
+          desc: 'SpringWell CF1 4-Stage Filter + Paired Salt-Based Water Softener on Main Line • 9 GPM • Lifetime Tank & Valve Warranty'
+        },
+        2: {
+          title: 'Tier 2: Whole-House + Softener + Kitchen Sink RO Combo',
+          monthly: 192,
+          cash: '$9,099',
+          fleetMonthly: 115,
+          fleetCash: '$4,995 (January Neighbor Route — Retail $6,495)',
+          desc: 'Whole-House Clean & Soft Water + Dedicated Kitchen Under-Sink Reverse Osmosis Drinking Faucet'
+        }
+      }
+    };
+
+    // ==========================================
+    // INITIALIZE FROM URL PARAMS OR SINK COMPANION
+    // ==========================================
+    function loadUrlAndSavedState() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('mode') === 'hard') {
+        state.hardWaterMode = true;
+        document.body.classList.add('hard-mode');
+      }
+      if (params.get('cl')) {
+        state.chlorine = parseFloat(params.get('cl')) || 1.3;
+        document.getElementById('inputChlorine').value = state.chlorine;
+      }
+      if (params.get('tds')) {
+        state.tds = parseInt(params.get('tds'), 10) || 85;
+        document.getElementById('inputTds').value = state.tds;
+      }
+      if (params.get('gpg')) {
+        state.hardness = parseInt(params.get('gpg'), 10) || 18;
+        document.getElementById('inputHardness').value = state.hardness;
+      }
+      if (params.get('opt') === '2') {
+        state.selectedOption = 2;
+      }
+      if (params.get('name')) document.getElementById('custName').value = params.get('name');
+      if (params.get('phone')) document.getElementById('custPhone').value = params.get('phone');
+      if (params.get('address')) document.getElementById('custAddress').value = params.get('address');
+
+      const savedLead = localStorage.getItem('blacktide_last_customer');
+      if (savedLead && !params.get('name')) {
+        try {
+          const parsed = JSON.parse(savedLead);
+          if (parsed.full_name) document.getElementById('custName').value = parsed.full_name;
+          if (parsed.phone) document.getElementById('custPhone').value = parsed.phone;
+          if (parsed.email) document.getElementById('custEmail').value = parsed.email;
+          if (parsed.address) document.getElementById('custAddress').value = parsed.address;
+        } catch (e) {}
+      }
+
+      document.getElementById('ghlWebhookInput').value = localStorage.getItem('blacktide_ghl_webhook') || '';
+      document.getElementById('ghlInvoiceUrlInput').value = localStorage.getItem('blacktide_ghl_invoice_url') || '';
+      updateOfflineQueueBadge();
+    }
+
+    function getActiveSlides() {
+      const allSlides = Array.from(document.querySelectorAll('.slide'));
+      if (state.hardWaterMode) return allSlides;
+      return allSlides.filter(s => !s.classList.contains('hard-mode-slide'));
+    }
+
+    function renderDeck() {
+      const allSlides = Array.from(document.querySelectorAll('.slide'));
+      const activeSlides = getActiveSlides();
+
+      if (state.currentSlideIndex >= activeSlides.length) state.currentSlideIndex = activeSlides.length - 1;
+      if (state.currentSlideIndex < 0) state.currentSlideIndex = 0;
+
+      const currentSlideEl = activeSlides[state.currentSlideIndex];
+      allSlides.forEach(s => s.classList.remove('active'));
+      currentSlideEl.classList.add('active');
+
+      document.getElementById('slideCounter').textContent = `${state.currentSlideIndex + 1} / ${activeSlides.length}`;
+      document.getElementById('prevBtn').disabled = state.currentSlideIndex === 0;
+      document.getElementById('nextBtn').disabled = state.currentSlideIndex === activeSlides.length - 1;
+
+      const modeText = state.hardWaterMode ? 'Hard Water / Well' : 'City Water (Soft)';
+      const slideCountText = state.hardWaterMode ? '12 Slides' : '10 Slides';
+      document.getElementById('topModeBadge').textContent = `${modeText} • ${slideCountText}`;
+      document.getElementById('barModeToggle').textContent = `Mode: ${modeText}`;
+      document.getElementById('slide1ModeText').textContent = `Mode: ${modeText}`;
+      document.getElementById('slide1ModeDot').style.color = state.hardWaterMode ? '#FBBF24' : '#38BDF8';
+
+      const softenerSvg = document.getElementById('svgSoftenerGroup');
+      if (softenerSvg) softenerSvg.style.opacity = state.hardWaterMode ? '1' : '0.18';
+
+      const notesAttr = state.hardWaterMode ? 'data-notes-hard' : 'data-notes-city';
+      document.getElementById('notesCopyText').textContent = currentSlideEl.getAttribute(notesAttr) || '';
+
+      triggerSlideAnimations(currentSlideEl.getAttribute('data-slide-id'));
+      updatePricingUI();
+      updateSummaryUI();
+      if (currentSlideEl.getAttribute('data-slide-id') === '10') {
+        setTimeout(resizeSigCanvas, 60);
+      }
+    }
+
+    function changeSlide(delta) {
+      const activeSlides = getActiveSlides();
+      const nextIndex = state.currentSlideIndex + delta;
+      if (nextIndex < 0 || nextIndex >= activeSlides.length) return;
+      state.currentSlideIndex = nextIndex;
+      renderDeck();
+    }
+
+    function toggleWaterMode() {
+      const activeSlidesBefore = getActiveSlides();
+      const currentSlideId = activeSlidesBefore[state.currentSlideIndex].getAttribute('data-slide-id');
+
+      state.hardWaterMode = !state.hardWaterMode;
+      document.body.classList.toggle('hard-mode', state.hardWaterMode);
+
+      const activeSlidesAfter = getActiveSlides();
+      const mappedIndex = activeSlidesAfter.findIndex(s => s.getAttribute('data-slide-id') === currentSlideId);
+      state.currentSlideIndex = mappedIndex >= 0 ? mappedIndex : 0;
+
+      renderDeck();
+    }
+
+    function toggleFleetPricing() {
+      state.fleetDiscountMode = !state.fleetDiscountMode;
+      const btn = document.getElementById('fleetRouteToggleBtn');
+      btn.classList.toggle('active-toggle', state.fleetDiscountMode);
+      btn.textContent = state.fleetDiscountMode
+        ? '✓ January Neighbor Fleet Waiver Applied'
+        : '🏷️ Apply January Neighbor Fleet Discount';
+      updatePricingUI();
+      updateSummaryUI();
+    }
+
+    function updateBottleSlider(val) {
+      state.monthlyBottleSpend = parseInt(val, 10) || 65;
+      document.getElementById('bottleSpendLabel').textContent = `$${state.monthlyBottleSpend} / month`;
+      const fiveYear = (state.monthlyBottleSpend * 60).toLocaleString();
+      document.getElementById('burnedCounter').textContent = `$${fiveYear} over 5 yrs`;
+      updatePricingUI();
+    }
+
+    // ==========================================
+    // 60FPS ANIMATION TRIGGERS ON SLIDE ENTER
+    // ==========================================
+    function triggerSlideAnimations(slideId) {
+      if (slideId === '2') {
+        animateRangeCounter('burnedCounter', 2700, 5040, 950);
+      } else if (slideId === '3') {
+        animateValue('stat240k', 0, 240000, 900, v => Math.round(v).toLocaleString());
+        animateValue('stat93p', 0, 93, 850, v => Math.round(v) + '%');
+        animateValue('stat45x', 0, 4.5, 850, v => v.toFixed(1) + 'x');
+        animateValue('stat60m', 0, 60, 850, v => Math.round(v) + 'M');
+      } else if (slideId === '4') {
+        resetAndFillBar('gaugeClFill');
+        resetAndFillBar('gaugeHaaFill');
+        resetAndFillBar('gaugeTthmFill');
+        if (state.hardWaterMode) resetAndFillBar('gaugeGpgFill');
+      } else if (slideId === '7') {
+        resetAndFillBar('raceCf1');
+        resetAndFillBar('raceAquasana');
+      }
+    }
+
+    function resetAndFillBar(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.transition = 'none';
+      el.style.width = '0%';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.transition = 'width 1.1s cubic-bezier(0.22, 1, 0.36, 1)';
+          el.style.width = el.getAttribute('data-target') || '70%';
+        });
+      });
+    }
+
+    function animateValue(id, start, end, duration, formatter) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const startTime = performance.now();
+      function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = start + (end - start) * eased;
+        el.textContent = formatter(current);
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function animateRangeCounter(id, endLow, endHigh, duration) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const startTime = performance.now();
+      function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const low = Math.round(endLow * eased).toLocaleString();
+        const high = Math.round(endHigh * eased).toLocaleString();
+        el.textContent = `$${low} – $${high}`;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ==========================================
+    // INTERACTIVE CONTROLS
+    // ==========================================
+    function updateTestReadings() {
+      const cl = parseFloat(document.getElementById('inputChlorine').value) || 0;
+      const tds = parseInt(document.getElementById('inputTds').value, 10) || 0;
+      const gpg = parseInt(document.getElementById('inputHardness').value, 10) || 0;
+
+      state.chlorine = cl;
+      state.tds = tds;
+      state.hardness = gpg;
+
+      document.getElementById('gaugeClLabel').textContent = cl.toFixed(1);
+      const clPct = Math.min(Math.max((cl / 2.5) * 100, 12), 96);
+      const clFill = document.getElementById('gaugeClFill');
+      clFill.setAttribute('data-target', clPct + '%');
+      clFill.style.width = clPct + '%';
+
+      const gpgLabel = document.getElementById('gaugeGpgLabel');
+      if (gpgLabel) {
+        gpgLabel.textContent = gpg;
+        const gpgPct = Math.min(Math.max((gpg / 25) * 100, 15), 98);
+        const gpgFill = document.getElementById('gaugeGpgFill');
+        gpgFill.setAttribute('data-target', gpgPct + '%');
+        gpgFill.style.width = gpgPct + '%';
+      }
+      updateSummaryUI();
+    }
+
+    function selectSetupPreview(optionNum) {
+      state.selectedOption = optionNum;
+      document.getElementById('setupCard1').classList.toggle('selected', optionNum === 1);
+      document.getElementById('setupCard2').classList.toggle('selected', optionNum === 2);
+      document.getElementById('roDiagramHighlight').style.opacity = optionNum === 2 ? '1' : '0.35';
+      updatePricingUI();
+      updateSummaryUI();
+    }
+
+    function toggleNationalFlip() {
+      const card = document.getElementById('nationalBrandFlip');
+      const front = document.getElementById('flipFront');
+      const back = document.getElementById('flipBack');
+      const isRevealed = card.classList.toggle('revealed');
+      front.style.display = isRevealed ? 'none' : 'block';
+      back.style.display = isRevealed ? 'block' : 'none';
+    }
+
+    function selectPricingOption(optionNum) {
+      state.selectedOption = optionNum;
+      selectSetupPreview(optionNum);
+    }
+
+    function switchSummaryOption(optionNum) {
+      selectPricingOption(optionNum);
+    }
+
+    function updatePricingUI() {
+      const modeKey = state.hardWaterMode ? 'hard' : 'city';
+      const p1 = PRICING[modeKey][1];
+      const p2 = PRICING[modeKey][2];
+
+      const m1 = state.fleetDiscountMode ? p1.fleetMonthly : p1.monthly;
+      const c1 = state.fleetDiscountMode ? p1.fleetCash : `${p1.cash} cash (includes full installation)`;
+      const m2 = state.fleetDiscountMode ? p2.fleetMonthly : p2.monthly;
+      const c2 = state.fleetDiscountMode ? p2.fleetCash : `${p2.cash} cash (includes full installation)`;
+
+      const soapOffset = state.hardWaterMode ? 45 : 0;
+      const net1 = Math.max(m1 - state.monthlyBottleSpend - soapOffset, 9);
+      const net2 = Math.max(m2 - state.monthlyBottleSpend - soapOffset, 14);
+
+      document.getElementById('card1Title').textContent = p1.title;
+      document.getElementById('card1Monthly').innerHTML = `$${m1}<span>/month</span>`;
+      document.getElementById('card1Cash').textContent = `or ${c1}`;
+      document.getElementById('card1Desc').textContent = p1.desc;
+      document.getElementById('card1NetDiff').innerHTML =
+        `Net difference after ditching $${state.monthlyBottleSpend}/mo bottles${soapOffset ? ' + $45/mo soap waste' : ''}: <strong>~$${net1}/mo (~$${(net1/30).toFixed(2)}/day)</strong>`;
+
+      document.getElementById('card2Title').textContent = p2.title;
+      document.getElementById('card2Monthly').innerHTML = `$${m2}<span>/month</span>`;
+      document.getElementById('card2Cash').textContent = `or ${c2}`;
+      document.getElementById('card2Desc').textContent = p2.desc;
+      document.getElementById('card2NetDiff').innerHTML =
+        `Net difference after ditching $${state.monthlyBottleSpend}/mo bottles${soapOffset ? ' + $45/mo soap waste' : ''}: <strong>~$${net2}/mo (~$${(net2/30).toFixed(2)}/day)</strong>`;
+
+      document.getElementById('priceCard1').classList.toggle('selected', state.selectedOption === 1);
+      document.getElementById('priceCard2').classList.toggle('selected', state.selectedOption === 2);
+
+      document.getElementById('priceCheck1').textContent = state.selectedOption === 1 ? '✓ SELECTED' : 'TAP TO SELECT';
+      document.getElementById('priceCheck1').style.color = state.selectedOption === 1 ? 'var(--emerald-bright)' : 'var(--glacier-dim)';
+
+      document.getElementById('priceCheck2').textContent = state.selectedOption === 2 ? '✓ SELECTED' : 'TAP TO SELECT';
+      document.getElementById('priceCheck2').style.color = state.selectedOption === 2 ? 'var(--emerald-bright)' : 'var(--glacier-dim)';
+    }
+
+    function updateSummaryUI() {
+      const modeKey = state.hardWaterMode ? 'hard' : 'city';
+      const chosen = PRICING[modeKey][state.selectedOption];
+      const monthly = state.fleetDiscountMode ? chosen.fleetMonthly : chosen.monthly;
+      const cash = state.fleetDiscountMode ? chosen.fleetCash : `${chosen.cash} cash`;
+
+      const testText = state.hardWaterMode
+        ? `Chlorine: ${state.chlorine} mg/L • TDS: ${state.tds} ppm • Hardness: ${state.hardness} GPG`
+        : `Chlorine: ${state.chlorine} mg/L • TDS: ${state.tds} ppm (City Water — Soft)`;
+
+      document.getElementById('sumWaterResults').textContent = testText;
+      document.getElementById('sumSystemName').textContent = chosen.title;
+      document.getElementById('sumPriceVal').textContent = `$${monthly}/mo (or ${cash})`;
+
+      // Sync Printable PDF Estimate & Facts Sheet
+      const pdfCustName = document.getElementById('pdfCustName');
+      if (pdfCustName) {
+        pdfCustName.textContent = document.getElementById('custName').value.trim() || 'Fort Collins Homeowner';
+        const phoneVal = document.getElementById('custPhone').value.trim();
+        const addrVal = document.getElementById('custAddress').value.trim();
+        document.getElementById('pdfCustContact').textContent = [addrVal, phoneVal].filter(Boolean).join(' • ') || 'Fort Collins, CO';
+        document.getElementById('pdfWaterReadings').textContent = testText;
+        document.getElementById('pdfSelectedSystem').textContent = chosen.title;
+        document.getElementById('pdfSelectedPrice').textContent = `$${monthly}/mo (or ${cash})`;
+      }
+
+      const statusEl = document.getElementById('sumInstallStatus');
+      const lockBtn = document.getElementById('januaryLockBtn');
+      const lockText = document.getElementById('januaryLockText');
+
+      if (state.januaryLocked) {
+        statusEl.textContent = '✓ January Priority Slot Reserved (Price Locked)';
+        statusEl.style.color = 'var(--emerald-bright)';
+        lockBtn.classList.add('locked');
+        lockText.textContent = '✓ January Slot Locked & Sent to GHL CRM';
+      } else {
+        statusEl.textContent = 'January Priority Slot (Pending Deposit)';
+        statusEl.style.color = 'var(--glacier)';
+        lockBtn.classList.remove('locked');
+        lockText.textContent = '🔒 Lock January Slot & Send to GHL CRM';
+      }
+    }
+
+    // ==========================================
+    // HTML5 CANVAS SIGNATURE PAD (szimek/signature_pad pattern)
+    // ==========================================
+    const sigCanvas = document.getElementById('sigCanvas');
+    const sigCtx = sigCanvas.getContext('2d');
+    let drawing = false;
+
+    function resizeSigCanvas() {
+      const rect = sigCanvas.parentElement.getBoundingClientRect();
+      if (rect.width === 0) return;
+      sigCanvas.width = rect.width;
+      sigCanvas.height = rect.height;
+      sigCtx.strokeStyle = '#38BDF8';
+      sigCtx.lineWidth = 2.4;
+      sigCtx.lineCap = 'round';
+      sigCtx.lineJoin = 'round';
+    }
+
+    function getPointerPos(e) {
+      const rect = sigCanvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    sigCanvas.addEventListener('pointerdown', e => {
+      drawing = true;
+      state.hasSignature = true;
+      const pos = getPointerPos(e);
+      sigCtx.beginPath();
+      sigCtx.moveTo(pos.x, pos.y);
+    });
+
+    sigCanvas.addEventListener('pointermove', e => {
+      if (!drawing) return;
+      const pos = getPointerPos(e);
+      sigCtx.lineTo(pos.x, pos.y);
+      sigCtx.stroke();
+    });
+
+    window.addEventListener('pointerup', () => { drawing = false; });
+
+    function clearSignature() {
+      sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+      state.hasSignature = false;
+    }
+
+    // ==========================================
+    // GOHIGHLEVEL (GHL) CRM & INVOICING DISPATCH
+    // ==========================================
+    async function submitToGhlAndLock() {
+      state.januaryLocked = true;
+      updateSummaryUI();
+
+      const modeKey = state.hardWaterMode ? 'hard' : 'city';
+      const chosen = PRICING[modeKey][state.selectedOption];
+      const monthly = state.fleetDiscountMode ? chosen.fleetMonthly : chosen.monthly;
+      const cash = state.fleetDiscountMode ? chosen.fleetCash : chosen.cash;
+
+      const payload = {
+        source: 'Blacktide Kitchen-Table Presentation Close',
+        timestamp: new Date().toISOString(),
+        full_name: document.getElementById('custName').value.trim() || 'Fort Collins Homeowner',
+        phone: document.getElementById('custPhone').value.trim(),
+        email: document.getElementById('custEmail').value.trim(),
+        address: document.getElementById('custAddress').value.trim(),
+        water_mode: state.hardWaterMode ? 'Hard Water / Well' : 'Fort Collins City Water (Soft)',
+        chlorine_mgl: state.chlorine,
+        tds_ppm: state.tds,
+        hardness_gpg: state.hardWaterMode ? state.hardness : 2,
+        selected_package: chosen.title,
+        monthly_investment: `$${monthly}/month`,
+        cash_investment: cash,
+        fleet_route_waiver_applied: state.fleetDiscountMode,
+        january_slot_locked: true,
+        signed_on_glass: state.hasSignature,
+        signature_data_url: state.hasSignature ? sigCanvas.toDataURL('image/png') : '',
+        tags: ['blacktide-kitchen-close', 'january-install-slot', state.hardWaterMode ? 'hard-water' : 'foco-city-water']
+      };
+
+      const statusBox = document.getElementById('ghlSyncStatus');
+      const webhookUrl = localStorage.getItem('blacktide_ghl_webhook') || '';
+      const invoiceUrl = localStorage.getItem('blacktide_ghl_invoice_url') || '';
+
+      if (webhookUrl) {
+        statusBox.textContent = 'Syncing contact, water test & estimate to GoHighLevel CRM...';
+        try {
+          await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          statusBox.textContent = '✓ Synced to GoHighLevel CRM! Contact & Opportunity Ready.';
+        } catch (err) {
+          queueOfflineLead(payload);
+          statusBox.textContent = '✓ Saved Offline! Will auto-sync to GHL as soon as Wi-Fi/Cell connects.';
+        }
+      } else {
+        queueOfflineLead(payload);
+        statusBox.textContent = '✓ Estimate Locked Locally! (Add your GHL Webhook in ⚙️ GHL CRM anytime)';
+      }
+
+      if (invoiceUrl) {
+        setTimeout(() => {
+          window.open(invoiceUrl, '_blank');
+        }, 900);
+      }
+    }
+
+    function queueOfflineLead(payload) {
+      const existing = JSON.parse(localStorage.getItem('blacktide_offline_leads') || '[]');
+      existing.push(payload);
+      localStorage.setItem('blacktide_offline_leads', JSON.stringify(existing));
+      updateOfflineQueueBadge();
+    }
+
+    function updateOfflineQueueBadge() {
+      const existing = JSON.parse(localStorage.getItem('blacktide_offline_leads') || '[]');
+      const el = document.getElementById('offlineQueueCount');
+      if (el) el.textContent = `${existing.length} offline lead(s) queued`;
+    }
+
+    function openGhlModal() {
+      updateOfflineQueueBadge();
+      document.getElementById('ghlModal').classList.add('open');
+    }
+    function closeGhlModal() {
+      document.getElementById('ghlModal').classList.remove('open');
+    }
+
+    async function saveGhlSettings() {
+      const hook = document.getElementById('ghlWebhookInput').value.trim();
+      const inv = document.getElementById('ghlInvoiceUrlInput').value.trim();
+      localStorage.setItem('blacktide_ghl_webhook', hook);
+      localStorage.setItem('blacktide_ghl_invoice_url', inv);
+
+      const queued = JSON.parse(localStorage.getItem('blacktide_offline_leads') || '[]');
+      if (hook && queued.length > 0) {
+        const remaining = [];
+        for (const item of queued) {
+          try {
+            await fetch(hook, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(item)
+            });
+          } catch (e) {
+            remaining.push(item);
+          }
+        }
+        localStorage.setItem('blacktide_offline_leads', JSON.stringify(remaining));
+      }
+      updateOfflineQueueBadge();
+      closeGhlModal();
+    }
+
+    // ==========================================
+    // QR CODE & SMS SHARE AT THE SINK / TABLE
+    // ==========================================
+    function getBaseUrl() {
+      const loc = window.location.href.split('?')[0];
+      return loc.substring(0, loc.lastIndexOf('/') + 1);
+    }
+
+    function setQrTarget(type) {
+      const base = getBaseUrl();
+      const ghl = encodeURIComponent(localStorage.getItem('blacktide_ghl_webhook') || '');
+      let targetUrl = '';
+      if (type === 'sink') {
+        targetUrl = `${base}sink.html?cl=${state.chlorine}&ghl=${ghl}`;
+      } else {
+        const mode = state.hardWaterMode ? 'hard' : 'city';
+        targetUrl = `${base}index.html?mode=${mode}&cl=${state.chlorine}&tds=${state.tds}&gpg=${state.hardness}&opt=${state.selectedOption}`;
+      }
+      document.getElementById('shareUrlInput').value = targetUrl;
+      document.getElementById('qrImage').src =
+        `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(targetUrl)}`;
+    }
+
+    function openQrModal() {
+      setQrTarget('sink');
+      document.getElementById('qrModal').classList.add('open');
+    }
+    function closeQrModal() {
+      document.getElementById('qrModal').classList.remove('open');
+    }
+
+    function copyShareUrl() {
+      const inp = document.getElementById('shareUrlInput');
+      navigator.clipboard.writeText(inp.value);
+    }
+
+    function sendSmsQuote() {
+      const phone = document.getElementById('custPhone').value.trim();
+      const modeKey = state.hardWaterMode ? 'hard' : 'city';
+      const chosen = PRICING[modeKey][state.selectedOption];
+      const monthly = state.fleetDiscountMode ? chosen.fleetMonthly : chosen.monthly;
+      const cash = state.fleetDiscountMode ? chosen.fleetCash : chosen.cash;
+      const base = getBaseUrl();
+      const link = `${base}index.html?mode=${modeKey}&cl=${state.chlorine}&tds=${state.tds}&opt=${state.selectedOption}`;
+
+      const body = `Hi! This is Fred Caldero with Blacktide Water Co. in Fort Collins. Here are your kitchen tap test results (Chlorine: ${state.chlorine} mg/L, TDS: ${state.tds} ppm) and your written estimate for the ${chosen.title}: $${monthly}/mo (or ${cash}). View your interactive summary here: ${link}`;
+      window.location.href = `sms:${phone}?&body=${encodeURIComponent(body)}`;
+    }
+
+    function toggleSpeakerNotes() {
+      state.notesOpen = !state.notesOpen;
+      document.getElementById('notesDrawer').classList.toggle('open', state.notesOpen);
+      document.getElementById('notesToggleBtn').classList.toggle('active-toggle', state.notesOpen);
+    }
+
+    function resetAppointment() {
+      state.hardWaterMode = false;
+      state.fleetDiscountMode = false;
+      state.currentSlideIndex = 0;
+      state.selectedOption = 1;
+      state.januaryLocked = false;
+      state.chlorine = 1.3;
+      state.tds = 85;
+      state.hardness = 18;
+
+      document.body.classList.remove('hard-mode');
+      document.getElementById('inputChlorine').value = '1.3';
+      document.getElementById('inputTds').value = '85';
+      document.getElementById('inputHardness').value = '18';
+      document.getElementById('custName').value = '';
+      document.getElementById('custPhone').value = '';
+      document.getElementById('custEmail').value = '';
+      document.getElementById('custAddress').value = '';
+      document.getElementById('ghlSyncStatus').textContent = '';
+      clearSignature();
+
+      const flipCard = document.getElementById('nationalBrandFlip');
+      flipCard.classList.remove('revealed');
+      document.getElementById('flipFront').style.display = 'block';
+      document.getElementById('flipBack').style.display = 'none';
+
+      updateTestReadings();
+      selectSetupPreview(1);
+      renderDeck();
+    }
+
+    // ==========================================
+    // KEYBOARD, TABLET SWIPE & SERVICE WORKER
+    // ==========================================
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        changeSlide(1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        changeSlide(-1);
+      } else if (e.key.toLowerCase() === 'n') {
+        toggleSpeakerNotes();
+      } else if (e.key.toLowerCase() === 'm') {
+        toggleWaterMode();
+      }
+    });
+
+    let touchStartX = 0;
+    const wrapper = document.getElementById('slidesWrapper');
+    wrapper.addEventListener('touchstart', e => {
+      if (e.target.id === 'sigCanvas' || e.target.type === 'range') return;
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', e => {
+      if (e.target.id === 'sigCanvas' || e.target.type === 'range') return;
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 55) changeSlide(diff > 0 ? 1 : -1);
+    }, { passive: true });
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+
+    loadUrlAndSavedState();
+    renderDeck();
+  </script>
+</body>
+</html>

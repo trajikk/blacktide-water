@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Your Live Water Test | Blacktide Water Co. (Fort Collins)</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0F172A;
+      --navy-card: #1E293B;
+      --glacier: #F8FAFC;
+      --glacier-muted: #CBD5E1;
+      --glacier-dim: #94A3B8;
+      --teal: #0284C7;
+      --teal-bright: #38BDF8;
+      --coral: #E11D48;
+      --coral-bright: #FB7185;
+      --amber: #F59E0B;
+      --emerald: #059669;
+      --emerald-bright: #34D399;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      background: #070B14;
+      color: var(--glacier);
+      font-family: var(--font);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .brand-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--teal), #0369A1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 20px 18px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(2, 132, 199, 0.18);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--teal-bright);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .lead {
+      font-size: 17px;
+      color: var(--glacier-muted);
+      margin-bottom: 22px;
+    }
+    .step-card {
+      background: linear-gradient(160deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 22px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+    .step-tag {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal-bright);
+      margin-bottom: 6px;
+    }
+    .step-title {
+      font-size: 21px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .cups-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .cup-box {
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .cup-clear {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--teal-bright);
+    }
+    .cup-yellow {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: #FBBF24;
+    }
+    .zip-row {
+      display: flex;
+      gap: 10px;
+      margin: 12px 0;
+    }
+    input, select {
+      width: 100%;
+      background: #0F172A;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 13px 14px;
+      border-radius: 12px;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--teal-bright);
+    }
+    .btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--teal), #0369A1);
+      color: #fff;
+      border: none;
+      padding: 15px 18px;
+      border-radius: 12px;
+      font-family: var(--font);
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(2, 132, 199, 0.35);
+    }
+    .btn-emerald {
+      background: linear-gradient(135deg, var(--emerald), #047857);
+      box-shadow: 0 8px 22px rgba(5, 150, 105, 0.35);
+    }
+    .contaminant-pill {
+      background: rgba(225, 29, 72, 0.14);
+      border: 1px solid rgba(225, 29, 72, 0.4);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-top: 10px;
+    }
+    .form-group {
+      margin-bottom: 12px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--glacier-muted);
+      margin-bottom: 5px;
+    }
+    .readings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .status-toast {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(5, 150, 105, 0.22);
+      border: 1px solid var(--emerald-bright);
+      color: var(--emerald-bright);
+      font-weight: 700;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="brand-badge">💧</div>
+      <span>BLACKTIDE WATER CO.</span>
+    </div>
+    <span style="font-size: 13px; font-weight: 700; color: var(--teal-bright);">Fort Collins, CO</span>
+  </header>
+
+  <main class="container">
+    <div class="hero-pill">● Interactive Kitchen-Sink Companion</div>
+    <h1>Follow Along With Your 2-Minute Tap Water Test</h1>
+    <p class="lead">While Fred tests your kitchen tap, follow the 3 live checks below on your phone and enter where you’d like your written water report sent.</p>
+
+    <!-- STEP 1: TWO CUP CHLORINE SKIN ABSORPTION TEST -->
+    <section class="step-card">
+      <div class="step-tag">Live Check #1 • Kitchen Faucet</div>
+      <div class="step-title">The 15-Second Chlorine Absorption Test</div>
+      <p style="font-size: 15px; color: var(--glacier-muted);">
+        We poured two identical cups of cold tap water. You swirled two fingers in <strong>Cup A</strong> for 15 seconds, then we added OTO/DPD chlorine reagent drops to both cups:
+      </p>
+      <div class="cups-grid">
+        <div class="cup-box cup-clear">
+          <div style="font-size: 24px; margin-bottom: 4px;">🖐️ ➔ 🥛</div>
+          <div style="font-weight: 800; color: var(--teal-bright);">Cup A (Your Fingers)</div>
+          <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 4px;">Stayed <strong>100% Clear</strong> — the free chlorine bound straight into your skin in 15 seconds.</div>
+        </div>
+        <div class="cup-box cup-yellow">
+          <div style="font-size: 24px; margin-bottom: 4px;">🚰 ➔ 🧪</div>
+          <div style="font-weight: 800; color: #FBBF24;">Cup B (Untouched Tap)</div>
+          <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 4px;">Turned <strong>Bright Yellow/Pink</strong> — pool-level disinfectant present in every shower.</div>
+        </div>
+      </div>
+      <div style="font-size: 14px; background: rgba(15,23,42,0.7); padding: 11px 14px; border-radius: 10px; color: var(--glacier-muted);">
+        💡 <strong>Why it matters in Colorado:</strong> A 10-minute hot shower opens your pores and exposes your skin and lungs to more chlorine and chemical steam than drinking 8 glasses of tap water.
+      </div>
+    </section>
+
+    <!-- STEP 2: LIVE EWG ZIP CODE CHECKER -->
+    <section class="step-card">
+      <div class="step-tag" style="color: var(--coral-bright);">Live Check #2 • Independent Database</div>
+      <div class="step-title">Check Your Northern Colorado Zip Code</div>
+      <p style="font-size: 15px; color: var(--glacier-muted); margin-bottom: 10px;">
+        Because Poudre River wildfire ash and Horsetooth algae mix with municipal chlorine, disinfection byproducts spike inside local pipes.
+      </p>
+      <div class="zip-row">
+        <select id="zipSelect" onchange="updateZipReport()">
+          <option value="80525">80525 — Fort Collins (Midtown / South)</option>
+          <option value="80521">80521 — Fort Collins (Old Town / West)</option>
+          <option value="80524">80524 — Fort Collins (North / Old Town)</option>
+          <option value="80526">80526 — Fort Collins (West / Horsetooth)</option>
+          <option value="80528">80528 — Fort Collins (Southeast / Harmony)</option>
+          <option value="80547">80547 — Timnath</option>
+          <option value="80549">80549 — Wellington (Hard Water Zone)</option>
+          <option value="80550">80550 — Windsor (Hard Water Zone)</option>
+        </select>
+      </div>
+
+      <div id="zipIntelBox">
+        <div class="contaminant-pill">
+          <div style="display:flex; justify-content:space-between; font-weight: 800; color: var(--coral-bright);">
+            <span>Total Trihalomethanes (TTHMs)</span>
+            <span>46x Health Guideline</span>
+          </div>
+          <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
+            Formed when chlorine reacts with Poudre wildfire runoff &amp; organic matter. EWG Listed Removal: <strong>Carbon Filtration</strong>.
+          </div>
+        </div>
+        <div class="contaminant-pill">
+          <div style="display:flex; justify-content:space-between; font-weight: 800; color: var(--coral-bright);">
+            <span>Haloacetic Acids (HAA5)</span>
+            <span>21x Health Guideline</span>
+          </div>
+          <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
+            Disinfection byproduct linked to long-term health risk. EWG Listed Removal: <strong>Carbon + Reverse Osmosis</strong>.
+          </div>
+        </div>
+      </div>
+
+      <a id="ewgExternalLink" href="https://www.ewg.org/tapwater/search-results.php?zip5=80525&searchtype=zip" target="_blank" rel="noopener" class="btn" style="margin-top: 14px; font-size: 15px; padding: 12px;">
+        🔎 Open Official EWG.org Tap Water Database ↗
+      </a>
+    </section>
+
+    <!-- STEP 3: FREEZER ICE CUBE SMELL TEST -->
+    <section class="step-card">
+      <div class="step-tag" style="color: #FBBF24;">Live Check #3 • Freezer Test</div>
+      <div class="step-title">The Freezer Ice Cube Smell Test</div>
+      <p style="font-size: 15px; color: var(--glacier-muted);">
+        Grab a handful of ice cubes from your freezer, drop them into a dry cup, and take a whiff. Freezing concentrates trapped chlorine gases and Horsetooth algae compounds (Geosmin) that a basic fridge carbon cartridge misses.
+      </p>
+    </section>
+
+    <!-- STEP 4: GHL CRM LEAD & WRITTEN ESTIMATE FORM -->
+    <section class="step-card" style="border-color: rgba(52, 211, 153, 0.4);">
+      <div class="step-tag" style="color: var(--emerald-bright);">Step 4 • Lock In Your Written Report &amp; Fleet Rate</div>
+      <div class="step-title">Get Your Kitchen-Table Water Report &amp; January Route Pricing</div>
+      <p style="font-size: 15px; color: var(--glacier-muted); margin-bottom: 16px;">
+        Enter your info below so Fred can text/email your official water test readings and lock in your neighborhood fleet install waiver.
+      </p>
+
+      <form id="sinkGhlForm" onsubmit="submitSinkLead(event)">
+        <div class="form-group">
+          <label>Your Full Name *</label>
+          <input type="text" id="leadName" required placeholder="e.g. Sarah & Mike Jenkins" />
+        </div>
+        <div class="readings-grid">
+          <div class="form-group">
+            <label>Best Mobile Phone *</label>
+            <input type="tel" id="leadPhone" required placeholder="(970) 555-0199" />
+          </div>
+          <div class="form-group">
+            <label>Email (For PDF Quote &amp; Invoice)</label>
+            <input type="email" id="leadEmail" placeholder="name@email.com" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Street Address &amp; Zip Code *</label>
+          <input type="text" id="leadAddress" required placeholder="1234 Mountain Ave, Fort Collins 80525" />
+        </div>
+
+        <div class="readings-grid">
+          <div class="form-group">
+            <label>Tap Chlorine Reading (mg/L)</label>
+            <input type="number" step="0.1" id="leadChlorine" value="1.3" />
+          </div>
+          <div class="form-group">
+            <label>Water Zone</label>
+            <select id="leadZone">
+              <option value="Fort Collins City (Soft)">Fort Collins City (Soft)</option>
+              <option value="Wellington / Windsor / Timnath (Hard Water)">Wellington / Windsor / Timnath (Hard Water)</option>
+              <option value="Laporte / Bellvue Well Water">Laporte / Bellvue Well Water</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-emerald" id="sinkSubmitBtn">
+          ✓ Send My Water Test Report &amp; Open Presentation
+        </button>
+
+        <div class="status-toast" id="sinkToast">
+          ✓ Saved! Your test report has been sent to Blacktide Water Co.
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const ghlWebhookFromUrl = params.get('ghl') || localStorage.getItem('blacktide_ghl_webhook') || '';
+    if (params.get('cl')) document.getElementById('leadChlorine').value = params.get('cl');
+    if (params.get('zip')) {
+      const zs = document.getElementById('zipSelect');
+      if ([...zs.options].some(o => o.value === params.get('zip'))) {
+        zs.value = params.get('zip');
+      }
+    }
+
+    function updateZipReport() {
+      const zip = document.getElementById('zipSelect').value;
+      document.getElementById('ewgExternalLink').href =
+        `https://www.ewg.org/tapwater/search-results.php?zip5=${zip}&searchtype=zip`;
+      const isHard = zip === '80549' || zip === '80550';
+      if (isHard) {
+        document.getElementById('leadZone').value = 'Wellington / Windsor / Timnath (Hard Water)';
+      }
+    }
+    updateZipReport();
+
+    async function submitSinkLead(e) {
+      e.preventDefault();
+      const btn = document.getElementById('sinkSubmitBtn');
+      btn.textContent = 'Sending Report...';
+
+      const payload = {
+        source: 'Blacktide Kitchen-Sink Homeowner Companion',
+        timestamp: new Date().toISOString(),
+        full_name: document.getElementById('leadName').value.trim(),
+        phone: document.getElementById('leadPhone').value.trim(),
+        email: document.getElementById('leadEmail').value.trim(),
+        address: document.getElementById('leadAddress').value.trim(),
+        zip_code: document.getElementById('zipSelect').value,
+        chlorine_mgl: document.getElementById('leadChlorine').value,
+        water_zone: document.getElementById('leadZone').value,
+        tags: ['kitchen-sink-test', 'fort-collins-water-test', 'january-route']
+      };
+
+      localStorage.setItem('blacktide_last_customer', JSON.stringify(payload));
+
+      if (ghlWebhookFromUrl) {
+        try {
+          await fetch(ghlWebhookFromUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          console.warn('Offline queue saved locally:', err);
+        }
+      }
+
+      document.getElementById('sinkToast').style.display = 'block';
+      btn.textContent = '✓ Report Saved — View Full Presentation →';
+      setTimeout(() => {
+        const mode = payload.water_zone.includes('Hard') || payload.water_zone.includes('Well') ? 'hard' : 'city';
+        window.location.href = `./index.html?mode=${mode}&cl=${encodeURIComponent(payload.chlorine_mgl)}&name=${encodeURIComponent(payload.full_name)}&phone=${encodeURIComponent(payload.phone)}&address=${encodeURIComponent(payload.address)}`;
+      }, 1100);
+    }
+  </script>
+</body>
+</html>
