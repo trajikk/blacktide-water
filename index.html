@@ -84,6 +84,20 @@
       }
     }
 
+    /* Full Mobile Phone Responsiveness */
+    @media (max-width: 780px) {
+      .top-bar { height: auto; padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+      .brand-loc { display: none; }
+      .slide { padding: 16px 16px 24px; justify-content: flex-start; gap: 14px; }
+      .split-grid, .setup-cards-row, .pricing-grid, .timeline-container, .summary-close-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+      }
+      .timeline-track-line { display: none; }
+      .presenter-bar { height: auto; padding: 10px 12px; flex-wrap: wrap; gap: 8px; justify-content: center; }
+      .slide1-corner-controls { position: static; margin-top: 14px; flex-wrap: wrap; }
+    }
+
     /* Top Header Bar */
     .top-bar {
       height: 58px;
@@ -723,7 +737,7 @@
     }
 
     /* ==========================================
-       SLIDE 7: HOW SPRINGWELL STACKS UP
+       SLIDE 7: HOW BLACKTIDE ALPINE-PURE STACKS UP
     ========================================== */
     .race-bar-wrap { margin-bottom: 14px; }
     .race-bar-fill {
@@ -1552,10 +1566,10 @@
              SLIDE 5: THE FIX — WHOLE-HOUSE PROTECTION
         ====================================================== -->
         <section class="slide" data-slide-id="5"
-          data-notes-city="Here is the permanent fix: the Blacktide Mountain-Pure System powered by SpringWell commercial-grade CF1 vessels right on your main water line. Instead of a tiny pitcher in the fridge, every single drop entering your home passes through four stages of catalytic carbon and KDF filtration before it ever hits your kitchen sink, your kids' bath, or your washing machine. It flows at 9 gallons a minute so your shower pressure stays strong, and includes custom copper/PEX bypass integration and a lifetime tank and valve warranty."
-          data-notes-hard="Here is the permanent fix: the Blacktide Mountain-Pure System powered by SpringWell CF1 vessels right on your main water line—paired with a high-efficiency softener for your hard water. Every single drop entering your home passes through four stages of filtration and ion-exchange softening before it hits your showers, kitchen sink, or appliances. It flows at 9 gallons a minute with a lifetime warranty.">
+          data-notes-city="Here is the permanent fix: the Blacktide Alpine-Pure AP-1000 System installed right on your main water line in the basement or garage. Instead of a tiny pitcher in the fridge, every single drop entering your home passes through four stages of catalytic carbon and KDF-55 filtration before it ever hits your kitchen sink, your kids' bath, or your washing machine. It flows at 9 gallons a minute so your shower pressure stays strong, and includes custom copper/PEX bypass integration and a lifetime tank and valve warranty."
+          data-notes-hard="Here is the permanent fix: the Blacktide Alpine-Pure AP-1000 System installed right on your main water line—paired with our high-efficiency Alpine-Soft conditioning vessel for your hard water. Every single drop entering your home passes through four stages of filtration and ion-exchange softening before it hits your showers, kitchen sink, or appliances. It flows at 9 gallons a minute with a lifetime warranty.">
           <div>
-            <div class="slide-eyebrow" style="color: var(--emerald-bright);">The Fix — Blacktide Mountain-Pure Turnkey Buildout</div>
+            <div class="slide-eyebrow" style="color: var(--emerald-bright);">The Fix — Blacktide Alpine-Pure™ Turnkey Buildout</div>
             <h2 class="slide-headline city-only">Clean Water From Every Tap in the House.</h2>
             <h2 class="slide-headline hard-only">Clean, Soft Water From Every Tap in the House.</h2>
           </div>
@@ -1564,7 +1578,7 @@
             <ul class="bullet-list">
               <li>
                 <span class="bullet-dot dot-emerald">✓</span>
-                <span><strong>SpringWell CF1 4-Stage Whole-House Carbon/KDF Filter</strong> <span class="hard-only" style="display:inline; color:var(--teal-bright);">(+ High-Efficiency Salt Water Softener)</span></span>
+                <span><strong>Blacktide Alpine-Pure™ AP-1000 4-Stage Catalytic Carbon/KDF System</strong> <span class="hard-only" style="display:inline; color:var(--teal-bright);">(+ High-Efficiency Salt Water Softener)</span></span>
               </li>
               <li>
                 <span class="bullet-dot dot-emerald">✓</span>
@@ -1599,7 +1613,7 @@
                 <rect x="103" y="103" width="58" height="22" rx="4" fill="rgba(56, 189, 248, 0.35)"/>
                 <rect x="103" y="131" width="58" height="22" rx="4" fill="rgba(5, 150, 105, 0.35)"/>
                 <rect x="103" y="159" width="58" height="22" rx="4" fill="rgba(52, 211, 153, 0.4)"/>
-                <text x="132" y="228" fill="#F8FAFC" font-size="12" font-weight="800" text-anchor="middle">SpringWell CF1</text>
+                <text x="132" y="228" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">Alpine-Pure AP-1000</text>
 
                 <g id="svgSoftenerGroup" style="opacity: 0.22; transition: opacity 0.3s ease;">
                   <line x1="169" y1="65" x2="205" y2="65" stroke="#0284C7" stroke-width="8"/>
@@ -1691,80 +1705,150 @@
         </section>
 
         <!-- =====================================================
-             SLIDE 6: TWO WAYS TO SET UP YOUR HOME
+             SLIDE 6: INTERACTIVE 3-STORY HOME X-RAY & 2-TIER SETUP
         ====================================================== -->
         <section class="slide" data-slide-id="6"
-          data-notes-city="Most families love Option 1 because every tap in the house tastes great and your showers are completely chlorine-free. And if you want ultra-pure drinking water right at your kitchen sink—the kind that strips out dissolved minerals, fluoride, and nitrates for coffee, ice cubes, and cooking—Option 2 adds an under-sink Reverse Osmosis tap right at your sink. That's why most Fort Collins families pair both."
-          data-notes-hard="Most families love Option 1 because every tap in the house tastes great and your showers are completely chlorine-free and scale-free. If you want ultra-pure drinking water right at your kitchen sink—the kind that drops your TDS reading down near zero for coffee, ice cubes, and cooking—Option 2 adds an under-sink Reverse Osmosis tap right at your sink.">
-          <div>
-            <div class="slide-eyebrow">Two Ways to Set Up Your Home</div>
-            <h2 class="slide-headline">Choose Your Level of Pure.</h2>
-          </div>
-
-          <div class="setup-cards-row">
-            <div class="setup-option-card selected" id="setupCard1" onclick="selectSetupPreview(1)">
-              <div class="setup-option-title">
-                <span>Option 1: Whole-House Protection</span>
-                <span style="color: var(--teal-bright);">●</span>
-              </div>
-              <p class="body-text city-only">
-                Clean, chlorine-free water at every tap, shower, and appliance.
-              </p>
-              <p class="body-text hard-only">
-                Clean, chlorine-free and scale-free soft water at every tap, shower, and appliance.
-              </p>
+          data-notes-city="Tap any of the glowing touchpoints on this home diagram with me. Touchpoint 1 shows where we tuck the Blacktide Alpine-Pure tank right where your main line enters the basement or garage. Touchpoint 2 shows your upstairs showers—where you stop inhaling vaporized chlorine and chloroform steam. Touchpoint 3 is your kitchen sink, where Tier 2 adds the Alpine-RO drinking faucet for coffee, cooking, and ice cubes. And Touchpoint 4 shows how you ditch the 240,000 microplastics per liter in grocery store plastic bottles."
+          data-notes-hard="Tap any of the glowing touchpoints on this home diagram with me. Touchpoint 1 shows where we tuck the Blacktide Alpine-Pure and Softener tanks on your main line in the basement or garage. Touchpoint 2 shows your upstairs showers—zero chlorine steam and zero hard-water soap scum. Touchpoint 3 is your kitchen sink RO tap, and Touchpoint 4 replaces plastic water bottles forever.">
+          <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:8px;">
+            <div>
+              <div class="slide-eyebrow">Interactive Guided Home Water X-Ray • Tap Any Room Hotspot</div>
+              <h2 class="slide-headline" style="margin-bottom:4px;">Two Simple Tiers. Every Room Protected.</h2>
             </div>
-
-            <div class="setup-option-card" id="setupCard2" onclick="selectSetupPreview(2)">
-              <div class="setup-option-title">
-                <span>Option 2: Whole-House + Kitchen Drinking Water Combo</span>
-                <span style="color: var(--emerald-bright);">★</span>
-              </div>
-              <p class="body-text">
-                Adds an Under-Sink Reverse Osmosis (RO) system at your kitchen sink for ultra-pure drinking, coffee, ice, and cooking water.
-              </p>
+            <div style="display:flex; gap:8px; margin-bottom:6px;">
+              <button type="button" class="subtle-btn" id="deckShieldOffBtn" onclick="toggleDeckHouseShield(false)">
+                ⚠️ Unfiltered Tap Flow
+              </button>
+              <button type="button" class="subtle-btn active-toggle" id="deckShieldOnBtn" onclick="toggleDeckHouseShield(true)">
+                🛡️ Blacktide Alpine-Pure™ Active
+              </button>
             </div>
           </div>
 
-          <div class="visual-card" style="padding: 14px 22px;">
-            <svg viewBox="0 0 800 160" style="width: 100%; height: 150px;">
-              <rect x="20" y="18" width="460" height="122" rx="14" fill="rgba(2, 132, 199, 0.16)" stroke="#38BDF8" stroke-width="2.5"/>
-              <text x="45" y="50" fill="#38BDF8" font-size="16" font-weight="800">OPTION 1: WHOLE-HOUSE SYSTEM</text>
-              <text x="45" y="80" fill="#F8FAFC" font-size="15" font-weight="600">✓ Master &amp; Kids' Showers (Zero Chlorine Steam)</text>
-              <text x="45" y="108" fill="#F8FAFC" font-size="15" font-weight="600">✓ All Bathrooms, Laundry &amp; Appliances</text>
+          <div class="split-grid" style="grid-template-columns: 1.08fr 0.92fr; gap: 18px;">
+            <!-- Left: Interactive 3-Story House Cross-Section with 5 Touchpoints -->
+            <div class="visual-card" style="padding: 14px 16px;">
+              <svg viewBox="0 0 560 305" style="width:100%; height:230px; background:#080D18; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
+                <!-- Roof -->
+                <polygon points="25,74 280,10 535,74" fill="rgba(30,41,59,0.65)" stroke="#475569" stroke-width="2.5"/>
+                <!-- 2nd Floor -->
+                <rect x="40" y="74" width="480" height="74" fill="rgba(15,23,42,0.9)" stroke="#475569" stroke-width="2"/>
+                <!-- Main Floor -->
+                <rect x="40" y="148" width="480" height="74" fill="rgba(15,23,42,0.9)" stroke="#475569" stroke-width="2"/>
+                <!-- Basement / Garage -->
+                <rect x="40" y="222" width="480" height="72" fill="rgba(9,14,26,0.96)" stroke="#475569" stroke-width="2"/>
 
-              <line class="flow-stream" x1="480" y1="80" x2="530" y2="80" stroke="#34D399" stroke-width="5"/>
+                <!-- Floor Labels -->
+                <text x="54" y="92" fill="#94A3B8" font-size="10.5" font-weight="800">2ND FLOOR: MASTER &amp; KIDS’ SHOWERS</text>
+                <text x="54" y="166" fill="#94A3B8" font-size="10.5" font-weight="800">MAIN FLOOR: KITCHEN SINK, ICE MAKER &amp; BOTTLED WATER</text>
+                <text x="54" y="240" fill="#94A3B8" font-size="10.5" font-weight="800">BASEMENT / GARAGE: MAIN WATER LINE &amp; LAUNDRY</text>
 
-              <g id="roDiagramHighlight" style="opacity: 0.38; transition: opacity 0.3s ease;">
-                <rect x="530" y="18" width="250" height="122" rx="14" fill="rgba(5, 150, 105, 0.22)" stroke="#34D399" stroke-width="2.5"/>
-                <text x="550" y="50" fill="#34D399" font-size="15" font-weight="800">+ UNDER-SINK RO TAP</text>
-                <text x="550" y="80" fill="#F8FAFC" font-size="14" font-weight="600">✓ Dedicated Kitchen Faucet</text>
-                <text x="550" y="108" fill="#F8FAFC" font-size="14" font-weight="600">✓ Near-Zero TDS Drinking &amp; Ice</text>
-              </g>
-            </svg>
+                <!-- Animated Plumbing Lines Through House -->
+                <path id="deckHousePipes" class="flow-stream" d="M12,265 L120,265 L120,112 L265,112 M120,188 L430,188 M120,265 L425,265" stroke="#38BDF8" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+                <!-- Hotspot 1: Basement / Garage Main Line Tank -->
+                <g onclick="selectDeckHotspot(1)" style="cursor:pointer;">
+                  <circle cx="120" cy="265" r="19" fill="rgba(2,132,199,0.3)" stroke="#38BDF8" stroke-width="2"/>
+                  <text x="120" y="270" fill="#fff" font-size="13" font-weight="800" text-anchor="middle">1</text>
+                  <text x="146" y="269" fill="#38BDF8" font-size="11.5" font-weight="800">Basement/Garage Tank</text>
+                </g>
+
+                <!-- Hotspot 2: Master Shower (Chlorine Steam) -->
+                <g onclick="selectDeckHotspot(2)" style="cursor:pointer;">
+                  <circle cx="265" cy="112" r="19" fill="rgba(225,29,72,0.3)" stroke="#FB7185" stroke-width="2"/>
+                  <text x="265" y="117" fill="#fff" font-size="13" font-weight="800" text-anchor="middle">2</text>
+                  <text x="291" y="116" fill="#FB7185" font-size="11.5" font-weight="800">🚿 Shower Chlorine Vapors</text>
+                </g>
+
+                <!-- Hotspot 3: Kitchen Sink & Under-Sink RO (Tier 2) -->
+                <g id="roDiagramHighlight" onclick="selectDeckHotspot(3)" style="cursor:pointer; transition: opacity 0.3s;">
+                  <circle cx="215" cy="188" r="19" fill="rgba(5,150,105,0.35)" stroke="#34D399" stroke-width="2"/>
+                  <text x="215" y="193" fill="#fff" font-size="13" font-weight="800" text-anchor="middle">3</text>
+                  <text x="241" y="192" fill="#34D399" font-size="11.5" font-weight="800">🚰 Kitchen RO &amp; Ice</text>
+                </g>
+
+                <!-- Hotspot 4: Bottled Water Microplastics -->
+                <g onclick="selectDeckHotspot(4)" style="cursor:pointer;">
+                  <circle cx="415" cy="188" r="19" fill="rgba(245,158,11,0.3)" stroke="#FBBF24" stroke-width="2"/>
+                  <text x="415" y="193" fill="#fff" font-size="13" font-weight="800" text-anchor="middle">4</text>
+                  <text x="441" y="192" fill="#FBBF24" font-size="11.5" font-weight="800">🍼 240k Microplastics</text>
+                </g>
+
+                <!-- Hotspot 5: Washing Machine & Appliances -->
+                <g onclick="selectDeckHotspot(5)" style="cursor:pointer;">
+                  <circle cx="415" cy="265" r="19" fill="rgba(56,189,248,0.25)" stroke="#38BDF8" stroke-width="2"/>
+                  <text x="415" y="270" fill="#fff" font-size="13" font-weight="800" text-anchor="middle">5</text>
+                  <text x="441" y="269" fill="#CBD5E1" font-size="11.5" font-weight="800">🧺 Laundry &amp; Plumbing</text>
+                </g>
+              </svg>
+
+              <!-- Hotspot Quick Buttons -->
+              <div style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">
+                <button type="button" class="subtle-btn active-toggle" id="deckTp1" onclick="selectDeckHotspot(1)">1. Basement/Garage</button>
+                <button type="button" class="subtle-btn" id="deckTp2" onclick="selectDeckHotspot(2)">2. Shower Steam</button>
+                <button type="button" class="subtle-btn" id="deckTp3" onclick="selectDeckHotspot(3)">3. Kitchen Sink RO</button>
+                <button type="button" class="subtle-btn" id="deckTp4" onclick="selectDeckHotspot(4)">4. Plastic Bottles</button>
+                <button type="button" class="subtle-btn" id="deckTp5" onclick="selectDeckHotspot(5)">5. Appliances</button>
+              </div>
+            </div>
+
+            <!-- Right: Dynamic Touchpoint Inspector + 2-Tier Selector Cards -->
+            <div style="display:flex; flex-direction:column; gap:12px; height:100%; justify-content:space-between;">
+              <div class="visual-card" style="padding: 16px 18px; height:auto; border-color: rgba(56,189,248,0.4);">
+                <div style="font-size:12px; font-weight:800; color:var(--teal-bright); text-transform:uppercase;" id="deckTpEyebrow">
+                  Touchpoint #1 • Basement Utility Room or Garage Main Line
+                </div>
+                <div style="font-size:19px; font-weight:800; color:var(--glacier); margin:4px 0 6px;" id="deckTpTitle">
+                  Blacktide Alpine-Pure™ AP-1000 Main-Line Installation
+                </div>
+                <p style="font-size:15px; color:var(--glacier-muted); line-height:1.42;" id="deckTpBody">
+                  Installed cleanly in your basement utility room or garage right where your main line enters. Strips out 99.9% of chlorine, chloroform (97x EWG limit), HAA9 (447x limit), and TTHMs (253x limit) at 9 GPM for 1,000,000 gallons (~10 years).
+                </p>
+              </div>
+
+              <div class="setup-option-card selected" id="setupCard1" onclick="selectSetupPreview(1)" style="padding: 14px 16px;">
+                <div class="setup-option-title" style="font-size:18px; margin-bottom:4px;">
+                  <span>Tier 1: Whole-House System (Minus Kitchen RO)</span>
+                  <span style="color: var(--teal-bright);">●</span>
+                </div>
+                <p class="body-text" style="font-size:15px;">
+                  99.9% chlorine-free, chemical-free water at every shower, bath, laundry tap &amp; appliance.
+                </p>
+              </div>
+
+              <div class="setup-option-card" id="setupCard2" onclick="selectSetupPreview(2)" style="padding: 14px 16px;">
+                <div class="setup-option-title" style="font-size:18px; margin-bottom:4px;">
+                  <span>Tier 2: Whole-House + Kitchen Sink RO Combo</span>
+                  <span style="color: var(--emerald-bright);">★ MOST POPULAR</span>
+                </div>
+                <p class="body-text" style="font-size:15px;">
+                  Adds the Blacktide Alpine-RO™ Under-Sink drinking faucet &amp; ice-maker line for near-zero TDS coffee, ice &amp; cooking.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
         <!-- =====================================================
-             SLIDE 7: HOW SPRINGWELL STACKS UP
+             SLIDE 7: HOW BLACKTIDE ALPINE-PURE STACKS UP
         ====================================================== -->
         <section class="slide" data-slide-id="7"
-          data-notes-city="You don't have to take my word on the hardware. SpringWell is the top-rated whole-house system of 2026—WaterFilterGeek gave it 4.8 out of 5, and AquaVerdict scored it 92 out of 100. It flows at 9 gallons a minute compared to Aquasana's 7. And unlike national outfits like Culligan, Kinetico, or RainSoft—who hold you hostage at your kitchen table for two hours before dropping an eight- or nine-thousand-dollar quote—I put the exact turnkey installed price right in front of you."
-          data-notes-hard="You don't have to take my word on the hardware. SpringWell is the top-rated whole-house system of 2026—WaterFilterGeek gave it 4.8 out of 5, and AquaVerdict scored it 92 out of 100. It flows at 9 gallons a minute compared to Aquasana's 7. And unlike national outfits like Culligan, Kinetico, or RainSoft—who hold you hostage at your kitchen table for two hours before dropping an eight- or nine-thousand-dollar quote—I put the exact turnkey installed price right in front of you.">
+          data-notes-city="Here is how our commercial-grade Blacktide Alpine-Pure AP-1000 stacks up against retail filters and old-school national water companies. Our commercial catalytic carbon and KDF-55 vessel is rated 4.8 out of 5 by WaterFilterGeek and 92 out of 100 by AquaVerdict. It flows at 9 gallons a minute compared to Aquasana's 7. And unlike national outfits like Culligan, Kinetico, or RainSoft—who hold you hostage at your kitchen table for two hours before dropping an eight- or nine-thousand-dollar quote—I put the exact turnkey installed price right in front of you."
+          data-notes-hard="Here is how our commercial-grade Blacktide Alpine-Pure AP-1000 stacks up against retail filters and old-school national water companies. It flows at 9 gallons a minute compared to Aquasana's 7, carries a lifetime tank and valve warranty, and unlike Culligan, Kinetico, or RainSoft, we print our exact turnkey installed price right in front of you.">
           <div>
-            <div class="slide-eyebrow">How SpringWell Stacks Up</div>
-            <h2 class="slide-headline">Top-Rated Equipment. Zero Hidden Pricing.</h2>
+            <div class="slide-eyebrow">How Blacktide Stacks Up</div>
+            <h2 class="slide-headline">Commercial-Grade Hardware. Zero Hidden Pricing.</h2>
           </div>
 
           <div class="split-grid">
             <ul class="bullet-list">
               <li>
                 <span class="bullet-dot dot-emerald">★</span>
-                <span><strong>SpringWell CF1:</strong> Top-Rated Whole-House Filter of 2026 (WaterFilterGeek Editor's Choice <strong>4.8/5</strong>, AquaVerdict <strong>92/100</strong>)</span>
+                <span><strong>Blacktide Alpine-Pure™ AP-1000:</strong> Top-Rated 4-Stage Catalytic Carbon &amp; KDF-55 Vessel of 2026 (Editor's Choice <strong>4.8/5</strong>, AquaVerdict <strong>92/100</strong>)</span>
               </li>
               <li>
                 <span class="bullet-dot dot-teal">⚡</span>
-                <span><strong>Flow Rate:</strong> SpringWell CF1 <strong>9 GPM</strong> vs. Aquasana Rhino <strong>7 GPM</strong></span>
+                <span><strong>Flow Rate:</strong> Blacktide AP-1000 <strong>9 GPM</strong> vs. Aquasana Rhino <strong>7 GPM</strong></span>
               </li>
               <li>
                 <span class="bullet-dot dot-coral">!</span>
@@ -1772,7 +1856,7 @@
               </li>
               <li>
                 <span class="bullet-dot dot-emerald">✓</span>
-                <span><strong>Blacktide Turnkey Package:</strong> Custom copper/PEX manifold, 3-valve bypass, licensed master plumber &amp; printed price upfront.</span>
+                <span><strong>Easy 2-Minute DIY Filter Swaps:</strong> Twist-off pre-filter ($15–$25) &amp; twist-and-lock RO cartridges—zero plumber ever needed for filter changes.</span>
               </li>
             </ul>
 
@@ -1783,7 +1867,7 @@
 
               <div class="race-bar-wrap">
                 <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:700; margin-bottom:5px;">
-                  <span>SpringWell CF1 (Blacktide Standard)</span>
+                  <span>Blacktide Alpine-Pure™ AP-1000</span>
                   <span style="color: var(--emerald-bright);">9.0 GPM</span>
                 </div>
                 <div class="gauge-track" style="height: 28px;">
@@ -1862,7 +1946,7 @@
                   or $5,999 cash (includes full installation)
                 </div>
                 <p class="body-text" id="card1Desc" style="font-size: 16px; color: var(--glacier-muted);">
-                  SpringWell CF1 4-Stage Whole-House Filter • 9 GPM • 1M-Gallon Capacity • Custom Copper/PEX Bypass &amp; Lifetime Tank Warranty
+                  Blacktide Alpine-Pure™ AP-1000 4-Stage Filter • 9 GPM • 1M-Gallon Capacity • Custom Copper/PEX Bypass &amp; Lifetime Tank Warranty
                 </p>
               </div>
               <div class="net-diff-callout" id="card1NetDiff">
@@ -2095,15 +2179,15 @@
             <div>
               <div style="font-weight: 800; color: #059669; margin-bottom: 4px;">C. Two Simple System Tiers &amp; Equipment Specs</div>
               <ul style="padding-left: 18px; margin-bottom: 10px;">
-                <li><strong>Tier 1 — Whole-House Only (No Kitchen RO):</strong> SpringWell CF1 4-Stage Catalytic Carbon + KDF-55 tank + 5-micron sediment pre-filter on your main water line. Flows at <strong>9 GPM</strong> (vs. Aquasana Rhino's 7 GPM), <strong>1,000,000-gallon capacity</strong> (~10 years), removes 99.9% of chlorine, chloramine, Horsetooth taste, and TTHMs/HAA5s at every shower and bathroom tap.</li>
-                <li><strong>Tier 2 — Whole-House + Kitchen Under-Sink RO Combo:</strong> Adds a dedicated 4-stage Reverse Osmosis system under your kitchen sink with a designer faucet to strip out dissolved solids, fluoride, and nitrates for near-zero TDS drinking, coffee, ice cubes, and cooking water.</li>
-                <li><strong>Top Independent Ratings:</strong> WaterFilterGeek Editor's Choice (4.8/5) &amp; AquaVerdict (92/100) with a Lifetime Warranty on tanks and valves.</li>
+                <li><strong>Tier 1 — Whole-House System (Minus Kitchen RO):</strong> Blacktide Alpine-Pure™ AP-1000 4-Stage Catalytic Carbon + KDF-55 tank + 5-micron sediment pre-filter on your main water line. Flows at <strong>9 GPM</strong> (vs. Aquasana Rhino's 7 GPM), <strong>1,000,000-gallon capacity</strong> (~10 years), removes 99.9% of chlorine, chloramine, Horsetooth taste, and TTHMs/HAA9 at every shower and bathroom tap.</li>
+                <li><strong>Tier 2 — Whole-House + Kitchen Sink RO Combo:</strong> Adds the dedicated 4-stage Blacktide Alpine-RO™ system under your kitchen sink with a designer faucet to strip out dissolved solids, fluoride, chromium-6, and nitrates for near-zero TDS drinking, coffee, ice cubes, and cooking water.</li>
+                <li><strong>Top Independent Ratings:</strong> Editor's Choice (4.8/5) &amp; AquaVerdict (92/100) with a Lifetime Warranty on tanks and valves.</li>
               </ul>
 
               <div style="font-weight: 800; color: #0F172A; margin-bottom: 4px;">D. Filter Replacement Costs &amp; 3-Minute DIY Swaps (No Plumber Needed!)</div>
               <ul style="padding-left: 18px;">
                 <li><strong>Main Whole-House Tank:</strong> Zero maintenance for <strong>1,000,000 gallons (~10 years)</strong>.</li>
-                <li><strong>Whole-House 5-Micron Sediment Pre-Filter:</strong> Costs only <strong>~$20–$25</strong> (swap every 6–9 months). Has a built-in shutoff valve—twist the housing off by hand in 2 minutes, drop in the new cartridge, twist back on.</li>
+                <li><strong>Whole-House 5-Micron Sediment Pre-Filter:</strong> Costs only <strong>~$15–$25</strong> (swap every 6–9 months). Has a built-in shutoff valve—twist the housing off by hand in 2 minutes, drop in the new cartridge, twist back on.</li>
                 <li><strong>Kitchen Under-Sink RO Filters (Tier 2):</strong> Pre/post carbon filters cost <strong>~$45–$65/year</strong> (swap every 6–12 months); RO membrane costs <strong>~$45</strong> (lasts 2–3 years). Twist-and-lock cartridges swap like a lightbulb in 60 seconds without turning off the main house water.</li>
                 <li><strong>Your Choice:</strong> We show you how to swap them yourself in 3 minutes on install day, or Blacktide can handle your annual filter swap for you.</li>
               </ul>
@@ -2430,41 +2514,90 @@
     const PRICING = {
       city: {
         1: {
-          title: 'Tier 1: Whole-House Clean Water (Minus Kitchen RO)',
+          title: 'Tier 1: Blacktide Alpine-Pure™ Whole-House (Minus Kitchen RO)',
           monthly: 127,
           cash: '$5,999',
           fleetMonthly: 65,
           fleetCash: '$2,695 (January Neighbor Route)',
-          desc: 'SpringWell CF1 4-Stage Whole-House Filter on Main Line • Every Shower, Bath & Laundry Tap • 9 GPM • 1M-Gallon Capacity • Lifetime Tank Warranty'
+          desc: 'Blacktide Alpine-Pure™ AP-1000 4-Stage Catalytic Carbon/KDF System on Main Line • Every Shower, Bath & Laundry Tap • 9 GPM • 1M-Gallon Capacity • Lifetime Tank Warranty'
         },
         2: {
-          title: 'Tier 2: Whole-House + Kitchen Sink RO Combo',
+          title: 'Tier 2: Blacktide Alpine-Pure™ + Kitchen Sink RO Combo',
           monthly: 152,
           cash: '$7,199',
           fleetMonthly: 89,
           fleetCash: '$3,895 (January Neighbor Route — Retail $5,295)',
-          desc: 'Complete Whole-House System + Dedicated Kitchen Under-Sink Reverse Osmosis Drinking Faucet for Coffee, Ice & Cooking'
+          desc: 'Complete Whole-House Alpine-Pure™ System + Dedicated Kitchen Under-Sink Alpine-RO™ Drinking Faucet for Coffee, Ice & Cooking'
         }
       },
       hard: {
         1: {
-          title: 'Tier 1: Whole-House Clean + Soft Water (Minus Kitchen RO)',
+          title: 'Tier 1: Blacktide Alpine-Pure™ + Softener (Minus Kitchen RO)',
           monthly: 167,
           cash: '$7,899',
           fleetMonthly: 99,
           fleetCash: '$4,295 (January Neighbor Route)',
-          desc: 'SpringWell CF1 4-Stage Filter + Paired Salt-Based Water Softener on Main Line • 9 GPM • Lifetime Tank & Valve Warranty'
+          desc: 'Blacktide Alpine-Pure™ 4-Stage Filter + Paired Salt-Based Water Softener on Main Line • 9 GPM • Lifetime Tank & Valve Warranty'
         },
         2: {
-          title: 'Tier 2: Whole-House + Softener + Kitchen Sink RO Combo',
+          title: 'Tier 2: Blacktide Alpine-Pure™ + Softener + Kitchen Sink RO',
           monthly: 192,
           cash: '$9,099',
           fleetMonthly: 115,
           fleetCash: '$4,995 (January Neighbor Route — Retail $6,495)',
-          desc: 'Whole-House Clean & Soft Water + Dedicated Kitchen Under-Sink Reverse Osmosis Drinking Faucet'
+          desc: 'Whole-House Clean & Soft Water + Dedicated Kitchen Under-Sink Alpine-RO™ Drinking Faucet'
         }
       }
     };
+
+    const DECK_HOTSPOTS = {
+      1: {
+        eyebrow: 'Touchpoint #1 • Basement Utility Room or Garage Main Line',
+        title: 'Blacktide Alpine-Pure™ AP-1000 Main-Line Installation',
+        body: 'Installed cleanly in your basement utility room or garage right where your main line enters. Strips out 99.9% of chlorine, chloroform (97x EWG limit), HAA9 (447x limit), and TTHMs (253x limit) at 9 GPM for 1,000,000 gallons (~10 years).'
+      },
+      2: {
+        eyebrow: 'Touchpoint #2 • 2nd Floor Master & Kids’ Showers',
+        title: '🚿 Stop Inhaling Vaporized Chlorine & Chloroform Steam',
+        body: 'In a 10-minute hot shower, your pores open and chlorinated water vaporizes into chemical steam containing Chloroform (97x EWG guideline) and TTHMs (253x guideline). You inhale and absorb more chlorine in one shower than drinking 8 glasses of tap water.'
+      },
+      3: {
+        eyebrow: 'Touchpoint #3 • Main Floor Kitchen Sink, Coffee & Ice Maker',
+        title: '🚰 Tier 2: Blacktide Alpine-RO™ Under-Sink Drinking Faucet',
+        body: 'Tier 2 adds a dedicated 4-stage Reverse Osmosis system neatly under your kitchen sink (and connects to your fridge ice maker). Strips out fluoride, chromium-6, nitrates, and Horsetooth lake odor for near-zero TDS drinking, coffee, and ice cubes.'
+      },
+      4: {
+        eyebrow: 'Touchpoint #4 • Grocery Store Plastic Bottled Water Trap',
+        title: '🍼 Ditch 240,000 Microplastics/Liter & $10–$12/Gallon Cases',
+        body: 'Lab tests found ~240,000 micro- and nanoplastic particles per liter in 93% of bottled water—linked in a 2024 study to a 4.5x higher risk of heart attack and stroke. Stop burning $2,700–$5,040 every 5 years lugging plastic cases.'
+      },
+      5: {
+        eyebrow: 'Touchpoint #5 • Washing Machine, Dishwasher & Plumbing',
+        title: '🧺 Chemical-Free Laundry & Protected Home Plumbing',
+        body: 'Removes harsh chlorine bleach and sediment from every load of laundry and every dishwasher cycle—and in hard water zones, stops calcium rock scale from choking your valves and appliances.'
+      }
+    };
+
+    function selectDeckHotspot(num) {
+      [1,2,3,4,5].forEach(i => {
+        const btn = document.getElementById('deckTp' + i);
+        if (btn) btn.classList.toggle('active-toggle', i === num);
+      });
+      const d = DECK_HOTSPOTS[num];
+      if (d) {
+        document.getElementById('deckTpEyebrow').textContent = d.eyebrow;
+        document.getElementById('deckTpTitle').textContent = d.title;
+        document.getElementById('deckTpBody').textContent = d.body;
+      }
+      if (num === 3) selectSetupPreview(2);
+    }
+
+    function toggleDeckHouseShield(isProtected) {
+      document.getElementById('deckShieldOffBtn').classList.toggle('active-toggle', !isProtected);
+      document.getElementById('deckShieldOnBtn').classList.toggle('active-toggle', isProtected);
+      const pipes = document.getElementById('deckHousePipes');
+      if (pipes) pipes.setAttribute('stroke', isProtected ? '#38BDF8' : '#F59E0B');
+    }
 
     // ==========================================
     // INITIALIZE FROM URL PARAMS OR SINK COMPANION

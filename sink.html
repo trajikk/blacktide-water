@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>Your Live Water Test | Blacktide Water Co. (Fort Collins)</title>
+  <title>Interactive Home Water X-Ray & Live Sink Test | Blacktide Water Co.</title>
   <link rel="manifest" href="./manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,16 +31,16 @@
       color: var(--glacier);
       font-family: var(--font);
       line-height: 1.5;
-      padding-bottom: 60px;
+      padding-bottom: 70px;
     }
     .header {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(15, 23, 42, 0.92);
+      background: rgba(15, 23, 42, 0.94);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 14px 20px;
+      padding: 13px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -50,7 +50,7 @@
       align-items: center;
       gap: 10px;
       font-weight: 800;
-      font-size: 18px;
+      font-size: 17px;
     }
     .brand-badge {
       width: 32px;
@@ -62,9 +62,9 @@
       justify-content: center;
     }
     .container {
-      max-width: 580px;
+      max-width: 600px;
       margin: 0 auto;
-      padding: 20px 18px;
+      padding: 18px 16px;
     }
     .hero-pill {
       display: inline-flex;
@@ -73,70 +73,126 @@
       background: rgba(2, 132, 199, 0.18);
       border: 1px solid rgba(56, 189, 248, 0.35);
       color: var(--teal-bright);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
-      padding: 6px 14px;
+      padding: 6px 13px;
       border-radius: 999px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     h1 {
-      font-size: 30px;
+      font-size: 27px;
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.02em;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .lead {
-      font-size: 17px;
+      font-size: 15.5px;
       color: var(--glacier-muted);
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
     .step-card {
-      background: linear-gradient(160deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
+      background: linear-gradient(160deg, rgba(30, 41, 59, 0.94), rgba(15, 23, 42, 0.98));
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 18px;
-      padding: 22px 20px;
+      padding: 20px 18px;
       margin-bottom: 18px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
     }
     .step-tag {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--teal-bright);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .step-title {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 800;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
+
+    /* Interactive Mobile Home X-Ray Map */
+    .xray-toggle-bar {
+      display: flex;
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+    .xray-mode-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(15,23,42,0.8);
+      color: var(--glacier-muted);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .xray-mode-btn.active-unprotected {
+      background: rgba(225, 29, 72, 0.22);
+      border-color: var(--coral-bright);
+      color: var(--coral-bright);
+    }
+    .xray-mode-btn.active-protected {
+      background: rgba(5, 150, 105, 0.24);
+      border-color: var(--emerald-bright);
+      color: var(--emerald-bright);
+    }
+
+    .touchpoint-pills {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .tp-btn {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      color: var(--glacier);
+      padding: 10px 12px;
+      border-radius: 11px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .tp-btn.active {
+      background: rgba(2, 132, 199, 0.28);
+      border-color: var(--teal-bright);
+      box-shadow: 0 0 16px rgba(56,189,248,0.25);
+    }
+    .tp-detail-box {
+      margin-top: 12px;
+      background: #090E1A;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+
     .cups-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin: 14px 0;
-    }
-    .cup-box {
-      border-radius: 14px;
-      padding: 14px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-    .cup-clear {
-      background: rgba(56, 189, 248, 0.12);
-      border-color: var(--teal-bright);
-    }
-    .cup-yellow {
-      background: rgba(245, 158, 11, 0.2);
-      border-color: #FBBF24;
-    }
-    .zip-row {
-      display: flex;
       gap: 10px;
       margin: 12px 0;
     }
+    .cup-box {
+      border-radius: 14px;
+      padding: 13px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .cup-clear { background: rgba(56, 189, 248, 0.12); border-color: var(--teal-bright); }
+    .cup-yellow { background: rgba(245, 158, 11, 0.2); border-color: #FBBF24; }
+    .zip-row { display: flex; gap: 10px; margin: 12px 0; }
     input, select {
       width: 100%;
       background: #0F172A;
@@ -145,22 +201,18 @@
       font-family: var(--font);
       font-size: 16px;
       font-weight: 600;
-      padding: 13px 14px;
+      padding: 12px 14px;
       border-radius: 12px;
-    }
-    input:focus, select:focus {
-      outline: none;
-      border-color: var(--teal-bright);
     }
     .btn {
       width: 100%;
       background: linear-gradient(135deg, var(--teal), #0369A1);
       color: #fff;
       border: none;
-      padding: 15px 18px;
+      padding: 14px 18px;
       border-radius: 12px;
       font-family: var(--font);
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       cursor: pointer;
       display: inline-flex;
@@ -178,15 +230,13 @@
       background: rgba(225, 29, 72, 0.14);
       border: 1px solid rgba(225, 29, 72, 0.4);
       border-radius: 12px;
-      padding: 12px 14px;
-      margin-top: 10px;
+      padding: 11px 13px;
+      margin-top: 9px;
     }
-    .form-group {
-      margin-bottom: 12px;
-    }
+    .form-group { margin-bottom: 12px; }
     .form-group label {
       display: block;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--glacier-muted);
       margin-bottom: 5px;
@@ -208,6 +258,20 @@
       font-weight: 700;
       text-align: center;
     }
+    .flow-anim {
+      stroke-dasharray: 8 8;
+      animation: dashFlow 0.9s linear infinite;
+    }
+    @keyframes dashFlow { to { stroke-dashoffset: -16; } }
+    .pulse-ring {
+      animation: ringPulse 1.8s ease-out infinite;
+      transform-origin: center;
+      transform-box: fill-box;
+    }
+    @keyframes ringPulse {
+      0% { transform: scale(0.9); opacity: 0.9; }
+      100% { transform: scale(1.75); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -216,13 +280,109 @@
       <div class="brand-badge">💧</div>
       <span>BLACKTIDE WATER CO.</span>
     </div>
-    <span style="font-size: 13px; font-weight: 700; color: var(--teal-bright);">Fort Collins, CO</span>
+    <span style="font-size: 12.5px; font-weight: 700; color: var(--teal-bright);">Fort Collins, CO</span>
   </header>
 
   <main class="container">
-    <div class="hero-pill">● Interactive Kitchen-Sink Companion</div>
-    <h1>Follow Along With Your 2-Minute Tap Water Test</h1>
-    <p class="lead">While Fred tests your kitchen tap, follow the 3 live checks below on your phone and enter where you’d like your written water report sent.</p>
+    <div class="hero-pill">● Self-Guided Home Water X-Ray &amp; Sink Companion</div>
+    <h1>See What Happens Inside Your Home’s Pipes &amp; Tap</h1>
+    <p class="lead">Tap any room in the house below to see how municipal chlorine, shower steam, and plastic bottles affect your home—and where your Blacktide Alpine-Pure™ system installs.</p>
+
+    <!-- STEP 0: SELF-SELLING INTERACTIVE HOUSE X-RAY -->
+    <section class="step-card" style="border-color: rgba(56, 189, 248, 0.4);">
+      <div class="step-tag">Interactive Guided Home Tour • Tap Any Hotspot</div>
+      <div class="step-title">Explore Your Home’s Water Touchpoints</div>
+
+      <div class="xray-toggle-bar">
+        <button type="button" class="xray-mode-btn active-unprotected" id="btnUnprotected" onclick="setHouseShield(false)">
+          ⚠️ Current Unfiltered Tap
+        </button>
+        <button type="button" class="xray-mode-btn" id="btnProtected" onclick="setHouseShield(true)">
+          🛡️ With Blacktide Alpine-Pure™
+        </button>
+      </div>
+
+      <!-- Interactive 3-Story House Cross Section SVG -->
+      <svg viewBox="0 0 520 310" style="width:100%; height:auto; background:#090E1A; border-radius:14px; border:1px solid rgba(255,255,255,0.1);">
+        <!-- Roof & House Frame -->
+        <polygon points="20,90 260,15 500,90" fill="rgba(30,41,59,0.7)" stroke="#475569" stroke-width="3"/>
+        <!-- Upper Floor (Shower & Bath) -->
+        <rect x="35" y="90" width="450" height="72" fill="rgba(15,23,42,0.9)" stroke="#475569" stroke-width="2"/>
+        <!-- Main Floor (Kitchen Sink + Bottled Water) -->
+        <rect x="35" y="162" width="450" height="72" fill="rgba(15,23,42,0.9)" stroke="#475569" stroke-width="2"/>
+        <!-- Basement / Garage Utility Room -->
+        <rect x="35" y="234" width="450" height="65" fill="rgba(10,15,28,0.95)" stroke="#475569" stroke-width="2"/>
+
+        <!-- Room Labels -->
+        <text x="50" y="110" fill="#94A3B8" font-size="11" font-weight="800">2ND FLOOR: MASTER SHOWER &amp; BATHS</text>
+        <text x="50" y="182" fill="#94A3B8" font-size="11" font-weight="800">MAIN FLOOR: KITCHEN SINK, ICE &amp; GROCERY BOTTLES</text>
+        <text x="50" y="252" fill="#94A3B8" font-size="11" font-weight="800">BASEMENT / GARAGE: MAIN WATER LINE ENTRY</text>
+
+        <!-- Plumbing Pipe Network -->
+        <path id="housePipeLine" class="flow-anim" d="M10,275 L125,275 L125,128 L240,128 M125,200 L390,200" stroke="#F59E0B" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+        <!-- Hotspot 1: Basement / Garage Blacktide Alpine-Pure System -->
+        <g onclick="selectHotspot(1)" style="cursor:pointer;">
+          <circle class="pulse-ring" cx="125" cy="270" r="18" fill="rgba(56,189,248,0.35)"/>
+          <circle cx="125" cy="270" r="16" fill="#0284C7" stroke="#F8FAFC" stroke-width="2"/>
+          <text x="125" y="275" fill="#fff" font-size="12" font-weight="800" text-anchor="middle">1</text>
+          <text x="150" y="274" fill="#38BDF8" font-size="11.5" font-weight="800">Basement/Garage Main Line</text>
+        </g>
+
+        <!-- Hotspot 2: Upstairs Master Shower (Chlorine Steam) -->
+        <g onclick="selectHotspot(2)" style="cursor:pointer;">
+          <circle class="pulse-ring" cx="245" cy="126" r="18" fill="rgba(225,29,72,0.35)"/>
+          <circle cx="245" cy="126" r="16" fill="#E11D48" stroke="#F8FAFC" stroke-width="2"/>
+          <text x="245" y="131" fill="#fff" font-size="12" font-weight="800" text-anchor="middle">2</text>
+          <text x="270" y="130" fill="#FB7185" font-size="11.5" font-weight="800">🚿 Hot Shower Chlorine Steam</text>
+        </g>
+
+        <!-- Hotspot 3: Kitchen Sink & Under-Sink Alpine-RO -->
+        <g onclick="selectHotspot(3)" style="cursor:pointer;">
+          <circle class="pulse-ring" cx="220" cy="200" r="18" fill="rgba(5,150,105,0.35)"/>
+          <circle cx="220" cy="200" r="16" fill="#059669" stroke="#F8FAFC" stroke-width="2"/>
+          <text x="220" y="205" fill="#fff" font-size="12" font-weight="800" text-anchor="middle">3</text>
+          <text x="245" y="204" fill="#34D399" font-size="11.5" font-weight="800">🚰 Kitchen Sink &amp; Ice</text>
+        </g>
+
+        <!-- Hotspot 4: Bottled Water Cases (240k Microplastics) -->
+        <g onclick="selectHotspot(4)" style="cursor:pointer;">
+          <circle class="pulse-ring" cx="400" cy="200" r="18" fill="rgba(245,158,11,0.35)"/>
+          <circle cx="400" cy="200" r="16" fill="#D97706" stroke="#F8FAFC" stroke-width="2"/>
+          <text x="400" y="205" fill="#fff" font-size="12" font-weight="800" text-anchor="middle">4</text>
+          <text x="424" y="204" fill="#FBBF24" font-size="11.5" font-weight="800">🍼 Plastic Bottles</text>
+        </g>
+      </svg>
+
+      <!-- Touchpoint Selector Buttons -->
+      <div class="touchpoint-pills">
+        <button type="button" class="tp-btn active" id="tpBtn1" onclick="selectHotspot(1)">
+          <span>1️⃣</span> Basement / Garage Install
+        </button>
+        <button type="button" class="tp-btn" id="tpBtn2" onclick="selectHotspot(2)">
+          <span>2️⃣</span> 🚿 Shower Chlorine Vapors
+        </button>
+        <button type="button" class="tp-btn" id="tpBtn3" onclick="selectHotspot(3)">
+          <span>3️⃣</span> 🚰 Kitchen Tap &amp; RO
+        </button>
+        <button type="button" class="tp-btn" id="tpBtn4" onclick="selectHotspot(4)">
+          <span>4️⃣</span> 🍼 240k Microplastics
+        </button>
+      </div>
+
+      <!-- Dynamic Hotspot Fact Box -->
+      <div class="tp-detail-box" id="tpDetailBox">
+        <div style="font-size:12px; font-weight:800; color:var(--teal-bright); text-transform:uppercase;" id="tpEyebrow">
+          Touchpoint #1 • Basement Utility Room or Garage Main Line
+        </div>
+        <div style="font-size:17px; font-weight:800; margin:3px 0 6px;" id="tpTitle">
+          Where Your Blacktide Alpine-Pure™ Tank Installs
+        </div>
+        <div style="font-size:14.5px; color:var(--glacier-muted);" id="tpBody">
+          We tuck your Blacktide Alpine-Pure™ AP-1000 4-Stage system right where the main water line enters your basement or garage. Every drop of water entering your home is stripped of 99.9% of chlorine, chloroform, HAA9 (447x limit), and TTHMs (253x limit) at 9 GPM before it ever branches to a single shower or faucet.
+        </div>
+      </div>
+    </section>
 
     <!-- STEP 1: TWO CUP CHLORINE SKIN ABSORPTION TEST -->
     <section class="step-card">
@@ -243,18 +403,12 @@
           <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 4px;">Turned <strong>Bright Yellow/Pink</strong> — pool-level disinfectant present in every shower.</div>
         </div>
       </div>
-      <div style="font-size: 14px; background: rgba(15,23,42,0.7); padding: 11px 14px; border-radius: 10px; color: var(--glacier-muted);">
-        💡 <strong>Why it matters in Colorado:</strong> A 10-minute hot shower opens your pores and exposes your skin and lungs to more chlorine and chemical steam than drinking 8 glasses of tap water.
-      </div>
     </section>
 
     <!-- STEP 2: LIVE EWG ZIP CODE CHECKER -->
     <section class="step-card">
-      <div class="step-tag" style="color: var(--coral-bright);">Live Check #2 • Independent Database</div>
+      <div class="step-tag" style="color: var(--coral-bright);">Live Check #2 • Official EWG Database (CO0135291)</div>
       <div class="step-title">Check Your Northern Colorado Zip Code</div>
-      <p style="font-size: 15px; color: var(--glacier-muted); margin-bottom: 10px;">
-        Because Poudre River wildfire ash and Horsetooth algae mix with municipal chlorine, disinfection byproducts spike inside local pipes.
-      </p>
       <div class="zip-row">
         <select id="zipSelect" onchange="updateZipReport()">
           <option value="80525">80525 — Fort Collins (Midtown / South)</option>
@@ -308,45 +462,12 @@
 
         <div class="contaminant-pill">
           <div style="display:flex; justify-content:space-between; font-weight: 800; color: var(--coral-bright);">
-            <span>4. Trichloroacetic &amp; Dichloroacetic Acid</span>
+            <span>4. Chloroform, Trichloroacetic &amp; Dichloroacetic Acid</span>
             <span>63x–150x Health Guideline</span>
           </div>
           <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
-            <strong>Detected:</strong> 15.0 ppb &amp; 12.6 ppb • <strong>Health Risk:</strong> Liver, metabolic &amp; cancer risk.<br/>
-            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Blacktide Tier 1 Whole-House Carbon + Tier 2 RO</span>
-          </div>
-        </div>
-
-        <div class="contaminant-pill">
-          <div style="display:flex; justify-content:space-between; font-weight: 800; color: var(--coral-bright);">
-            <span>5. Chloroform &amp; Bromodichloromethane</span>
-            <span>54x–97x Health Guideline</span>
-          </div>
-          <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
-            <strong>Detected:</strong> 38.9 ppb &amp; 5.4 ppb • <strong>Health Risk:</strong> Volatile disinfection gases absorbed through skin and lungs during showers; linked to cancer &amp; liver/kidney stress.<br/>
+            <strong>Detected:</strong> 38.9 ppb Chloroform (97x), 15.0 ppb TCAA (150x) • <strong>Health Risk:</strong> Volatile shower gases linked to liver, metabolic &amp; cancer risk.<br/>
             <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Blacktide Tier 1 Whole-House Catalytic Carbon</span>
-          </div>
-        </div>
-
-        <div class="contaminant-pill">
-          <div style="display:flex; justify-content:space-between; font-weight: 800; color: var(--coral-bright);">
-            <span>6. Bromochloroacetic &amp; Dibromoacetic Acid</span>
-            <span>15x–32x Health Guideline</span>
-          </div>
-          <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
-            <strong>Health Risk:</strong> Brominated disinfection byproducts linked to cellular mutation &amp; cancer risk.<br/>
-            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Blacktide Tier 1 Whole-House Carbon + Tier 2 RO</span>
-          </div>
-        </div>
-
-        <div class="contaminant-pill" style="background: rgba(245, 158, 11, 0.14); border-color: rgba(245, 158, 11, 0.4);">
-          <div style="display:flex; justify-content:space-between; font-weight: 800; color: #FBBF24;">
-            <span>7. Chromium-6, Nitrates, Fluoride &amp; Chlorine</span>
-            <span>Daily Tap Exposure</span>
-          </div>
-          <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
-            <strong>Health &amp; Home Impact:</strong> Dry itchy winter skin, brittle hair, pool odor, Horsetooth dirt taste (Geosmin), and dissolved fluoride/metals in drinking water.<br/>
-            <span style="color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Removes 99.9% Chlorine • Tier 2 Kitchen RO Strips Fluoride &amp; Chromium-6</span>
           </div>
         </div>
       </div>
@@ -356,23 +477,10 @@
       </a>
     </section>
 
-    <!-- STEP 3: FREEZER ICE CUBE SMELL TEST -->
-    <section class="step-card">
-      <div class="step-tag" style="color: #FBBF24;">Live Check #3 • Freezer Test</div>
-      <div class="step-title">The Freezer Ice Cube Smell Test</div>
-      <p style="font-size: 15px; color: var(--glacier-muted);">
-        Grab a handful of ice cubes from your freezer, drop them into a dry cup, and take a whiff. Freezing concentrates trapped chlorine gases and Horsetooth algae compounds (Geosmin) that a basic fridge carbon cartridge misses.
-      </p>
-    </section>
-
     <!-- STEP 4: GHL CRM LEAD & WRITTEN ESTIMATE FORM -->
     <section class="step-card" style="border-color: rgba(52, 211, 153, 0.4);">
-      <div class="step-tag" style="color: var(--emerald-bright);">Step 4 • Lock In Your Written Report &amp; Fleet Rate</div>
-      <div class="step-title">Get Your Kitchen-Table Water Report &amp; January Route Pricing</div>
-      <p style="font-size: 15px; color: var(--glacier-muted); margin-bottom: 16px;">
-        Enter your info below so Fred can text/email your official water test readings and lock in your neighborhood fleet install waiver.
-      </p>
-
+      <div class="step-tag" style="color: var(--emerald-bright);">Lock In Your Written Report &amp; January Route Pricing</div>
+      <div class="step-title">Send Your Water Report &amp; Unlock Your Estimate</div>
       <form id="sinkGhlForm" onsubmit="submitSinkLead(event)">
         <div class="form-group">
           <label>Your Full Name *</label>
@@ -392,7 +500,6 @@
           <label>Street Address &amp; Zip Code *</label>
           <input type="text" id="leadAddress" required placeholder="1234 Mountain Ave, Fort Collins 80525" />
         </div>
-
         <div class="readings-grid">
           <div class="form-group">
             <label>Tap Chlorine Reading (mg/L)</label>
@@ -407,28 +514,60 @@
             </select>
           </div>
         </div>
-
         <button type="submit" class="btn btn-emerald" id="sinkSubmitBtn">
           ✓ Send My Water Test Report &amp; Open Presentation
         </button>
-
         <div class="status-toast" id="sinkToast">
-          ✓ Saved! Your test report has been sent to Blacktide Water Co.
+          ✓ Saved! Opening your interactive home estimate...
         </div>
       </form>
     </section>
   </main>
 
   <script>
+    const HOTSPOTS = {
+      1: {
+        eyebrow: 'Touchpoint #1 • Basement Utility Room or Garage Main Line',
+        title: 'Where Your Blacktide Alpine-Pure™ System Installs',
+        body: 'We tuck your Blacktide Alpine-Pure™ AP-1000 4-Stage Catalytic Carbon & KDF-55 tank right where the main water line enters your basement or garage. It filters 1,000,000 gallons (~10 years) at a full 9 GPM pressure with a commercial 3-valve bypass and Lifetime Tank & Valve Warranty.'
+      },
+      2: {
+        eyebrow: 'Touchpoint #2 • 2nd Floor Master & Kids’ Showers',
+        title: '🚿 Stop Inhaling Vaporized Chlorine & Chloroform Steam',
+        body: 'In a 10-minute hot shower, your pores open and chlorinated water vaporizes into steam containing Chloroform (97x EWG limit) and TTHMs (253x EWG limit). You absorb and inhale more chlorine in one hot shower than drinking 8 glasses of tap water—causing dry, itchy winter skin and brittle hair.'
+      },
+      3: {
+        eyebrow: 'Touchpoint #3 • Main Floor Kitchen Sink, Coffee & Ice Maker',
+        title: '🚰 Ultra-Pure Cooking, Coffee & Crystal-Clear Ice Cubes',
+        body: 'Tier 2 adds the Blacktide Alpine-RO™ Under-Sink Reverse Osmosis system right under your kitchen sink with a designer drinking faucet and refrigerator ice-line connection. It strips out dissolved solids, fluoride, chromium-6, and Horsetooth lake odor (Geosmin) for near-zero TDS water.'
+      },
+      4: {
+        eyebrow: 'Touchpoint #4 • Grocery Store Plastic Bottled Water Cases',
+        title: '🍼 Ditch 240,000 Microplastics/Liter & $10–$12/Gallon Cases',
+        body: 'Researchers found ~240,000 micro- and nanoplastic particles per liter in 93% of bottled water—and a 2024 medical study linked microplastics in artery plaque to a 4.5x higher risk of heart attack and stroke. A family of four burns $2,700 to $5,040 every 5 years on plastic bottles.'
+      }
+    };
+
+    function selectHotspot(num) {
+      [1,2,3,4].forEach(i => {
+        document.getElementById('tpBtn' + i).classList.toggle('active', i === num);
+      });
+      const data = HOTSPOTS[num];
+      document.getElementById('tpEyebrow').textContent = data.eyebrow;
+      document.getElementById('tpTitle').textContent = data.title;
+      document.getElementById('tpBody').textContent = data.body;
+    }
+
+    function setHouseShield(isProtected) {
+      document.getElementById('btnUnprotected').classList.toggle('active-unprotected', !isProtected);
+      document.getElementById('btnProtected').classList.toggle('active-protected', isProtected);
+      const pipe = document.getElementById('housePipeLine');
+      pipe.setAttribute('stroke', isProtected ? '#38BDF8' : '#F59E0B');
+    }
+
     const params = new URLSearchParams(window.location.search);
     const ghlWebhookFromUrl = params.get('ghl') || localStorage.getItem('blacktide_ghl_webhook') || '';
     if (params.get('cl')) document.getElementById('leadChlorine').value = params.get('cl');
-    if (params.get('zip')) {
-      const zs = document.getElementById('zipSelect');
-      if ([...zs.options].some(o => o.value === params.get('zip'))) {
-        zs.value = params.get('zip');
-      }
-    }
 
     function updateZipReport() {
       const zip = document.getElementById('zipSelect').value;
@@ -437,11 +576,9 @@
         ? 'https://www.ewg.org/tapwater/system.php?pws=CO0135291'
         : `https://www.ewg.org/tapwater/search-results.php?zip5=${zip}&searchtype=zip`;
       const isHard = zip === '80549' || zip === '80550' || zip === '80547';
-      if (isHard) {
-        document.getElementById('leadZone').value = 'Wellington / Windsor / Timnath (Hard Water)';
-      } else {
-        document.getElementById('leadZone').value = 'Fort Collins City (Soft)';
-      }
+      document.getElementById('leadZone').value = isHard
+        ? 'Wellington / Windsor / Timnath (Hard Water)'
+        : 'Fort Collins City (Soft)';
     }
     updateZipReport();
 
@@ -472,9 +609,7 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
           });
-        } catch (err) {
-          console.warn('Offline queue saved locally:', err);
-        }
+        } catch (err) {}
       }
 
       document.getElementById('sinkToast').style.display = 'block';
@@ -482,9 +617,8 @@
       setTimeout(() => {
         const mode = payload.water_zone.includes('Hard') || payload.water_zone.includes('Well') ? 'hard' : 'city';
         window.location.href = `./index.html?mode=${mode}&cl=${encodeURIComponent(payload.chlorine_mgl)}&name=${encodeURIComponent(payload.full_name)}&phone=${encodeURIComponent(payload.phone)}&address=${encodeURIComponent(payload.address)}`;
-      }, 1100);
+      }, 950);
     }
   </script>
 </body>
 </html>
-
