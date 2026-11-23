@@ -11,3 +11,4 @@ Built for **Fred Caldero (Blacktide Water Co. — Fort Collins, CO)**.
    - Send this link (or scan the built-in QR code on Slide 1 / Bottom Bar) so the homeowner can follow the **2-Cup 15-Second Chlorine Finger Absorption Test**, check their **Northern Colorado Zip Code (`80525`, `80521`, `80528`, `80549`, `80550`) on EWG.org**, and submit their info directly into your GHL CRM at the sink.
 3. **`training.html` — Fort Collins Door-to-Door & Kitchen-Table Field Training Playbook**
    - Your complete Northern Colorado study manual covering the Rocky Mountain Water Myth, why you never test TDS/Hardness inside Fort Collins city limits, the SpringWell "Google Check" defense, word-for-word porch scripts, interactive objection flashcards, the 3-step kitchen sink demo theater, 3-tier pricing math, and 1-click copyable Facebook/Instagram ad copy.
+

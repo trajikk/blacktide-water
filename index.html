@@ -1463,8 +1463,14 @@
                 </div>
               </div>
 
-              <div class="city-soft-badge city-only">
-                <span>✓</span> Fort Collins City Water is Soft — No Softener Needed.
+              <!-- City Water Soft Checkmark Badge + Full EWG CO0135291 Modal Button -->
+              <div style="display:flex; gap:10px; align-items:center; margin-top: 10px;">
+                <div class="city-soft-badge city-only" style="margin-top:0; flex:1;">
+                  <span>✓</span> Fort Collins City Water is Soft — No Softener Needed.
+                </div>
+                <button type="button" class="nav-btn primary-next" style="padding: 9px 14px; font-size: 13px; white-space: nowrap;" onclick="openEwgModal()">
+                  🔬 Full EWG Report (CO0135291)
+                </button>
               </div>
 
               <div class="live-test-inputs">
@@ -2105,6 +2111,90 @@
           </div>
         </div>
 
+        <!-- Complete EWG CO0135291 Contaminant Table on Printable PDF -->
+        <div style="border: 1px solid #CBD5E1; border-radius: 10px; padding: 14px; margin-bottom: 14px; background: #FFF;">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid #E11D48; padding-bottom: 6px; margin-bottom: 8px;">
+            <div style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: #E11D48;">
+              4. Official EWG Tap Water Report: City of Fort Collins Utilities (PWS ID: CO0135291)
+            </div>
+            <div style="font-size: 11px; font-weight: 700; color: #475569;">
+              Source: ewg.org/tapwater/system.php?pws=CO0135291 • Serves ~179,901 Residents
+            </div>
+          </div>
+          <table style="width:100%; border-collapse:collapse; font-size: 11.5px; color:#0F172A;">
+            <thead>
+              <tr style="background:#F1F5F9; text-align:left; border-bottom:1px solid #CBD5E1;">
+                <th style="padding:6px;">Contaminant Detected in CO0135291</th>
+                <th style="padding:6px;">Utility Level vs. EWG Guideline</th>
+                <th style="padding:6px;">Primary Health Risk (EWG / Toxicological Data)</th>
+                <th style="padding:6px;">How Blacktide Eliminates It</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #E2E8F0;">
+                <td style="padding:5px 6px;"><strong>Haloacetic Acids (HAA9)</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">447x EWG Guideline (26.8 ppb vs 0.06 ppb)</td>
+                <td style="padding:5px 6px;">Increased long-term cancer risk; developmental &amp; reproductive toxicity</td>
+                <td style="padding:5px 6px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon + Tier 2 RO</td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0;">
+                <td style="padding:5px 6px;"><strong>Total Trihalomethanes (TTHMs)</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">206x–253x EWG Guideline (31–38 ppb vs 0.15 ppb)</td>
+                <td style="padding:5px 6px;">Bladder &amp; colorectal cancer risk; vaporizes into shower steam &amp; absorbs via skin</td>
+                <td style="padding:5px 6px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon + Tier 2 RO</td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0;">
+                <td style="padding:5px 6px;"><strong>Haloacetic Acids (HAA5)</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">220x EWG Guideline (22.0 ppb vs 0.1 ppb)</td>
+                <td style="padding:5px 6px;">Cancer risk; formed when chlorine reacts with Poudre wildfire ash &amp; runoff</td>
+                <td style="padding:5px 6px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon + Tier 2 RO</td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0;">
+                <td style="padding:5px 6px;"><strong>Trichloroacetic Acid</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">150x EWG Guideline (15.0 ppb vs 0.1 ppb)</td>
+                <td style="padding:5px 6px;">Liver &amp; cellular toxicity; long-term cancer risk</td>
+                <td style="padding:5px 6px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon + Tier 2 RO</td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0;">
+                <td style="padding:5px 6px;"><strong>Chloroform</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">97x EWG Guideline (38.9 ppb vs 0.4 ppb)</td>
+                <td style="padding:5px 6px;">Volatile disinfection gas inhaled during hot showers; cancer &amp; liver/kidney stress</td>
+                <td style="padding:5px 6px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon (Every Shower)</td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0;">
+                <td style="padding:5px 6px;"><strong>Dichloroacetic Acid</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">63x EWG Guideline (12.6 ppb vs 0.2 ppb)</td>
+                <td style="padding:5px 6px;">Cancer risk &amp; metabolic/reproductive concerns</td>
+                <td style="padding:5px 6px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon + Tier 2 RO</td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0;">
+                <td style="padding:5px 6px;"><strong>Bromodichloromethane</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">54x EWG Guideline (3.2–5.4 ppb vs 0.06 ppb)</td>
+                <td style="padding:5px 6px;">Carcinogenic trihalomethane compound; pregnancy &amp; developmental risk</td>
+                <td style="padding:5px 6px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon + Tier 2 RO</td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0;">
+                <td style="padding:5px 6px;"><strong>Bromochloroacetic Acid &amp; Dibromoacetic Acid</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">15x–32x EWG Guideline (Exceeds 0.02 ppb goal)</td>
+                <td style="padding:5px 6px;">Brominated disinfection byproducts tied to cellular mutation &amp; cancer risk</td>
+                <td style="padding:5px 6px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon + Tier 2 RO</td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0;">
+                <td style="padding:5px 6px;"><strong>Chromium (Hexavalent / Chromium-6) &amp; Nitrates</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">Exceeds 0.02 ppb EWG Health Benchmark</td>
+                <td style="padding:5px 6px;">Gastrointestinal &amp; liver toxicity, cancer risk, agricultural runoff</td>
+                <td style="padding:5px 6px; color:#0284C7; font-weight:700;">✓ Tier 2 Kitchen Under-Sink RO + KDF-55 Media</td>
+              </tr>
+              <tr>
+                <td style="padding:5px 6px;"><strong>Free Chlorine, Fluoride &amp; Horsetooth Geosmin</strong></td>
+                <td style="padding:5px 6px; color:#E11D48; font-weight:800;">~1.3 mg/L Chlorine • ~0.7 mg/L Fluoride</td>
+                <td style="padding:5px 6px;">Dry/itchy skin, brittle hair, pool smell, late-summer lake dirt taste, fluoride intake</td>
+                <td style="padding:5px 6px; color:#059669; font-weight:700;">✓ Tier 1 Removes 99.9% Chlorine • Tier 2 RO Strips Fluoride</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px solid #CBD5E1; padding-top: 10px; font-size: 13px; color: #334155;">
           <div><strong>Fred Caldero • Blacktide Water Co.</strong> | Fort Collins, Colorado</div>
           <div>January Priority Installation Guarantee • No 2-Hour Sales Pitch • Upfront Written Pricing</div>
@@ -2208,6 +2298,112 @@
         <div style="display:flex; gap:10px;">
           <button class="nav-btn" onclick="closeGhlModal()">Cancel</button>
           <button class="nav-btn primary-next" onclick="saveGhlSettings()">Save &amp; Sync GHL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MODAL 3: FULL EWG FORT COLLINS REPORT (PWS ID: CO0135291)
+  ====================================================== -->
+  <div class="modal-backdrop" id="ewgModal" onclick="if(event.target===this)closeEwgModal()">
+    <div class="modal-card" style="max-width: 960px; max-height: 88vh; overflow-y: auto;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 12px;">
+        <div>
+          <div style="font-size:12px; font-weight:800; color:var(--coral-bright); text-transform:uppercase; letter-spacing:0.06em;">
+            Environmental Working Group (EWG) Tap Water Database • PWS ID: CO0135291
+          </div>
+          <h3 style="font-size:22px; font-weight:800; color:var(--glacier);">
+            City of Fort Collins Utilities — Detected Contaminants, Health Risks &amp; Blacktide Elimination
+          </h3>
+          <div style="font-size:13px; color:var(--glacier-muted);">
+            Serves ~179,901 Residents • Surface Water (Cache la Poudre River &amp; Horsetooth Reservoir) • Meets EPA Legal Limits, Exceeds 10 EWG Health Guidelines
+          </div>
+        </div>
+        <button class="nav-btn" onclick="closeEwgModal()">✕ Close</button>
+      </div>
+
+      <div style="overflow-x:auto; border:1px solid rgba(255,255,255,0.12); border-radius:12px;">
+        <table style="width:100%; border-collapse:collapse; font-size:13.5px; text-align:left;">
+          <thead>
+            <tr style="background:rgba(15,23,42,0.95); color:var(--teal-bright); border-bottom:1px solid rgba(255,255,255,0.12);">
+              <th style="padding:10px 12px;">Contaminant (CO0135291)</th>
+              <th style="padding:10px 12px;">Fort Collins vs. EWG Guideline</th>
+              <th style="padding:10px 12px;">What It Causes (Health &amp; Home Risk)</th>
+              <th style="padding:10px 12px;">Blacktide Elimination Stage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+              <td style="padding:9px 12px; font-weight:800;">1. Haloacetic Acids (HAA9)</td>
+              <td style="padding:9px 12px; color:var(--coral-bright); font-weight:800;">447x EWG Limit (26.8 ppb vs 0.06 ppb)</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">Long-term cancer risk; reproductive &amp; developmental toxicity</td>
+              <td style="padding:9px 12px; color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Whole-House Carbon + Tier 2 RO</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+              <td style="padding:9px 12px; font-weight:800;">2. Total Trihalomethanes (TTHMs)</td>
+              <td style="padding:9px 12px; color:var(--coral-bright); font-weight:800;">206x–253x EWG Limit (31–38 ppb vs 0.15 ppb)</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">Bladder/colorectal cancer risk; inhaled as chemical steam in hot showers</td>
+              <td style="padding:9px 12px; color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Whole-House Carbon (Every Shower)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+              <td style="padding:9px 12px; font-weight:800;">3. Haloacetic Acids (HAA5)</td>
+              <td style="padding:9px 12px; color:var(--coral-bright); font-weight:800;">220x EWG Limit (22.0 ppb vs 0.1 ppb)</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">Carcinogenic byproduct from chlorine + Poudre River wildfire runoff</td>
+              <td style="padding:9px 12px; color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Whole-House Carbon + Tier 2 RO</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+              <td style="padding:9px 12px; font-weight:800;">4. Trichloroacetic Acid</td>
+              <td style="padding:9px 12px; color:var(--coral-bright); font-weight:800;">150x EWG Limit (15.0 ppb vs 0.1 ppb)</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">Cellular &amp; liver toxicity; long-term cancer risk</td>
+              <td style="padding:9px 12px; color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Whole-House Carbon + Tier 2 RO</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+              <td style="padding:9px 12px; font-weight:800;">5. Chloroform</td>
+              <td style="padding:9px 12px; color:var(--coral-bright); font-weight:800;">97x EWG Limit (38.9 ppb vs 0.4 ppb)</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">Volatile disinfection gas absorbed through skin &amp; lungs in showers</td>
+              <td style="padding:9px 12px; color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+              <td style="padding:9px 12px; font-weight:800;">6. Dichloroacetic Acid</td>
+              <td style="padding:9px 12px; color:var(--coral-bright); font-weight:800;">63x EWG Limit (12.6 ppb vs 0.2 ppb)</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">Cancer risk; liver &amp; developmental effects</td>
+              <td style="padding:9px 12px; color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Whole-House Carbon + Tier 2 RO</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+              <td style="padding:9px 12px; font-weight:800;">7. Bromodichloromethane</td>
+              <td style="padding:9px 12px; color:var(--coral-bright); font-weight:800;">54x EWG Limit (3.2–5.4 ppb vs 0.06 ppb)</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">Cancer risk &amp; pregnancy/fetal development concerns</td>
+              <td style="padding:9px 12px; color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Whole-House Carbon + Tier 2 RO</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+              <td style="padding:9px 12px; font-weight:800;">8. Bromochloroacetic &amp; Dibromoacetic Acid</td>
+              <td style="padding:9px 12px; color:var(--coral-bright); font-weight:800;">15x–32x EWG Limit (Exceeds 0.02 ppb goal)</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">Brominated disinfection acids linked to DNA/cellular stress &amp; cancer</td>
+              <td style="padding:9px 12px; color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Whole-House Carbon + Tier 2 RO</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+              <td style="padding:9px 12px; font-weight:800;">9. Chromium (Hexavalent) &amp; Nitrates</td>
+              <td style="padding:9px 12px; color:#FBBF24; font-weight:800;">Trace Detections Above 0.02 ppb Goal</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">"Erin Brockovich" carcinogen, liver/GI stress, agricultural runoff</td>
+              <td style="padding:9px 12px; color:var(--teal-bright); font-weight:700;">✓ Tier 2 Kitchen Under-Sink RO + KDF-55</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px; font-weight:800;">10. Free Chlorine, Fluoride &amp; Geosmin</td>
+              <td style="padding:9px 12px; color:#FBBF24; font-weight:800;">~1.3 mg/L Chlorine • ~0.7 mg/L Fluoride</td>
+              <td style="padding:9px 12px; color:var(--glacier-muted);">Dry itchy winter skin, pool odor, Horsetooth dirt taste, fluoride intake</td>
+              <td style="padding:9px 12px; color:var(--emerald-bright); font-weight:700;">✓ Tier 1 Strips Chlorine • Tier 2 RO Strips Fluoride</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px;">
+        <a href="https://www.ewg.org/tapwater/system.php?pws=CO0135291" target="_blank" rel="noopener" class="subtle-btn" style="color:var(--teal-bright); border-color:var(--teal-bright);">
+          🔗 Verify Live on EWG.org (CO0135291) ↗
+        </a>
+        <div style="font-size:13px; color:var(--emerald-bright); font-weight:700;">
+          ✓ EWG Listed Filtration Technologies: Activated Carbon + Reverse Osmosis (Your Exact 2-Tier System)
         </div>
       </div>
     </div>
@@ -2726,6 +2922,12 @@
     }
     function closeGhlModal() {
       document.getElementById('ghlModal').classList.remove('open');
+    }
+    function openEwgModal() {
+      document.getElementById('ewgModal').classList.add('open');
+    }
+    function closeEwgModal() {
+      document.getElementById('ewgModal').classList.remove('open');
     }
 
     async function saveGhlSettings() {
