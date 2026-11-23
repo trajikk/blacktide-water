@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Alpine Tide Water Co. | 5-Step Interactive Home Water Configurator</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Matte Carbon / Brushed Graphite + Day-Glow Tiffany Mint & Nike Volt */
+      --bg-deep: #050608;
+      --bg-carbon: #0B0D12;
+      --bg-card: #12151E;
+      --bg-card-hover: #181C28;
+      --border-subtle: rgba(255, 255, 255, 0.09);
+      --glacier: #F8FAFC;
+      --glacier-muted: #CBD5E1;
+      --glacier-dim: #94A3B8;
+      --tiffany: #00F5D4;
+      --tiffany-dark: #00BFA5;
+      --tiffany-glow: rgba(0, 245, 212, 0.32);
+      --volt: #DFFF00;
+      --volt-dark: #A8E600;
+      --volt-glow: rgba(223, 255, 0, 0.32);
+      --coral: #FF1E56;
+      --coral-bright: #FF4D79;
+      --coral-glow: rgba(255, 30, 86, 0.32);
+      --amber: #FFB800;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body.theme-volt {
+      --tiffany: #DFFF00;
+      --tiffany-dark: #B8E600;
+      --tiffany-glow: rgba(223, 255, 0, 0.35);
+      --volt: #00F5D4;
+      --volt-dark: #00BFA5;
+      --volt-glow: rgba(0, 245, 212, 0.35);
+    }
+
+    body.theme-tiffany {
+      --tiffany: #00F5D4;
+      --tiffany-dark: #0ABAB5;
+      --tiffany-glow: rgba(0, 245, 212, 0.38);
+      --volt: #00FF87;
+      --volt-dark: #00C875;
+      --volt-glow: rgba(0, 255, 135, 0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--bg-deep);
+      color: var(--glacier);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Carbon + Liquid Wave Background */
+    .app-shell {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(0, 245, 212, 0.09) 0%, transparent 42%),
+        radial-gradient(circle at 85% 88%, rgba(223, 255, 0, 0.07) 0%, transparent 42%),
+        linear-gradient(180deg, #0A0C11 0%, #050608 100%);
+    }
+
+    .bg-waves-svg {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 190px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+    .wave-1 { animation: waveMove 10s ease-in-out infinite alternate; }
+    .wave-2 { animation: waveMove 14s ease-in-out infinite alternate-reverse; }
+    @keyframes waveMove {
+      0% { transform: translateX(-22px); }
+      100% { transform: translateX(22px); }
+    }
+
+    /* Sticky Top Navigation & 5-Screen Stepper */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(9, 11, 16, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--tiffany) 0%, var(--tiffany-dark) 100%);
+      color: #050608;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      box-shadow: 0 0 18px var(--tiffany-glow);
+    }
+
+    .brand-name {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--tiffany);
+      font-weight: 700;
+    }
+
+    /* 5-Screen Interactive Step Tabs */
+    .step-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(18, 21, 30, 0.9);
+      padding: 5px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    .step-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--glacier-dim);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.22s ease;
+    }
+
+    .step-tab-btn:hover { color: var(--glacier); }
+
+    .step-tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 245, 212, 0.2) 0%, rgba(223, 255, 0, 0.14) 100%);
+      color: var(--tiffany);
+      border: 1px solid var(--tiffany);
+      box-shadow: 0 0 16px var(--tiffany-glow);
+    }
+
+    .step-num-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--glacier);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .step-tab-btn.active .step-num-badge {
+      background: var(--tiffany);
+      color: #050608;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill-btn {
+      background: rgba(18, 21, 30, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--glacier-muted);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .pill-btn:hover {
+      border-color: var(--tiffany);
+      color: var(--tiffany);
+    }
+
+    /* Main Stage Container */
+    .stage-container {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      max-width: 1380px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 28px 90px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .screen {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      animation: screenEnter 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .screen.active { display: flex; }
+
+    @keyframes screenEnter {
+      from { opacity: 0; transform: translateY(16px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Section Headers */
+    .screen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .eyebrow {
+      font-size: 12.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--tiffany);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .headline {
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+    }
+
+    .subheadline {
+      font-size: 16.5px;
+      color: var(--glacier-muted);
+      max-width: 780px;
+      margin-top: 4px;
+    }
+
+    .carbon-card {
+      background: linear-gradient(160deg, rgba(20, 24, 34, 0.94) 0%, rgba(11, 13, 19, 0.98) 100%);
+      border: 1px solid rgba(0, 245, 212, 0.16);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+    }
+
+    /* =====================================================
+       SCREEN 1: LOCAL TAP WATER X-RAY (AREA SELECTOR + FLIP CARDS)
+    ====================================================== */
+    .city-selector-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .city-btn {
+      background: rgba(18, 21, 30, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--glacier-muted);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 11px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .city-btn.active {
+      background: rgba(0, 245, 212, 0.16);
+      border-color: var(--tiffany);
+      color: var(--glacier);
+      box-shadow: 0 0 22px var(--tiffany-glow);
+    }
+
+    .utility-summary-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      background: rgba(18, 22, 32, 0.95);
+      border: 1px solid rgba(255, 30, 86, 0.4);
+      border-radius: 16px;
+      padding: 16px 22px;
+    }
+
+    /* 3D Flip Contaminant Cards Grid */
+    .contaminant-flip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+      gap: 16px;
+    }
+
+    .flip-card {
+      background: transparent;
+      height: 220px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .flip-front {
+      background: linear-gradient(160deg, #151822 0%, #0C0E14 100%);
+      border: 1px solid rgba(255, 30, 86, 0.38);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+    }
+
+    .flip-back {
+      background: linear-gradient(160deg, #0F1D1E 0%, #0A1014 100%);
+      border: 1px solid var(--tiffany);
+      box-shadow: 0 0 25px var(--tiffany-glow);
+      transform: rotateY(180deg);
+    }
+
+    .exceed-badge {
+      display: inline-block;
+      background: rgba(255, 30, 86, 0.2);
+      border: 1px solid var(--coral-bright);
+      color: var(--coral-bright);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .meter-bar-track {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .meter-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--amber) 0%, var(--coral) 100%);
+    }
+
+    /* =====================================================
+       SCREEN 2: BOTTLED WATER & MICROPLASTICS CALCULATOR
+    ====================================================== */
+    .screen2-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .slider-control-box {
+      background: rgba(15, 18, 26, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .slider-val-pill {
+      background: rgba(0, 245, 212, 0.16);
+      border: 1px solid var(--tiffany);
+      color: var(--tiffany);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      accent-color: var(--tiffany);
+      cursor: pointer;
+    }
+
+    .impact-counters-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .impact-stat-box {
+      background: rgba(15, 18, 26, 0.92);
+      border: 1px solid rgba(255, 30, 86, 0.35);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+
+    .impact-number {
+      font-size: clamp(24px, 2.4vw, 32px);
+      font-weight: 800;
+      color: var(--coral-bright);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.15;
+    }
+
+    .bottle-spin-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .micro-drift-1 { animation: driftA 3.8s ease-in-out infinite alternate; }
+    .micro-drift-2 { animation: driftB 4.6s ease-in-out infinite alternate-reverse; }
+    @keyframes driftA {
+      0% { transform: translate(-6px, -6px); }
+      100% { transform: translate(8px, 10px); }
+    }
+    @keyframes driftB {
+      0% { transform: translate(8px, -8px); }
+      100% { transform: translate(-10px, 7px); }
+    }
+
+    /* =====================================================
+       SCREEN 3: INTERACTIVE 3D-STYLE SYSTEM & HOME WALKTHROUGH
+    ====================================================== */
+    .screen3-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .stage-selector-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .stage-pill {
+      background: rgba(15, 18, 26, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--glacier-muted);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 9px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .stage-pill.active {
+      background: rgba(0, 245, 212, 0.18);
+      border-color: var(--tiffany);
+      color: var(--tiffany);
+      box-shadow: 0 0 16px var(--tiffany-glow);
+    }
+
+    .flow-dash-line {
+      stroke-dasharray: 10 10;
+      animation: flowMove 0.85s linear infinite;
+    }
+    @keyframes flowMove { to { stroke-dashoffset: -20; } }
+
+    .hotspot-pulse {
+      animation: pulseCircle 1.8s ease-out infinite;
+      transform-origin: center;
+      transform-box: fill-box;
+    }
+    @keyframes pulseCircle {
+      0% { transform: scale(0.9); opacity: 0.85; }
+      100% { transform: scale(1.7); opacity: 0; }
+    }
+
+    /* =====================================================
+       SCREEN 4: LIVE KITCHEN SINK TEST SCORECARD
+    ====================================================== */
+    .screen4-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .dial-input-card {
+      background: rgba(15, 18, 26, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+    }
+
+    .chlorine-color-pills {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .cl-pill {
+      padding: 10px 8px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      font-family: var(--font);
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .cl-pill.active {
+      transform: scale(1.03);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+      border-color: #fff;
+    }
+
+    .health-score-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    /* =====================================================
+       SCREEN 5: INTERACTIVE PACKAGE & MONTHLY PAYMENT BUILDER
+    ====================================================== */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .pkg-card {
+      background: linear-gradient(165deg, rgba(22, 26, 38, 0.95) 0%, rgba(11, 13, 19, 0.98) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 22px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+    }
+
+    .pkg-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--tiffany);
+    }
+
+    .pkg-card.selected {
+      border-color: var(--volt);
+      background: linear-gradient(165deg, rgba(0, 245, 212, 0.14) 0%, rgba(11, 13, 19, 0.98) 100%);
+      box-shadow: 0 0 34px var(--volt-glow);
+    }
+
+    .pkg-price-hero {
+      font-size: clamp(38px, 3.8vw, 52px);
+      font-weight: 800;
+      color: var(--glacier);
+      line-height: 1;
+      margin: 12px 0 4px;
+    }
+
+    .pkg-price-hero span {
+      font-size: 18px;
+      color: var(--glacier-muted);
+      font-weight: 600;
+    }
+
+    .close-summary-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 20px;
+      margin-top: 8px;
+    }
+
+    .crm-input {
+      width: 100%;
+      background: #080A0F;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 14.5px;
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 10px;
+    }
+    .crm-input:focus {
+      outline: none;
+      border-color: var(--tiffany);
+    }
+
+    .sig-pad-wrap {
+      background: #06080C;
+      border: 1px dashed var(--tiffany);
+      border-radius: 12px;
+      position: relative;
+      height: 96px;
+      margin: 8px 0;
+      touch-action: none;
+    }
+
+    #sigCanvas {
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+      display: block;
+    }
+
+    .cta-volt-btn {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, var(--volt) 0%, var(--tiffany) 100%);
+      color: #050608;
+      font-family: var(--font);
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 28px var(--tiffany-glow);
+      transition: all 0.2s;
+    }
+
+    .cta-volt-btn:hover { transform: translateY(-1px); }
+
+    /* Bottom Floating Navigation Bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(8, 10, 15, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-subtle);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 55;
+    }
+
+    .nav-btn {
+      background: rgba(20, 24, 34, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--glacier);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 800;
+      padding: 9px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover:not(:disabled) {
+      border-color: var(--tiffany);
+      color: var(--tiffany);
+    }
+    .nav-btn.primary {
+      background: linear-gradient(135deg, var(--tiffany) 0%, var(--tiffany-dark) 100%);
+      color: #050608;
+      border-color: var(--tiffany);
+      box-shadow: 0 0 18px var(--tiffany-glow);
+    }
+
+    /* Speaker Notes Drawer */
+    .notes-drawer {
+      position: fixed;
+      bottom: 70px;
+      left: 24px;
+      right: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: rgba(11, 14, 20, 0.98);
+      border: 1px solid var(--tiffany);
+      border-radius: 14px;
+      padding: 16px 22px;
+      z-index: 65;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+      display: none;
+    }
+    .notes-drawer.open { display: block; }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 6, 10, 0.86);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-card {
+      background: #10131C;
+      border: 1px solid var(--tiffany);
+      border-radius: 18px;
+      max-width: 540px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.85);
+    }
+
+    @media (max-width: 920px) {
+      .screen2-grid, .screen3-grid, .screen4-grid, .close-summary-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .top-header { padding: 10px 14px; }
+      .stage-container { padding: 16px 14px 90px; }
+    }
+
+    @media print {
+      body { background: #ffffff !important; color: #0F172A !important; }
+      .top-header, .bottom-bar, .notes-drawer, .stage-container, .bg-waves-svg { display: none !important; }
+      #printablePdfSheet { display: block !important; }
+    }
+    #printablePdfSheet {
+      display: none;
+      background: #ffffff;
+      color: #0F172A;
+      padding: 28px 36px;
+      font-family: var(--font);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Subtle Animated Carbon/Tiffany Liquid Waves -->
+    <svg class="bg-waves-svg" viewBox="0 0 1440 200" preserveAspectRatio="none">
+      <path class="wave-2" d="M-40,130 C280,70 520,180 840,120 C1120,65 1300,155 1480,115 L1480,200 L-40,200 Z" fill="rgba(0, 245, 212, 0.07)"/>
+      <path class="wave-1" d="M-40,158 C340,105 640,190 960,140 C1180,105 1340,165 1480,148 L1480,200 L-40,200 Z" fill="rgba(223, 255, 0, 0.05)"/>
+    </svg>
+
+    <!-- Sticky Header & 5-Screen Interactive Stepper -->
+    <header class="top-header">
+      <div class="brand-cluster">
+        <div class="brand-icon">💧</div>
+        <div>
+          <div class="brand-name">ALPINE TIDE WATER CO.</div>
+          <div class="brand-sub">Fort Collins &amp; Northern Colorado • Fred Caldero</div>
+        </div>
+      </div>
+
+      <nav class="step-tabs">
+        <button class="step-tab-btn active" onclick="goToScreen(0)">
+          <span class="step-num-badge">1</span> Area Water X-Ray
+        </button>
+        <button class="step-tab-btn" onclick="goToScreen(1)">
+          <span class="step-num-badge">2</span> Microplastics &amp; Bottle Trap
+        </button>
+        <button class="step-tab-btn" onclick="goToScreen(2)">
+          <span class="step-num-badge">3</span> Interactive Home System
+        </button>
+        <button class="step-tab-btn" onclick="goToScreen(3)">
+          <span class="step-num-badge">4</span> Live Sink Scorecard
+        </button>
+        <button class="step-tab-btn" onclick="goToScreen(4)">
+          <span class="step-num-badge">5</span> Package &amp; Payment Builder
+        </button>
+      </nav>
+
+      <div class="top-actions">
+        <button class="pill-btn" id="neonThemeBtn" onclick="cycleNeonTheme()" style="border-color: var(--volt); color: var(--volt);">
+          ⚡ Tiffany + Volt
+        </button>
+        <a href="./sink.html" class="pill-btn">📱 Sink Link</a>
+        <a href="./training.html" class="pill-btn">📘 Playbook</a>
+      </div>
+    </header>
+
+    <!-- Main 5-Screen Interactive Stage -->
+    <main class="stage-container">
+
+      <!-- =====================================================
+           SCREEN 1: THE LOCAL TAP WATER X-RAY (AREA WATER REPORT)
+      ====================================================== -->
+      <section class="screen active" id="screen0">
+        <div class="screen-header">
+          <div>
+            <div class="eyebrow">Screen 1 of 5 • Official Northern Colorado Water Utility X-Ray</div>
+            <h1 class="headline">What’s Legally Allowed vs. What’s Actually Healthy.</h1>
+            <p class="subheadline">Select your Northern Colorado community below, then <strong>tap any Contaminant Card to flip it over</strong> and see what it does to your showers, skin, and drinking water.</p>
+          </div>
+          <a href="https://www.ewg.org/tapwater/system.php?pws=CO0135291" target="_blank" rel="noopener" class="pill-btn" style="border-color:var(--tiffany); color:var(--tiffany); padding:10px 16px; font-size:13px;">
+            🔎 Verify Official EWG Utility Database (CO0135291) ↗
+          </a>
+        </div>
+
+        <!-- City / Water District Selector -->
+        <div class="city-selector-bar">
+          <button class="city-btn active" id="cityBtn_foco" onclick="selectTerritory('foco')">
+            🏔️ Fort Collins Utilities (80521–80528 • CO0135291)
+          </button>
+          <button class="city-btn" id="cityBtn_windsor" onclick="selectTerritory('windsor')">
+            🏡 Windsor &amp; Timnath (80550 / 80547)
+          </button>
+          <button class="city-btn" id="cityBtn_wellington" onclick="selectTerritory('wellington')">
+            🚰 Wellington Municipal (80549 • Hard Water Zone)
+          </button>
+          <button class="city-btn" id="cityBtn_well" onclick="selectTerritory('well')">
+            🌲 Laporte / Bellvue Private Wells
+          </button>
+        </div>
+
+        <!-- Utility Summary Banner -->
+        <div class="utility-summary-banner">
+          <div>
+            <div style="font-size:12px; font-weight:800; color:var(--coral-bright); text-transform:uppercase;" id="utilBannerCode">
+              EPA PWS ID: CO0135291 • SURFACE WATER: CACHE LA POUDRE RIVER &amp; HORSETOOTH RESERVOIR
+            </div>
+            <div style="font-size:19px; font-weight:800; margin-top:2px;" id="utilBannerTitle">
+              Fort Collins Utilities: Complies with Decades-Old EPA Legal Limits — Exceeds 10 EWG Health Guidelines
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <span style="background:rgba(0,245,212,0.14); border:1px solid var(--tiffany); color:var(--tiffany); padding:7px 14px; border-radius:999px; font-size:13px; font-weight:800;" id="utilSoftnessBadge">
+              ✓ Naturally Soft Water (2 GPG) — No Softener Needed
+            </span>
+          </div>
+        </div>
+
+        <!-- 6 Interactive Flip Contaminant Cards -->
+        <div class="contaminant-flip-grid" id="contaminantCardsGrid"></div>
+      </section>
+
+      <!-- =====================================================
+           SCREEN 2: THE BOTTLED WATER & MICROPLASTICS TRAP
+      ====================================================== -->
+      <section class="screen" id="screen1">
+        <div class="screen-header">
+          <div>
+            <div class="eyebrow" style="color:var(--coral-bright);">Screen 2 of 5 • Bottled Water Waste &amp; Microplastics Calculator</div>
+            <h2 class="headline">You’re Already Paying for a Water System. You Just Don’t Own It.</h2>
+            <p class="subheadline">Drag the two sliders below to see how much your household burns on single-use plastic bottles—and how many microplastic particles come with them.</p>
+          </div>
+        </div>
+
+        <div class="screen2-grid">
+          <!-- Left: Interactive Sliders + Live Ticking Output Counters -->
+          <div class="carbon-card">
+            <div class="slider-control-box">
+              <div class="slider-label-row">
+                <span>1. Cases of bottled water bought per week</span>
+                <span class="slider-val-pill" id="casesPerWeekVal">2 Cases / wk</span>
+              </div>
+              <input type="range" id="casesSlider" min="0.5" max="8" step="0.5" value="2" oninput="recalcBottleTrap()" />
+              <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--glacier-dim); margin-top:6px;">
+                <span>0.5 case/wk</span>
+                <span>King Soopers / Costco 24–40 pk</span>
+                <span>8 cases/wk</span>
+              </div>
+            </div>
+
+            <div class="slider-control-box">
+              <div class="slider-label-row">
+                <span>2. Average cost per case (plus fridge filter cartridges)</span>
+                <span class="slider-val-pill" id="costPerCaseVal">$7.50 / case</span>
+              </div>
+              <input type="range" id="costCaseSlider" min="4" max="16" step="0.5" value="7.5" oninput="recalcBottleTrap()" />
+              <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--glacier-dim); margin-top:6px;">
+                <span>$4/case</span>
+                <span>Equals $10–$12 per gallon vs. $0.04/gal filtered</span>
+                <span>$16/case</span>
+              </div>
+            </div>
+
+            <div class="impact-counters-grid">
+              <div class="impact-stat-box">
+                <div style="font-size:12px; font-weight:800; color:var(--glacier-muted); text-transform:uppercase;">5-Year Money Burned</div>
+                <div class="impact-number" id="out5YrBurn">$3,900</div>
+                <div style="font-size:12.5px; color:var(--glacier-dim); margin-top:2px;">$<span id="outMonthlyBurn">65</span>/month with zero equity</div>
+              </div>
+
+              <div class="impact-stat-box">
+                <div style="font-size:12px; font-weight:800; color:var(--glacier-muted); text-transform:uppercase;">10-Year Money Burned</div>
+                <div class="impact-number" id="out10YrBurn">$7,800</div>
+                <div style="font-size:12.5px; color:var(--glacier-dim); margin-top:2px;">More than a full home system</div>
+              </div>
+
+              <div class="impact-stat-box" style="border-color: rgba(255, 184, 0, 0.4);">
+                <div style="font-size:12px; font-weight:800; color:var(--glacier-muted); text-transform:uppercase;">Plastic Bottles Dumped (5 Yrs)</div>
+                <div class="impact-number" style="color:var(--amber);" id="outBottlesDumped">18,200</div>
+                <div style="font-size:12.5px; color:var(--glacier-dim); margin-top:2px;">60M dumped daily in U.S. (&lt;30% recycled)</div>
+              </div>
+
+              <div class="impact-stat-box" style="border-color: rgba(0, 245, 212, 0.4);">
+                <div style="font-size:12px; font-weight:800; color:var(--glacier-muted); text-transform:uppercase;">Microplastics Ingested / Year</div>
+                <div class="impact-number" style="color:var(--tiffany);" id="outMicroplastics">436,800,000</div>
+                <div style="font-size:12.5px; color:var(--glacier-dim); margin-top:2px;">At ~240,000 plastic particles per liter</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Animated 3D-Style Microscope Bottle & Clinical Evidence -->
+          <div class="carbon-card bottle-spin-stage">
+            <div style="font-size:13px; font-weight:800; color:var(--coral-bright); text-transform:uppercase; letter-spacing:0.06em;">
+              Microscope X-Ray: 240,000 Nanoplastic Particles Per Liter
+            </div>
+
+            <svg viewBox="0 0 380 230" style="width:100%; max-height:220px;">
+              <!-- 3D Cylindrical Bottle Graphic -->
+              <defs>
+                <linearGradient id="bottleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="rgba(0,245,212,0.08)"/>
+                  <stop offset="50%" stop-color="rgba(0,245,212,0.26)"/>
+                  <stop offset="100%" stop-color="rgba(0,245,212,0.08)"/>
+                </linearGradient>
+              </defs>
+              <rect x="65" y="12" width="38" height="22" rx="5" fill="#1E293B" stroke="#00F5D4" stroke-width="2"/>
+              <rect x="38" y="34" width="92" height="175" rx="18" fill="url(#bottleGrad)" stroke="#00F5D4" stroke-width="2.5"/>
+              <ellipse cx="84" cy="60" rx="44" ry="8" fill="none" stroke="rgba(0,245,212,0.35)" stroke-width="1.5"/>
+              <ellipse cx="84" cy="180" rx="44" ry="8" fill="none" stroke="rgba(0,245,212,0.35)" stroke-width="1.5"/>
+
+              <!-- Zoom Beam to Microscope Lens -->
+              <polygon points="110,115 225,45 225,185" fill="rgba(255,30,86,0.16)"/>
+              <circle cx="272" cy="115" r="80" fill="#07090E" stroke="#FF1E56" stroke-width="3.5"/>
+
+              <!-- Drifting Nanoplastic Particles -->
+              <g class="micro-drift-1">
+                <circle cx="242" cy="82" r="4.5" fill="#FF4D79"/>
+                <circle cx="285" cy="70" r="3.5" fill="#DFFF00"/>
+                <circle cx="310" cy="112" r="5" fill="#FF4D79"/>
+                <circle cx="255" cy="142" r="4" fill="#00F5D4"/>
+                <circle cx="290" cy="155" r="4.5" fill="#FF4D79"/>
+                <circle cx="225" cy="118" r="3.5" fill="#DFFF00"/>
+              </g>
+              <g class="micro-drift-2">
+                <circle cx="268" cy="108" r="5" fill="#FF4D79"/>
+                <circle cx="302" cy="90" r="3.2" fill="#DFFF00"/>
+                <circle cx="240" cy="152" r="3.8" fill="#FF4D79"/>
+                <circle cx="318" cy="135" r="4" fill="#00F5D4"/>
+                <circle cx="270" cy="62" r="3.5" fill="#FF4D79"/>
+              </g>
+            </svg>
+
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; width:100%;">
+              <div style="background:#0B0E15; border:1px solid rgba(255,255,255,0.1); padding:10px; border-radius:12px;">
+                <div style="font-size:22px; font-weight:800; color:var(--volt);">93%</div>
+                <div style="font-size:11.5px; color:var(--glacier-muted);">Bottled Brands Positive</div>
+              </div>
+              <div style="background:#0B0E15; border:1px solid rgba(255,30,86,0.35); padding:10px; border-radius:12px;">
+                <div style="font-size:22px; font-weight:800; color:var(--coral-bright);">4.5x</div>
+                <div style="font-size:11.5px; color:var(--glacier-muted);">Heart Attack &amp; Stroke Risk (2024 Study)</div>
+              </div>
+              <div style="background:#0B0E15; border:1px solid rgba(0,245,212,0.35); padding:10px; border-radius:12px;">
+                <div style="font-size:22px; font-weight:800; color:var(--tiffany);">~$0.04</div>
+                <div style="font-size:11.5px; color:var(--glacier-muted);">Per Gal With Alpine Tide</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SCREEN 3: INTERACTIVE 3D-STYLE SYSTEM & HOME WALKTHROUGH
+      ====================================================== -->
+      <section class="screen" id="screen2">
+        <div class="screen-header">
+          <div>
+            <div class="eyebrow">Screen 3 of 5 • Interactive 3-Story Home &amp; 2-Stage System Walkthrough</div>
+            <h2 class="headline">How Alpine Tide Protects Every Pipe, Shower &amp; Glass.</h2>
+            <p class="subheadline">Tap any numbered room or filtration stage below to trace how water flows at <strong>9 GPM</strong> from your basement/garage main line to your upstairs showers and kitchen sink.</p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="pill-btn" id="flowRawBtn" onclick="setPlumbingFlowMode(false)">⚠️ Show Unfiltered Tap Flow</button>
+            <button class="pill-btn" id="flowCleanBtn" onclick="setPlumbingFlowMode(true)" style="border-color:var(--tiffany); color:var(--tiffany);">🛡️ Show Alpine Tide Active</button>
+          </div>
+        </div>
+
+        <div class="screen3-grid">
+          <!-- Left: Interactive Animated Home + Plumbing Schematic -->
+          <div class="carbon-card" style="padding:16px;">
+            <div class="stage-selector-pills">
+              <button class="stage-pill active" id="walkBtn1" onclick="selectWalkStage(1)">1️⃣ Stage 1: Whole-House AT-1000 (Basement/Garage)</button>
+              <button class="stage-pill" id="walkBtn2" onclick="selectWalkStage(2)">2️⃣ Stage 2: Kitchen Under-Sink AT-RO</button>
+              <button class="stage-pill" id="walkBtn3" onclick="selectWalkStage(3)">3️⃣ 2nd-Floor Showers (Zero Chlorine Steam)</button>
+              <button class="stage-pill" id="walkBtn4" onclick="selectWalkStage(4)">4️⃣ Laundry, Appliances &amp; Easy DIY Filters</button>
+            </div>
+
+            <svg viewBox="0 0 600 320" style="width:100%; height:265px; background:#07090E; border-radius:14px; border:1px solid rgba(255,255,255,0.08);">
+              <!-- House Silhouette -->
+              <polygon points="25,75 300,12 575,75" fill="rgba(20,25,38,0.75)" stroke="#334155" stroke-width="2.5"/>
+              <!-- 2nd Floor -->
+              <rect x="40" y="75" width="520" height="76" fill="rgba(13,16,24,0.92)" stroke="#334155" stroke-width="2"/>
+              <!-- Main Floor -->
+              <rect x="40" y="151" width="520" height="76" fill="rgba(13,16,24,0.92)" stroke="#334155" stroke-width="2"/>
+              <!-- Basement / Garage -->
+              <rect x="40" y="227" width="520" height="78" fill="rgba(8,10,16,0.98)" stroke="#334155" stroke-width="2"/>
+
+              <text x="55" y="94" fill="#64748B" font-size="11" font-weight="800">2ND FLOOR: MASTER &amp; KIDS’ SHOWERS</text>
+              <text x="55" y="170" fill="#64748B" font-size="11" font-weight="800">MAIN FLOOR: KITCHEN SINK, RO FAUCET &amp; ICE MAKER</text>
+              <text x="55" y="246" fill="#64748B" font-size="11" font-weight="800">BASEMENT / GARAGE: MAIN LINE ENTRY &amp; APPLIANCES</text>
+
+              <!-- Incoming City Main Line -->
+              <line x1="5" y1="274" x2="115" y2="274" stroke="#FFB800" stroke-width="6"/>
+              <text x="14" y="264" fill="#FFB800" font-size="10" font-weight="800">CITY MAIN</text>
+
+              <!-- Animated House Plumbing Network -->
+              <path id="walkPipeNetwork" class="flow-dash-line" d="M115,274 L115,115 L295,115 M115,192 L450,192 M115,274 L460,274" stroke="#00F5D4" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+
+              <!-- Node 1: Basement / Garage AT-1000 Carbon/KDF Tank -->
+              <g onclick="selectWalkStage(1)" style="cursor:pointer;">
+                <rect x="92" y="236" width="46" height="62" rx="12" fill="#0F172A" stroke="#00F5D4" stroke-width="2.5"/>
+                <circle class="hotspot-pulse" cx="115" cy="267" r="20" fill="rgba(0,245,212,0.35)"/>
+                <circle cx="115" cy="267" r="15" fill="#00F5D4"/>
+                <text x="115" y="272" fill="#050608" font-size="12" font-weight="900" text-anchor="middle">1</text>
+                <text x="148" y="271" fill="#00F5D4" font-size="12" font-weight="800">AT-1000 Whole-House Tank (9 GPM)</text>
+              </g>
+
+              <!-- Node 2: Kitchen Under-Sink AT-RO -->
+              <g onclick="selectWalkStage(2)" style="cursor:pointer;">
+                <circle class="hotspot-pulse" cx="265" cy="192" r="20" fill="rgba(223,255,0,0.35)"/>
+                <circle cx="265" cy="192" r="15" fill="#DFFF00"/>
+                <text x="265" y="197" fill="#050608" font-size="12" font-weight="900" text-anchor="middle">2</text>
+                <text x="288" y="196" fill="#DFFF00" font-size="12" font-weight="800">🚰 Kitchen AT-RO Tap &amp; Ice</text>
+              </g>
+
+              <!-- Node 3: Upstairs Showers -->
+              <g onclick="selectWalkStage(3)" style="cursor:pointer;">
+                <circle class="hotspot-pulse" cx="295" cy="115" r="20" fill="rgba(255,30,86,0.35)"/>
+                <circle cx="295" cy="115" r="15" fill="#FF1E56"/>
+                <text x="295" y="120" fill="#fff" font-size="12" font-weight="900" text-anchor="middle">3</text>
+                <text x="318" y="119" fill="#FF4D79" font-size="12" font-weight="800">🚿 Steam-Free Showers</text>
+              </g>
+
+              <!-- Node 4: Laundry & Appliances -->
+              <g onclick="selectWalkStage(4)" style="cursor:pointer;">
+                <circle cx="455" cy="274" r="15" fill="#1E293B" stroke="#00F5D4" stroke-width="2"/>
+                <text x="455" y="279" fill="#00F5D4" font-size="12" font-weight="900" text-anchor="middle">4</text>
+                <text x="478" y="278" fill="#CBD5E1" font-size="12" font-weight="800">🧺 Laundry &amp; DIY Filter</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Right: Stage X-Ray Detail Breakdown + Competitive Flow Race -->
+          <div style="display:flex; flex-direction:column; gap:16px; justify-content:space-between;">
+            <div class="carbon-card" style="border-color: var(--tiffany);">
+              <div style="font-size:12px; font-weight:800; color:var(--tiffany); text-transform:uppercase;" id="walkDetailTag">
+                STAGE 1 • BASEMENT OR GARAGE MAIN WATER LINE
+              </div>
+              <h3 style="font-size:22px; font-weight:800; margin:6px 0 8px;" id="walkDetailTitle">
+                Alpine Tide AT-1000™ 4-Stage Catalytic Carbon &amp; KDF-55 Tank
+              </h3>
+              <p style="font-size:15.5px; color:var(--glacier-muted); line-height:1.48;" id="walkDetailBody">
+                Installed right where your main water line enters your home. Uses high-activity coconut shell catalytic carbon and KDF-55 media to strip out <strong>99.9% of free chlorine, chloramine, HAA9 (447x limit), TTHMs (253x limit), chloroform, and Horsetooth algae taste</strong> before water ever reaches a single shower, bath, or laundry tap.
+              </p>
+              <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; margin-top:14px;">
+                <div style="background:#090B10; padding:10px; border-radius:10px; text-align:center; border:1px solid rgba(255,255,255,0.08);">
+                  <div style="font-size:18px; font-weight:800; color:var(--volt);" id="walkMetric1">9.0 GPM</div>
+                  <div style="font-size:11px; color:var(--glacier-dim);">Zero Pressure Drop</div>
+                </div>
+                <div style="background:#090B10; padding:10px; border-radius:10px; text-align:center; border:1px solid rgba(255,255,255,0.08);">
+                  <div style="font-size:18px; font-weight:800; color:var(--tiffany);" id="walkMetric2">1,000,000 Gal</div>
+                  <div style="font-size:11px; color:var(--glacier-dim);">~10-Yr Media Life</div>
+                </div>
+                <div style="background:#090B10; padding:10px; border-radius:10px; text-align:center; border:1px solid rgba(255,255,255,0.08);">
+                  <div style="font-size:18px; font-weight:800; color:var(--glacier);" id="walkMetric3">Lifetime</div>
+                  <div style="font-size:11px; color:var(--glacier-dim);">Tank &amp; Valve Warranty</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Competitive Flow Rate & Price Transparency Card -->
+            <div class="carbon-card">
+              <div style="font-size:12px; font-weight:800; color:var(--volt); text-transform:uppercase; margin-bottom:8px;">
+                Why Alpine Tide Beats Retail Tanks &amp; $8,000+ National Sales Outfits
+              </div>
+              <div style="margin-bottom:10px;">
+                <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:700; margin-bottom:4px;">
+                  <span>Alpine Tide AT-1000™ (4.8/5 Editor's Choice • 92/100 AquaVerdict)</span>
+                  <span style="color:var(--volt);">9.0 GPM Full Pressure</span>
+                </div>
+                <div class="meter-bar-track" style="height:14px;">
+                  <div style="width:94%; height:100%; background:linear-gradient(90deg, var(--tiffany), var(--volt)); border-radius:999px;"></div>
+                </div>
+              </div>
+              <div style="margin-bottom:10px;">
+                <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:700; margin-bottom:4px; color:var(--glacier-dim);">
+                  <span>Aquasana Rhino (Retail Competitor)</span>
+                  <span>7.0 GPM (22% Slower)</span>
+                </div>
+                <div class="meter-bar-track" style="height:14px;">
+                  <div style="width:70%; height:100%; background:#475569; border-radius:999px;"></div>
+                </div>
+              </div>
+              <div style="font-size:13px; color:var(--glacier-muted); background:#090B10; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.08);">
+                💡 <strong>No Plumber Needed for Filters:</strong> Main tank lasts 10 years. The 5-micron pre-filter ($15–$25) and Under-Sink RO cartridges twist off by hand in 2 minutes!
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SCREEN 4: LIVE KITCHEN SINK TEST SCORECARD (CLOSING BRIDGE)
+      ====================================================== -->
+      <section class="screen" id="screen3">
+        <div class="screen-header">
+          <div>
+            <div class="eyebrow" style="color:var(--volt);">Screen 4 of 5 • Live Kitchen Sink Test Scorecard</div>
+            <h2 class="headline">Plug In Your Live Kitchen Tap Readings.</h2>
+            <p class="subheadline">Enter the exact readings from your 2-cup chlorine drop test and meter below to calculate your home’s Water Quality Score and recommended setup.</p>
+          </div>
+        </div>
+
+        <div class="screen4-grid">
+          <!-- Left: 3 Clean Interactive Dials / Inputs -->
+          <div class="carbon-card">
+            <!-- Input 1: Chlorine Color & Level -->
+            <div class="dial-input-card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:15px; font-weight:800;">1. Kitchen Tap Chlorine Test (2-Cup Finger Drop Test)</span>
+                <span style="font-size:18px; font-weight:800; color:var(--coral-bright);" id="liveClReadout">1.3 mg/L (Pool Level)</span>
+              </div>
+              <div class="chlorine-color-pills">
+                <button type="button" class="cl-pill" id="clBtn0" style="background:rgba(0,245,212,0.18); color:var(--tiffany);" onclick="setChlorineLevel(0.1, 0)">
+                  🥛 0.0 Clear<br><span style="font-size:10px;">(Cup A Fingers)</span>
+                </button>
+                <button type="button" class="cl-pill" id="clBtn1" style="background:rgba(254,240,138,0.22); color:#FEF08A;" onclick="setChlorineLevel(0.7, 1)">
+                  🍋 0.7 Light<br><span style="font-size:10px;">Mod. Chlorine</span>
+                </button>
+                <button type="button" class="cl-pill active" id="clBtn2" style="background:rgba(250,204,21,0.28); color:#FACC15;" onclick="setChlorineLevel(1.3, 2)">
+                  🧪 1.3 Bright<br><span style="font-size:10px;">FoCo Tap Avg</span>
+                </button>
+                <button type="button" class="cl-pill" id="clBtn3" style="background:rgba(245,158,11,0.35); color:#F59E0B;" onclick="setChlorineLevel(2.2, 3)">
+                  ⚠️ 2.2+ Deep<br><span style="font-size:10px;">Heavy Runoff</span>
+                </button>
+              </div>
+              <input type="range" id="liveClSlider" min="0" max="3.5" step="0.1" value="1.3" style="margin-top:12px;" oninput="setChlorineLevel(parseFloat(this.value), -1)" />
+            </div>
+
+            <!-- Input 2: Tap TDS Reading -->
+            <div class="dial-input-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:15px; font-weight:800;">2. Tap Total Dissolved Solids (TDS Meter)</span>
+                <span style="font-size:18px; font-weight:800; color:var(--tiffany);" id="liveTdsReadout">85 ppm</span>
+              </div>
+              <input type="range" id="liveTdsSlider" min="20" max="750" step="5" value="85" oninput="setTdsLevel(parseInt(this.value,10))" />
+              <div style="display:flex; justify-content:space-between; font-size:11.5px; color:var(--glacier-dim); margin-top:6px;">
+                <span>0–15 ppm (Alpine-RO Pure)</span>
+                <span>50–110 ppm (FoCo City)</span>
+                <span>400–750+ ppm (Wellington/Wells)</span>
+              </div>
+            </div>
+
+            <!-- Input 3: Water Hardness (GPG) -->
+            <div class="dial-input-card" style="margin-bottom:0;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:15px; font-weight:800;">3. Water Hardness (Grains Per Gallon — GPG)</span>
+                <span style="font-size:18px; font-weight:800; color:var(--volt);" id="liveGpgReadout">2 GPG (Naturally Soft)</span>
+              </div>
+              <input type="range" id="liveGpgSlider" min="1" max="30" step="1" value="2" oninput="setGpgLevel(parseInt(this.value,10))" />
+              <div style="display:flex; justify-content:space-between; font-size:11.5px; color:var(--glacier-dim); margin-top:6px;">
+                <span>1–3 GPG (FoCo Soft — No Softener)</span>
+                <span>7–10 GPG (Moderate)</span>
+                <span>12–30 GPG (Hard Rock Scale)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Animated Home Water Health Score Speedometer & Prescription -->
+          <div class="carbon-card health-score-stage">
+            <div style="font-size:12.5px; font-weight:800; color:var(--glacier-muted); text-transform:uppercase; letter-spacing:0.08em;">
+              Calculated Home Water Health &amp; Shower Safety Score
+            </div>
+
+            <!-- Animated SVG Gauge -->
+            <svg viewBox="0 0 320 175" style="width:100%; max-width:310px;">
+              <path d="M 35 150 A 125 125 0 0 1 285 150" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="22" stroke-linecap="round"/>
+              <path id="scoreArcPath" d="M 35 150 A 125 125 0 0 1 285 150" fill="none" stroke="#FF1E56" stroke-width="22" stroke-linecap="round" stroke-dasharray="392" stroke-dashoffset="245" style="transition: all 0.7s cubic-bezier(0.22,1,0.36,1);"/>
+              <text x="160" y="112" id="scoreNumberText" fill="#FF4D79" font-size="48" font-weight="900" text-anchor="middle">38 / 100</text>
+              <text x="160" y="142" id="scoreGradeText" fill="#F8FAFC" font-size="15" font-weight="800" text-anchor="middle">GRADE D • HEAVY CHLORINE &amp; DBPs</text>
+            </svg>
+
+            <div style="width:100%; background:#090B11; border:1px solid var(--tiffany); border-radius:14px; padding:16px; text-align:left;">
+              <div style="font-size:12px; font-weight:800; color:var(--tiffany); text-transform:uppercase; margin-bottom:4px;">
+                Automatic System Prescription for Your Readings:
+              </div>
+              <div style="font-size:18px; font-weight:800; color:var(--volt); margin-bottom:6px;" id="rxSystemTitle">
+                Recommended: Alpine Tide AT-1000™ Whole-House + AT-RO™ Kitchen Combo
+              </div>
+              <p style="font-size:14px; color:var(--glacier-muted); margin-bottom:12px;" id="rxSystemReason">
+                Your water is naturally soft (2 GPG — you do NOT need a water softener), but your 1.3 mg/L chlorine reading and 447x EWG disinfection byproducts require Whole-House Catalytic Carbon/KDF for your showers plus Under-Sink RO for fluoride-free drinking water.
+              </p>
+              <button type="button" class="cta-volt-btn" onclick="goToScreen(4)">
+                Build Your Monthly Package on Screen 5 →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SCREEN 5: INTERACTIVE PACKAGE & MONTHLY PAYMENT BUILDER
+      ====================================================== -->
+      <section class="screen" id="screen4">
+        <div class="screen-header">
+          <div>
+            <div class="eyebrow" style="color:var(--volt);">Screen 5 of 5 • Interactive Package &amp; Monthly Payment Builder</div>
+            <h2 class="headline">Straightforward Pricing. Lock In Your January Install Slot.</h2>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="pill-btn" id="softenerAddonBtn" onclick="toggleHardWaterAddon()">
+              ➕ Add Hard-Water Softener (Wellington / Windsor)
+            </button>
+            <button type="button" class="pill-btn" id="fleetDiscountBtn" onclick="toggleFleetWaiver()" style="border-color:var(--volt); color:var(--volt);">
+              🏷️ Apply January Neighbor Fleet Discount (-$1,400)
+            </button>
+          </div>
+        </div>
+
+        <!-- 2 Core Tiers (+ Optional Softener Sync) -->
+        <div class="packages-grid">
+          <!-- Tier 1: Whole-House Minus Kitchen Sink -->
+          <div class="pkg-card" id="pkgCard1" onclick="selectPackageTier(1)">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12.5px; font-weight:800; color:var(--tiffany); text-transform:uppercase;">TIER 1 • WHOLE-HOUSE ONLY (MINUS KITCHEN RO)</span>
+                <span id="pkgBadge1" style="font-size:13px; font-weight:800; color:var(--glacier-dim);">TAP TO SELECT</span>
+              </div>
+              <h3 style="font-size:22px; font-weight:800; margin-top:6px;" id="pkgTitle1">
+                Alpine Tide AT-1000™ Whole-House System
+              </h3>
+              <div class="pkg-price-hero" id="pkgMonthly1">$127<span>/month</span></div>
+              <div style="font-size:15px; font-weight:700; color:var(--glacier-muted); margin-bottom:12px;" id="pkgCash1">
+                or $5,999 cash (includes full licensed plumber installation)
+              </div>
+              <ul style="list-style:none; font-size:14.5px; color:var(--glacier-muted); display:flex; flex-direction:column; gap:6px; margin-bottom:14px;">
+                <li>✓ 99.9% Chlorine, Chloroform &amp; HAA9/TTHM removal at every shower &amp; bath</li>
+                <li>✓ 9.0 GPM full pressure • 1,000,000-gallon capacity (~10 years)</li>
+                <li>✓ Custom copper/PEX 3-valve bypass &amp; Lifetime Tank/Valve Warranty</li>
+              </ul>
+            </div>
+            <div style="background:rgba(0,245,212,0.12); border:1px solid var(--tiffany); padding:10px 12px; border-radius:10px; font-size:13.5px; font-weight:700; color:var(--tiffany);" id="pkgNet1">
+              After ditching $65/mo bottled water: <strong>Net cost ~$62/mo (~$2.06/day)</strong>
+            </div>
+          </div>
+
+          <!-- Tier 2: Whole-House + Kitchen Sink RO Combo (Recommended Target) -->
+          <div class="pkg-card selected" id="pkgCard2" onclick="selectPackageTier(2)">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12.5px; font-weight:800; color:var(--volt); text-transform:uppercase;">TIER 2 • RECOMMENDED COMPLETE HOME COMBO ★</span>
+                <span id="pkgBadge2" style="font-size:13px; font-weight:800; color:var(--volt);">✓ SELECTED</span>
+              </div>
+              <h3 style="font-size:22px; font-weight:800; margin-top:6px;" id="pkgTitle2">
+                Alpine Tide AT-1000™ Whole-House + Kitchen Sink AT-RO™
+              </h3>
+              <div class="pkg-price-hero" id="pkgMonthly2">$152<span>/month</span></div>
+              <div style="font-size:15px; font-weight:700; color:var(--glacier-muted); margin-bottom:12px;" id="pkgCash2">
+                or $7,199 cash (includes full licensed plumber installation)
+              </div>
+              <ul style="list-style:none; font-size:14.5px; color:var(--glacier-muted); display:flex; flex-direction:column; gap:6px; margin-bottom:14px;">
+                <li>✓ Everything in Tier 1 (Every shower, bath, laundry &amp; pipe protected)</li>
+                <li>✓ <strong>PLUS</strong> Under-Sink 4-Stage Alpine Tide AT-RO™ at your kitchen sink</li>
+                <li>✓ Strips out Fluoride, Chromium-6, Nitrates &amp; TDS for pure coffee, ice &amp; cooking</li>
+              </ul>
+            </div>
+            <div style="background:rgba(223,255,0,0.14); border:1px solid var(--volt); padding:10px 12px; border-radius:10px; font-size:13.5px; font-weight:700; color:var(--volt);" id="pkgNet2">
+              After ditching $65/mo bottled water: <strong>Net cost ~$87/mo (~$2.85/day)</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Summary, Signature Pad & GoHighLevel CRM Dispatch -->
+        <div class="close-summary-grid">
+          <div class="carbon-card" style="padding:18px 20px;">
+            <div style="font-size:12px; font-weight:800; color:var(--tiffany); text-transform:uppercase; margin-bottom:8px;">
+              Written Estimate &amp; January Schedule Summary
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.08); font-size:14.5px;">
+              <span style="color:var(--glacier-muted);">Live Sink Test Results:</span>
+              <strong id="sumReadingsText" style="color:var(--coral-bright);">Chlorine: 1.3 mg/L • TDS: 85 ppm • Hardness: 2 GPG</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.08); font-size:14.5px;">
+              <span style="color:var(--glacier-muted);">Selected Package:</span>
+              <strong id="sumPkgText" style="color:var(--tiffany);">Tier 2: Whole-House + Kitchen Sink AT-RO™</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.08); font-size:15.5px;">
+              <span style="color:var(--glacier-muted);">Locked Investment:</span>
+              <strong id="sumPriceText" style="color:var(--volt);">$152/mo (or $7,199 cash)</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:7px 0; font-size:14px;">
+              <span style="color:var(--glacier-muted);">Installation Window:</span>
+              <strong id="sumSlotStatus">January Priority Route • Licensed FoCo Plumber</strong>
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; margin-top:12px;">
+              <button type="button" class="pill-btn" onclick="window.print()" style="text-align:center;">📄 Save / Print PDF</button>
+              <button type="button" class="pill-btn" onclick="sendSmsQuote()" style="text-align:center;">💬 Text Estimate</button>
+              <button type="button" class="pill-btn" onclick="openQrModal()" style="text-align:center;">📱 QR to Phone</button>
+            </div>
+          </div>
+
+          <div class="carbon-card" style="padding:18px 20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:12px; font-weight:800; color:var(--volt); text-transform:uppercase;">
+                Homeowner Signature &amp; GoHighLevel CRM Sync
+              </span>
+              <button type="button" class="pill-btn" style="padding:3px 9px; font-size:11px;" onclick="openGhlModal()">⚙️ GHL Setup</button>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <input type="text" class="crm-input" id="custName" placeholder="Homeowner Full Name *" />
+              <input type="tel" class="crm-input" id="custPhone" placeholder="Mobile Phone *" />
+              <input type="email" class="crm-input" id="custEmail" placeholder="Email (For PDF &amp; Invoice)" />
+              <input type="text" class="crm-input" id="custAddress" placeholder="Street Address &amp; Zip" />
+            </div>
+
+            <div class="sig-pad-wrap">
+              <canvas id="sigCanvas"></canvas>
+              <button type="button" onclick="clearSignature()" style="position:absolute; top:6px; right:8px; background:#181C28; border:1px solid rgba(255,255,255,0.2); color:var(--glacier-dim); font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; cursor:pointer;">Clear Sign</button>
+            </div>
+
+            <button type="button" class="cta-volt-btn" id="lockInstallBtn" onclick="submitToGhlAndLock()">
+              🔒 Lock In January Install Slot &amp; Send to GHL CRM
+            </button>
+            <div id="ghlSyncMsg" style="font-size:12px; font-weight:700; color:var(--tiffany); text-align:center; margin-top:6px; min-height:16px;"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Printable 1-Page Estimate + Complete EWG CO0135291 & Water Facts Sheet -->
+    <section id="printablePdfSheet">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom: 3px solid #0ABAB5; padding-bottom: 12px; margin-bottom: 14px;">
+        <div>
+          <div style="font-size: 22px; font-weight: 800; color: #0F172A;">ALPINE TIDE WATER CO. — FORT COLLINS, CO</div>
+          <div style="font-size: 13.5px; font-weight: 700; color: #0ABAB5;">Fred Caldero • Local Neighbor &amp; Water Treatment Specialist</div>
+        </div>
+        <div style="text-align:right; font-size: 12.5px; color: #334155; font-weight: 600;">
+          <div>Written Kitchen-Table Water Report &amp; Estimate</div>
+          <div>January Priority Installation Schedule</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+        <div style="border: 1px solid #CBD5E1; border-radius: 10px; padding: 12px;">
+          <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: #0ABAB5; margin-bottom: 4px;">1. Homeowner &amp; Live Tap Water Test</div>
+          <div style="font-size: 13.5px; margin-bottom: 3px;"><strong>Homeowner:</strong> <span id="pdfCustName">Fort Collins Homeowner</span></div>
+          <div style="font-size: 13.5px; margin-bottom: 3px;"><strong>Address / Phone:</strong> <span id="pdfCustContact">Fort Collins, CO</span></div>
+          <div style="font-size: 13.5px;"><strong>Live Test Readings:</strong> <span id="pdfWaterReadings" style="color:#E11D48; font-weight:700;">Chlorine: 1.3 mg/L • TDS: 85 ppm • Hardness: 2 GPG</span></div>
+        </div>
+
+        <div style="border: 2px solid #059669; background: #F0FDF4; border-radius: 10px; padding: 12px;">
+          <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: #059669; margin-bottom: 4px;">2. Selected System &amp; Written Price</div>
+          <div style="font-size: 15px; font-weight: 800; color: #0F172A;" id="pdfSelectedSystem">Tier 2: Alpine Tide AT-1000™ + Kitchen Sink AT-RO™</div>
+          <div style="font-size: 18px; font-weight: 800; color: #059669; margin: 2px 0;" id="pdfSelectedPrice">$152/mo (or $7,199 cash)</div>
+          <div style="font-size: 12.5px; color: #334155;">✓ Turnkey installation by licensed local Fort Collins master plumber • Lifetime Tank/Valve Warranty</div>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #CBD5E1; border-radius: 10px; padding: 12px; margin-bottom: 12px; background: #F8FAFC; font-size: 12px; line-height: 1.42;">
+        <div style="font-weight: 800; text-transform: uppercase; color: #0F172A; border-bottom: 1px solid #CBD5E1; padding-bottom: 4px; margin-bottom: 8px;">
+          3. Key Water Facts, Microplastic Numbers &amp; Easy 2-Minute DIY Filter Maintenance
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <ul style="padding-left: 16px;">
+            <li><strong>240,000 Microplastics / Liter:</strong> Found in 93% of bottled water; 2024 medical study linked microplastics in artery plaque to a <strong>4.5x higher risk</strong> of heart attack, stroke, or death.</li>
+            <li><strong>60M Plastic Bottles Dumped Daily:</strong> Family of 4 spends <strong>$45–$84/mo ($2,700–$5,040 / 5 yrs)</strong> paying $10–$12/gal vs. <strong>~$0.04/gal</strong> with Alpine Tide.</li>
+            <li><strong>15-Second Shower Chlorine Absorption:</strong> Fort Collins tap runs ~1.3 mg/L free chlorine, which absorbs into skin in 15 seconds and vaporizes into chloroform steam in hot showers.</li>
+          </ul>
+          <ul style="padding-left: 16px;">
+            <li><strong>Main AT-1000™ Tank (9 GPM):</strong> Zero maintenance for <strong>1,000,000 gallons (~10 years)</strong>.</li>
+            <li><strong>5-Micron Pre-Filter &amp; AT-RO™ Cartridges (No Plumber Needed!):</strong> Pre-filter costs only <strong>~$15–$25</strong> (swap every 6–9 mos in 2 mins by hand). Under-sink AT-RO twist-and-lock cartridges cost <strong>~$45–$65/yr</strong> and swap like a lightbulb in 60 seconds.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #CBD5E1; border-radius: 10px; padding: 12px; background: #FFF;">
+        <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #E11D48; margin-bottom: 6px;">
+          4. Official EWG Report: City of Fort Collins Utilities (PWS ID: CO0135291 — ewg.org/tapwater/system.php?pws=CO0135291)
+        </div>
+        <table style="width:100%; border-collapse:collapse; font-size: 11px; color:#0F172A;">
+          <thead>
+            <tr style="background:#F1F5F9; text-align:left; border-bottom:1px solid #CBD5E1;">
+              <th style="padding:5px;">Contaminant (CO0135291)</th>
+              <th style="padding:5px;">Utility Level vs. EWG Guideline</th>
+              <th style="padding:5px;">Primary Health Risk</th>
+              <th style="padding:5px;">How Alpine Tide Eliminates It</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:4px 5px;"><strong>Haloacetic Acids (HAA9)</strong></td><td style="padding:4px 5px; color:#E11D48; font-weight:800;">447x EWG Limit (26.8 ppb vs 0.06 ppb)</td><td style="padding:4px 5px;">Cancer, developmental &amp; reproductive risk</td><td style="padding:4px 5px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Carbon + Tier 2 RO</td></tr>
+            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:4px 5px;"><strong>Total Trihalomethanes (TTHMs)</strong></td><td style="padding:4px 5px; color:#E11D48; font-weight:800;">206x–253x EWG Limit (31–38 ppb vs 0.15 ppb)</td><td style="padding:4px 5px;">Bladder/colorectal cancer; inhaled in shower steam</td><td style="padding:4px 5px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Carbon (Every Shower)</td></tr>
+            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:4px 5px;"><strong>Haloacetic Acids (HAA5)</strong></td><td style="padding:4px 5px; color:#E11D48; font-weight:800;">220x EWG Limit (22.0 ppb vs 0.1 ppb)</td><td style="padding:4px 5px;">Cancer risk from chlorine + Poudre wildfire runoff</td><td style="padding:4px 5px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Carbon + Tier 2 RO</td></tr>
+            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:4px 5px;"><strong>Trichloroacetic &amp; Dichloroacetic Acid</strong></td><td style="padding:4px 5px; color:#E11D48; font-weight:800;">63x–150x EWG Limit (15.0 &amp; 12.6 ppb)</td><td style="padding:4px 5px;">Liver, cellular &amp; metabolic toxicity; cancer risk</td><td style="padding:4px 5px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Carbon + Tier 2 RO</td></tr>
+            <tr style="border-bottom:1px solid #E2E8F0;"><td style="padding:4px 5px;"><strong>Chloroform &amp; Bromodichloromethane</strong></td><td style="padding:4px 5px; color:#E11D48; font-weight:800;">54x–97x EWG Limit (38.9 &amp; 5.4 ppb)</td><td style="padding:4px 5px;">Volatile shower gases; liver/kidney &amp; cancer risk</td><td style="padding:4px 5px; color:#059669; font-weight:700;">✓ Tier 1 Whole-House Catalytic Carbon</td></tr>
+            <tr><td style="padding:4px 5px;"><strong>Chromium-6, Nitrates, Fluoride &amp; Chlorine</strong></td><td style="padding:4px 5px; color:#E11D48; font-weight:800;">~1.3 mg/L Chlorine • ~0.7 mg/L Fluoride</td><td style="padding:4px 5px;">Dry itchy skin, pool smell, Horsetooth dirt taste</td><td style="padding:4px 5px; color:#059669; font-weight:700;">✓ Tier 1 Strips Chlorine • Tier 2 RO Strips Fluoride</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Speaker Notes & Live Screen Objection Decoder Drawer -->
+    <aside class="notes-drawer" id="notesDrawer">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div>
+          <div style="font-size:11.5px; font-weight:800; color:var(--tiffany); text-transform:uppercase; margin-bottom:4px;">
+            🗣️ Fred’s Kitchen-Table Speaker Track (Press N)
+          </div>
+          <div style="font-size:15px; color:var(--glacier); line-height:1.45;" id="notesText"></div>
+        </div>
+        <div style="border-left: 2px solid var(--coral-bright); padding-left: 16px;">
+          <div style="font-size:11.5px; font-weight:800; color:var(--volt); text-transform:uppercase; margin-bottom:4px;" id="objDecoderTitle">
+            🎯 If They Stop on This Screen — Diagnosed Objection &amp; Word-for-Word Rebuttal
+          </div>
+          <div style="font-size:14.5px; color:var(--glacier-muted); line-height:1.45;" id="objDecoderText"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Bottom Presenter Bar -->
+    <footer class="bottom-bar">
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button class="pill-btn" onclick="toggleNotes()" style="border-color:var(--volt); color:var(--volt);">🎯 Objection Decoder &amp; Notes (N)</button>
+        <button class="pill-btn" onclick="openQrModal()">📱 QR / Sink Link</button>
+        <a href="./deck.html?v=5" class="pill-btn" title="Switch to 10-Slide Classic Deck">🎞️ 10-Slide View</a>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <button class="nav-btn" id="prevScreenBtn" onclick="stepScreen(-1)">← Back</button>
+        <span style="font-size:13.5px; font-weight:800; color:var(--glacier-muted); min-width:85px; text-align:center;" id="screenIndicator">Screen 1 / 5</span>
+        <button class="nav-btn primary" id="nextScreenBtn" onclick="stepScreen(1)">Next Step →</button>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button class="pill-btn" onclick="openGhlModal()">⚙️ GHL CRM</button>
+        <button class="pill-btn" onclick="resetConfigurator()">Reset</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL 1: QR CODE SHARE -->
+  <div class="modal-backdrop" id="qrModal" onclick="if(event.target===this)closeQrModal()">
+    <div class="modal-card" style="text-align:center;">
+      <div style="font-size:12px; font-weight:800; color:var(--tiffany); text-transform:uppercase; margin-bottom:4px;">
+        Interactive Homeowner Mobile Link
+      </div>
+      <h3 style="font-size:21px; font-weight:800; margin-bottom:8px;">Scan With Homeowner’s Camera</h3>
+      <p style="font-size:14px; color:var(--glacier-muted); margin-bottom:14px;">
+        Lets the homeowner tap through the interactive House X-Ray, check EWG report <code>CO0135291</code>, and submit their info at the sink.
+      </p>
+      <div style="background:#fff; padding:14px; border-radius:14px; display:inline-block; margin-bottom:14px;">
+        <img id="qrImage" src="" alt="QR Code" style="width:200px; height:200px; display:block;" />
+      </div>
+      <div style="display:flex; gap:8px; justify-content:center; margin-bottom:12px;">
+        <button class="nav-btn" onclick="setQrMode('sink')">📱 Sink Companion</button>
+        <button class="nav-btn" onclick="setQrMode('app')">🖥️ This 5-Step Configurator</button>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <input type="text" class="crm-input" id="shareUrlBox" readonly style="text-align:center;" />
+        <button class="nav-btn primary" onclick="navigator.clipboard.writeText(document.getElementById('shareUrlBox').value)">Copy</button>
+        <button class="nav-btn" onclick="closeQrModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: GHL CRM WEBHOOK & INVOICE SETUP -->
+  <div class="modal-backdrop" id="ghlModal" onclick="if(event.target===this)closeGhlModal()">
+    <div class="modal-card">
+      <div style="font-size:12px; font-weight:800; color:var(--volt); text-transform:uppercase; margin-bottom:4px;">
+        GoHighLevel (GHL) CRM &amp; Automated Invoicing
+      </div>
+      <h3 style="font-size:21px; font-weight:800; margin-bottom:8px;">Connect Your GHL Sub-Account</h3>
+      <p style="font-size:13.5px; color:var(--glacier-muted); margin-bottom:14px;">
+        Paste your GHL <strong>Inbound Webhook URL</strong> and optional <strong>GHL FastPay / Deposit Invoice Link</strong>. Saved locally and auto-syncs offline leads.
+      </p>
+      <div style="margin-bottom:12px;">
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--tiffany); margin-bottom:4px;">1. GHL Inbound Webhook URL</label>
+        <input type="url" class="crm-input" id="ghlWebhookInput" placeholder="https://services.leadconnectorhq.com/hooks/..." />
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--volt); margin-bottom:4px;">2. GHL Deposit / Invoice Checkout Link (Optional)</label>
+        <input type="url" class="crm-input" id="ghlInvoiceUrlInput" placeholder="https://link.fastpaydirect.com/payment-link/..." />
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span id="offlineQueueCount" style="font-size:12px; color:var(--glacier-dim);">0 offline leads queued</span>
+        <div style="display:flex; gap:10px;">
+          <button class="nav-btn" onclick="closeGhlModal()">Cancel</button>
+          <button class="nav-btn primary" onclick="saveGhlSettings()">Save &amp; Sync GHL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =====================================================
+    // STATE & LOCAL NORTHERN COLORADO UTILITY DATA
+    // =====================================================
+    const appState = {
+      currentScreen: 0,
+      territory: 'foco',
+      casesPerWeek: 2,
+      costPerCase: 7.5,
+      monthlyBottleSpend: 65,
+      chlorine: 1.3,
+      tds: 85,
+      hardness: 2,
+      selectedTier: 2, // 1 = Whole-House Only, 2 = Whole-House + Kitchen RO
+      includeSoftener: false,
+      fleetWaiver: false,
+      notesOpen: false,
+      hasSignature: false,
+      januaryLocked: false
+    };
+
+    const SCREEN_NOTES = [
+      "Screen 1 (Tap Water X-Ray): 'Before we look at any equipment, let's pull up your local water report right here. Tap any of these six cards—every single one is inside the EPA's decades-old legal limit, yet hundreds of times above independent EWG health guidelines because chlorine reacts with Poudre wildfire runoff and Horsetooth algae.'",
+      "Screen 2 (Bottled Water & Microplastics Calculator): 'Go ahead and slide those two bars to match roughly how many cases of water or fridge filters you guys buy. Look at the 5-year and 10-year cash burned—and worse, researchers found 240,000 microplastic particles per liter in 93% of bottled water, which a 2024 study tied to 4.5x higher cardiovascular risk.'",
+      "Screen 3 (Interactive System Walkthrough): 'Tap through the 4 touchpoints on the house. Stage 1 is our Alpine Tide AT-1000 tank in your basement or garage—it strips out 99.9% of chlorine and disinfection gases at 9 GPM before water reaches your upstairs showers. Stage 2 is our Alpine Tide AT-RO under the kitchen sink for near-zero TDS coffee, ice cubes, and drinking water.'",
+      "Screen 4 (Live Kitchen Sink Scorecard): 'Now let's plug in the exact numbers we just saw at your kitchen sink. Watch what happens to your Home Water Health Score—and look at the exact prescription box below it.'",
+      "Screen 5 (Package & Monthly Payment Builder): 'We keep it dead simple—just two options. Tier 1 does the entire house minus the kitchen drinking tap. Tier 2 includes the whole house PLUS the dedicated Reverse Osmosis faucet at your kitchen sink. And if we pair your install on our January neighborhood route, tap the Fleet Discount button right there to waive the install fee.'"
+    ];
+
+    const SCREEN_OBJECTIONS = [
+      {
+        stage: "Stopped on Screen 1 (Local Water Report X-Ray)",
+        diagnosis: "OBJECTION #1: 'Skepticism / The Rocky Mountain Water Myth' (They still think Fort Collins tap water is fine).",
+        rebuttal: "SAY THIS: 'I totally get it—Fort Collins water is legally compliant and naturally soft. That’s why we don’t sell softeners here. The issue isn’t hardness; it’s the 1.3 mg/L of pool chlorine the city pumps in after the Cameron Peak fire and Horsetooth algae blooms, which creates HAA9 at 447x the health limit. Let’s do the 15-second 2-cup finger test at your sink so you can see where that chlorine goes with your own eyes.'"
+      },
+      {
+        stage: "Stopped on Screen 2 (Bottled Water & Microplastics Trap)",
+        diagnosis: "OBJECTION #2: 'We Don't Buy Bottled Water / We Use Our Fridge Filter or Brita Pitcher.'",
+        rebuttal: "SAY THIS: 'That’s awesome that you aren’t lugging plastic cases! Here’s the catch with a fridge filter or Brita: first, standard fridge carbon doesn’t strip out dissolved fluoride or chromium-6. Second—and way more important—you don’t shower in your Brita pitcher. You absorb and inhale more chlorine and chloroform steam in one 10-minute hot shower than drinking 8 glasses of tap water.'"
+      },
+      {
+        stage: "Stopped on Screen 3 (Interactive Home & System Walkthrough)",
+        diagnosis: "OBJECTION #3: 'Space / Plumbing Anxiety / Don't Want to Pay a Plumber to Change Filters.'",
+        rebuttal: "SAY THIS: 'Look how compact this is—the main AT-1000 tank takes up only a 12-inch footprint right where your main line enters the basement or garage, and you don’t touch it for 10 years (1,000,000 gallons). Even better, you NEVER need a plumber for filter changes. The pre-filter is $18 and twists off by hand in 2 minutes, and the under-sink RO cartridges twist out like a lightbulb in 60 seconds.'"
+      },
+      {
+        stage: "Stopped on Screen 4 (Live Kitchen Sink Test Scorecard)",
+        diagnosis: "OBJECTION #4: 'They Believe the Problem Is Real, But Are Bracing for Sticker Shock / Spouse Delay.'",
+        rebuttal: "SAY THIS: 'Seeing a 38/100 score is eye-opening, right? Before we even look at the numbers on the next screen, remember: because our master plumber’s rig is already going to be on your block in January, we’re waiving the entire $800 installation fee and applying the $600 neighborhood fleet credit. Let’s look at how close the monthly number is to what families spend on bottles and filters.'"
+      },
+      {
+        stage: "Stopped on Screen 5 (Package & Monthly Payment Builder)",
+        diagnosis: "OBJECTION #5: 'Price / Need to Talk to Spouse / Want to Think About It.'",
+        rebuttal: "SAY THIS: 'Totally fair—nobody should rush a home upgrade. Look at two quick things: first, if the $89/mo Combo is a stretch right now, we can start with Tier 1 (Whole-House Minus Kitchen Sink) for just $65/mo ($2,695), and you can add the kitchen RO anytime later. Second, we only have two January fleet install slots left for this neighborhood waiver. We can lock in your written fleet price today with a 100% refundable slot reservation while you two sleep on it—fair enough?'"
+      }
+    ];
+
+    const TERRITORIES = {
+      foco: {
+        code: 'EPA PWS ID: CO0135291 • SURFACE WATER: CACHE LA POUDRE RIVER & HORSETOOTH RESERVOIR',
+        title: 'Fort Collins Utilities: Complies with EPA Legal Limits — Exceeds 10 EWG Health Guidelines',
+        softBadge: '✓ Naturally Soft Water (~2 GPG) — No Softener Needed',
+        defaultCl: 1.3, defaultTds: 85, defaultGpg: 2, needSoftener: false,
+        cards: [
+          {
+            name: 'Haloacetic Acids (HAA9)',
+            exceed: '447x EWG Guideline',
+            detected: '26.8 ppb', goal: '0.06 ppb', legal: '60 ppb (HAA5)', pct: 94,
+            impact: 'Formed when municipal chlorine reacts with Poudre River wildfire ash & organic runoff.',
+            risk: 'Linked to long-term cancer risk, cellular stress & developmental/reproductive toxicity.',
+            fix: '✓ Eliminated by Stage 1 Alpine Tide AT-1000™ Catalytic Carbon + Stage 2 AT-RO™'
+          },
+          {
+            name: 'Total Trihalomethanes (TTHMs)',
+            exceed: '253x EWG Guideline',
+            detected: '31–38 ppb', goal: '0.15 ppb', legal: '80 ppb', pct: 88,
+            impact: 'Volatile disinfection gases that vaporize into chemical steam inside every hot shower.',
+            risk: 'Inhaled & absorbed through open pores; linked to bladder & colorectal cancer risk.',
+            fix: '✓ Eliminated by Stage 1 Alpine Tide AT-1000™ before water ever reaches your showers'
+          },
+          {
+            name: 'Chloroform (Volatile Gas)',
+            exceed: '97x EWG Guideline',
+            detected: '38.9 ppb', goal: '0.4 ppb', legal: '80 ppb (TTHM)', pct: 82,
+            impact: 'Primary trihalomethane gas created by heavy chlorination of surface reservoir water.',
+            risk: 'Inhaling shower steam exposes your lungs to more chloroform than drinking 8 glasses of tap water.',
+            fix: '✓ Eliminated 99.9% at every shower & bath by Alpine Tide Catalytic Carbon'
+          },
+          {
+            name: 'Trichloroacetic & Dichloroacetic Acid',
+            exceed: '63x–150x EWG Guideline',
+            detected: '15.0 & 12.6 ppb', goal: '0.1–0.2 ppb', legal: '60 ppb', pct: 79,
+            impact: 'Chlorinated organic acids present in every tap across zip codes 80521, 80524, 80525, 80526 & 80528.',
+            risk: 'Long-term liver, metabolic, and cancer risk benchmarks flagged by EWG.',
+            fix: '✓ Eliminated by Alpine Tide AT-1000™ Whole-House Carbon + Under-Sink AT-RO™'
+          },
+          {
+            name: 'Free Chlorine & Horsetooth Geosmin',
+            exceed: '1.3 mg/L Pool Level',
+            detected: '~1.3 mg/L', goal: '0.0 mg/L at Tap', legal: '4.0 mg/L', pct: 75,
+            impact: 'Pumped in to kill Horsetooth Reservoir algae blooms; causes late-summer "dirt taste" & pool odor.',
+            risk: 'Absorbs into skin in 15 seconds; strips natural oils causing dry, itchy Colorado winter skin & brittle hair.',
+            fix: '✓ Stripped 99.9% by Alpine Tide KDF-55 & Catalytic Coconut Shell Carbon'
+          },
+          {
+            name: 'Chromium-6, Fluoride & Nitrates',
+            exceed: 'Above EWG Goal',
+            detected: '0.7 mg/L Fluoride + Trace Cr-6', goal: '0.02 ppb Cr-6', legal: '4.0 mg/L Fl', pct: 68,
+            impact: 'Dissolved municipal fluoride additive and trace hexavalent chromium/nitrates pass through basic carbon pitchers.',
+            risk: 'Health-conscious families want zero fluoride, nitrates, or dissolved metals in baby formula, coffee & drinking water.',
+            fix: '✓ Stripped to near-zero TDS by Stage 2 Kitchen Under-Sink Alpine Tide AT-RO™'
+          }
+        ]
+      },
+      windsor: {
+        code: 'NORTHERN COLORADO REGIONAL WATER • ZIP CODES 80550 (WINDSOR) & 80547 (TIMNATH)',
+        title: 'Windsor & Timnath: High Chlorine Byproducts + Moderate-to-Hard Mineral Scale',
+        softBadge: '⚠️ Moderate-to-Hard Water (8–14 GPG) — Scale Protection Recommended',
+        defaultCl: 1.4, defaultTds: 260, defaultGpg: 11, needSoftener: true,
+        cards: [
+          {
+            name: 'Total Trihalomethanes (TTHMs)',
+            exceed: '240x+ EWG Guideline',
+            detected: '36–44 ppb', goal: '0.15 ppb', legal: '80 ppb', pct: 89,
+            impact: 'Long transmission lines require higher disinfectant residual, increasing TTHM formation.',
+            risk: 'Inhaled as chemical vapor in hot showers; linked to long-term cancer risk.',
+            fix: '✓ Eliminated by Stage 1 Alpine Tide AT-1000™ Catalytic Carbon'
+          },
+          {
+            name: 'Haloacetic Acids (HAA5 / HAA9)',
+            exceed: '220x–400x EWG Guideline',
+            detected: '24–31 ppb', goal: '0.06–0.1 ppb', legal: '60 ppb', pct: 91,
+            impact: 'Formed when chlorine reacts with organic surface runoff in regional reservoirs.',
+            risk: 'Cellular & reproductive toxicity; long-term cancer risk.',
+            fix: '✓ Eliminated by Stage 1 Whole-House Carbon + Stage 2 Kitchen AT-RO™'
+          },
+          {
+            name: 'Calcium & Magnesium Hardness Scale',
+            exceed: '8–14 GPG Hard',
+            detected: '11 GPG Avg', goal: '< 3 GPG Soft', legal: 'Unregulated', pct: 78,
+            impact: 'Dissolved limestone rock crusts faucets, spots glassware, and builds scale inside appliances.',
+            risk: 'Forces you to spend $40–$60/mo extra on soap, detergent & lotions while choking plumbing valves.',
+            fix: '✓ Eliminated 97.5% by Paired Alpine Tide High-Efficiency Salt Softener'
+          },
+          {
+            name: 'Free Chlorine & Chloramines',
+            exceed: '1.4 mg/L Disinfectant',
+            detected: '1.4 mg/L', goal: '0.0 mg/L', legal: '4.0 mg/L', pct: 80,
+            impact: 'Harsh chemical smell in showers and stiff, faded laundry.',
+            risk: 'Aggressively dries out skin and scalp in Colorado’s arid climate.',
+            fix: '✓ Stripped 99.9% by Alpine Tide Catalytic Carbon + KDF-55'
+          },
+          {
+            name: 'Total Dissolved Solids (TDS) & Fluoride',
+            exceed: '220–340 ppm TDS',
+            detected: '260 ppm', goal: '< 25 ppm RO', legal: '500 ppm', pct: 72,
+            impact: 'Leaves white mineral rings on coffee makers, kettles, and cloudy freezer ice cubes.',
+            risk: 'Includes municipal fluoride, sulfates, and dissolved salts.',
+            fix: '✓ Dropped to near-zero TDS by Stage 2 Under-Sink Alpine Tide AT-RO™'
+          },
+          {
+            name: 'Chromium-6 & Agricultural Nitrates',
+            exceed: 'Exceeds EWG Goal',
+            detected: 'Trace Detections', goal: '0.02 ppb', legal: '100 ppb', pct: 64,
+            impact: 'Regional agricultural runoff and natural mineral leaching across Weld/Larimer County.',
+            risk: 'Long-term liver, thyroid & gastrointestinal impact.',
+            fix: '✓ Removed at the kitchen tap by Stage 2 Alpine Tide 4-Stage RO Membrane'
+          }
+        ]
+      },
+      wellington: {
+        code: 'WELLINGTON MUNICIPAL WATER • ZIP CODE 80549 (SEVERE HARD WATER & HIGH TDS ZONE)',
+        title: 'Wellington (80549): Severe Rock Hardness (16–24 GPG), High TDS & Disinfection Byproducts',
+        softBadge: '🚨 Severe Hard Water (18+ GPG) — Whole-House Filter + Softener Required',
+        defaultCl: 1.5, defaultTds: 520, defaultGpg: 18, needSoftener: true,
+        cards: [
+          {
+            name: 'Severe Calcium & Magnesium Rock Scale',
+            exceed: '16–24+ GPG Severe',
+            detected: '18 GPG Avg', goal: '0–1 GPG Soft', legal: 'Unregulated', pct: 96,
+            impact: 'Literally liquid rock flowing through your pipes, dishwashers, and showerheads every day.',
+            risk: 'Cuts appliance lifespan by 30–50% and wastes $50–$65/mo on extra detergent, shampoo & cleaners.',
+            fix: '✓ 97.5% Removed by Alpine Tide High-Efficiency Ion-Exchange Softener'
+          },
+          {
+            name: 'High Total Dissolved Solids (TDS & Sulfates)',
+            exceed: '450–700+ ppm TDS',
+            detected: '520 ppm Avg', goal: '< 25 ppm RO', legal: '500 ppm Secondary', pct: 92,
+            impact: 'Heavy mineral taste, crusty white buildup on every fixture, and cloudy, stale-tasting ice.',
+            risk: 'Overwhelms basic fridge filters in weeks.',
+            fix: '✓ Reduced 96–99% at the kitchen tap by Stage 2 Alpine Tide AT-RO™'
+          },
+          {
+            name: 'Disinfection Byproducts (TTHMs & HAA5)',
+            exceed: '180x–310x EWG Limit',
+            detected: '34+ ppb', goal: '0.15 ppb', legal: '80 ppb', pct: 86,
+            impact: 'Chlorine reacting with organic matter creates regulated & unregulated carcinogenic acids.',
+            risk: 'Inhaled in hot shower steam and absorbed through skin.',
+            fix: '✓ Stripped by Stage 1 Alpine Tide AT-1000™ Catalytic Carbon Vessel'
+          },
+          {
+            name: 'Heavy Free Chlorine / Chloramines',
+            exceed: '1.5+ mg/L',
+            detected: '1.5 mg/L', goal: '0.0 mg/L', legal: '4.0 mg/L', pct: 84,
+            impact: 'Strong chemical odor at every faucet and shower.',
+            risk: 'Combines with hard water soap curd to trigger severe winter eczema, dry skin & dull hair.',
+            fix: '✓ Eliminated 99.9% by Stage 1 Catalytic Carbon & KDF-55'
+          },
+          {
+            name: 'Nitrates & Agricultural Runoff',
+            exceed: 'Above EWG Benchmark',
+            detected: 'Elevated Trace', goal: '0.14 ppm', legal: '10 ppm', pct: 74,
+            impact: 'Surrounding agricultural groundwater & surface runoff.',
+            risk: 'Linked to thyroid & developmental risks in infants and expectant mothers.',
+            fix: '✓ Stripped by Stage 2 Under-Sink Alpine Tide AT-RO™ Membrane'
+          },
+          {
+            name: 'Fluoride & Trace Heavy Metals',
+            exceed: 'Daily Tap Intake',
+            detected: '0.7+ mg/L', goal: '0.0 mg/L RO', legal: '4.0 mg/L', pct: 70,
+            impact: 'Cannot be removed by standard carbon pitcher filters.',
+            risk: 'Accumulates in cooking water, coffee, tea, and ice cubes.',
+            fix: '✓ Eliminated at your dedicated kitchen drinking faucet by Stage 2 AT-RO™'
+          }
+        ]
+      },
+      well: {
+        code: 'LAPORTE, BELLVUE & NORTHERN LARIMER COUNTY PRIVATE WELLS',
+        title: 'Rural Well Water: Extreme Hardness, Iron/Sulfur, Sediment & Agricultural Runoff',
+        softBadge: '🚨 Private Well Zone (20+ GPG / 580 ppm) — Filter + Softener + RO Required',
+        defaultCl: 0.2, defaultTds: 580, defaultGpg: 20, needSoftener: true,
+        cards: [
+          {
+            name: 'Extreme Well Hardness (Calcium & Magnesium)',
+            exceed: '18–28+ GPG Extreme',
+            detected: '20 GPG Avg', goal: '0–1 GPG', legal: 'Private Well', pct: 95,
+            impact: 'Rapidly chokes plumbing valves, ruins washing machines, and leaves thick white scale.',
+            risk: 'Destroys water-using appliances years early and prevents soap from lathering.',
+            fix: '✓ Eliminated by Alpine Tide Commercial Ion-Exchange Softener'
+          },
+          {
+            name: 'Iron, Rust & Hydrogen Sulfide ("Rotten Egg" Odor)',
+            exceed: 'Staining & Odor',
+            detected: 'High Well Minerals', goal: '0.0 ppm', legal: 'Private Well', pct: 88,
+            impact: 'Leaves orange rust stains in toilets/showers and metallic or sulfur odor.',
+            risk: 'Ruins white laundry and makes tap water unpleasant to drink.',
+            fix: '✓ Oxidized & stripped by Alpine Tide KDF-55 + Catalytic Carbon + Pre-Filter'
+          },
+          {
+            name: 'High TDS, Nitrates & Septic/Ag Leaching',
+            exceed: '500–850+ ppm TDS',
+            detected: '580 ppm Avg', goal: '< 25 ppm RO', legal: '500 ppm', pct: 90,
+            impact: 'Groundwater dissolves rock, salts, and surface runoff into private well aquifers.',
+            risk: 'Unmonitored nitrates and dissolved solids go straight into drinking water.',
+            fix: '✓ Stripped to near-zero TDS by Stage 2 Under-Sink Alpine Tide AT-RO™'
+          },
+          {
+            name: 'Sand, Silt & Well Pump Sediment',
+            exceed: 'Abrasive Particles',
+            detected: '5–50+ Micron Silt', goal: '0 Micron', legal: 'Private Well', pct: 82,
+            impact: 'Scours faucet ceramic discs, clogs refrigerator lines, and clouds glasses.',
+            risk: 'Causes premature valve leaks across the home.',
+            fix: '✓ Trapped by Stage 1 Heavy-Duty 5-Micron Washable/Twist-Off Pre-Filter'
+          },
+          {
+            name: 'Naturally Occurring Chromium-6 & Trace Metals',
+            exceed: 'Rocky Mountain Bedrock',
+            detected: 'Bedrock Leaching', goal: '0.00 ppb', legal: 'Private Well', pct: 76,
+            impact: 'Foothills granite and shale naturally leach trace metals into groundwater.',
+            risk: 'Long-term cumulative health exposure through drinking & cooking water.',
+            fix: '✓ Eliminated at the kitchen tap by Stage 2 0.0001-Micron AT-RO™ Membrane'
+          },
+          {
+            name: 'Wildfire Ash & Post-Burn Watershed Runoff',
+            exceed: 'Poudre Foothills Wells',
+            detected: 'Seasonal Surge', goal: '0.0 ppb', legal: 'Private Well', pct: 80,
+            impact: 'Spring snowmelt pushes dissolved organic carbon and tannins into shallow wells.',
+            risk: 'Alters water taste, color, and safety every spring and summer.',
+            fix: '✓ Dual-barrier protection: Whole-House AT-1000™ + Kitchen AT-RO™'
+          }
+        ]
+      }
+    };
+
+    const WALK_STAGES = {
+      1: {
+        tag: 'STAGE 1 • BASEMENT UTILITY ROOM OR GARAGE MAIN LINE',
+        title: 'Alpine Tide AT-1000™ 4-Stage Catalytic Carbon & KDF-55 Tank',
+        body: 'Installed cleanly right where your main water line enters your basement or garage. Every drop of water passes through high-activity coconut shell catalytic carbon, KDF-55 media, and a 5-micron sediment pre-filter—stripping out 99.9% of chlorine, chloroform (97x limit), HAA9 (447x limit), and TTHMs (253x limit) at a full 9 GPM before reaching any room.',
+        m1: '9.0 GPM', m2: '1,000,000 Gal', m3: 'Lifetime Warranty'
+      },
+      2: {
+        tag: 'STAGE 2 • MAIN FLOOR KITCHEN SINK & REFRIGERATOR ICE LINE',
+        title: 'Alpine Tide AT-RO™ 4-Stage Under-Sink Reverse Osmosis System',
+        body: 'Tucked neatly under your kitchen sink with a designer brushed-metal drinking faucet (plus optional tie-in to your refrigerator ice maker). Its 0.0001-micron RO membrane strips out up to 99.9% of dissolved solids (TDS), fluoride, hexavalent chromium-6, nitrates, and microplastics for ultra-pure coffee, ice cubes, baby formula, and cooking.',
+        m1: 'Near-0 TDS', m2: '60-Sec Swap', m3: 'Fluoride-Free'
+      },
+      3: {
+        tag: 'UPSTAIRS MASTER & KIDS’ SHOWERS • ZERO CHEMICAL STEAM',
+        title: '🚿 Stop Inhaling Vaporized Chlorine & Chloroform in Hot Showers',
+        body: 'In a 10-minute hot shower, your pores open wide and untreated tap water vaporizes Chloroform (97x EWG limit) and TTHMs (253x EWG limit) into chemical steam. Your family inhales and absorbs more chlorine in one hot shower than drinking 8 glasses of tap water—which is the real reason skin and hair get so dry and itchy during Colorado winters.',
+        m1: '0% Chlorine', m2: 'Softer Skin', m3: 'Zero Pool Odor'
+      },
+      4: {
+        tag: 'LAUNDRY, APPLIANCES & 2-MINUTE DIY FILTER CHANGES',
+        title: '🧺 Protected Plumbing & Easy Twist-Off Filters (Zero Plumber Needed!)',
+        body: 'Your main AT-1000 tank lasts 1,000,000 gallons (~10 years) with zero annual maintenance. The 5-micron pre-filter costs only ~$15–$25 (twists off by hand in 2 minutes with a built-in shutoff valve), and the under-sink AT-RO cartridges twist out like a lightbulb in 60 seconds (~$45–$65/yr). Do it yourself in 2 minutes, or let us handle it once a year!',
+        m1: '$15–$25 Filter', m2: '2-Min DIY', m3: 'No Plumber Needed'
+      }
+    };
+
+    // =====================================================
+    // NAVIGATION & SCREEN SWITCHING
+    // =====================================================
+    function goToScreen(idx) {
+      if (idx < 0 || idx > 4) return;
+      appState.currentScreen = idx;
+
+      document.querySelectorAll('.screen').forEach((el, i) => {
+        el.classList.toggle('active', i === idx);
+      });
+      document.querySelectorAll('.step-tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+
+      document.getElementById('prevScreenBtn').disabled = idx === 0;
+      document.getElementById('nextScreenBtn').textContent = idx === 4 ? '✓ On Final Close' : 'Next Step →';
+      document.getElementById('nextScreenBtn').disabled = idx === 4;
+      document.getElementById('screenIndicator').textContent = `Screen ${idx + 1} / 5`;
+      document.getElementById('notesText').textContent = SCREEN_NOTES[idx];
+
+      // Update Live Screen Objection Decoder & Track Furthest Screen Reached
+      appState.furthestScreen = Math.max(appState.furthestScreen || 0, idx + 1);
+      const obj = SCREEN_OBJECTIONS[idx];
+      if (obj) {
+        document.getElementById('objDecoderTitle').textContent = `🎯 ${obj.stage} — ${obj.diagnosis}`;
+        document.getElementById('objDecoderText').textContent = obj.rebuttal;
+      }
+      localStorage.setItem('alpinetide_last_screen_telemetry', JSON.stringify({
+        current_screen: idx + 1,
+        furthest_screen: appState.furthestScreen,
+        diagnosed_objection: obj ? obj.diagnosis : '',
+        timestamp: new Date().toISOString()
+      }));
+
+      if (idx === 3) updateLiveScorecard();
+      if (idx === 4) {
+        updatePackageBuilderUI();
+        setTimeout(resizeSigCanvas, 60);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function stepScreen(delta) {
+      goToScreen(appState.currentScreen + delta);
+    }
+
+    // =====================================================
+    // SCREEN 1: TERRITORY & FLIP CARDS
+    // =====================================================
+    function selectTerritory(key) {
+      appState.territory = key;
+      ['foco', 'windsor', 'wellington', 'well'].forEach(k => {
+        document.getElementById('cityBtn_' + k).classList.toggle('active', k === key);
+      });
+
+      const t = TERRITORIES[key];
+      document.getElementById('utilBannerCode').textContent = t.code;
+      document.getElementById('utilBannerTitle').textContent = t.title;
+      const badge = document.getElementById('utilSoftnessBadge');
+      badge.textContent = t.softBadge;
+      badge.style.borderColor = t.needSoftener ? 'var(--amber)' : 'var(--tiffany)';
+      badge.style.color = t.needSoftener ? 'var(--amber)' : 'var(--tiffany)';
+
+      // Pre-load realistic sink readings for that town
+      appState.chlorine = t.defaultCl;
+      appState.tds = t.defaultTds;
+      appState.hardness = t.defaultGpg;
+      appState.includeSoftener = t.needSoftener;
+
+      document.getElementById('liveClSlider').value = t.defaultCl;
+      document.getElementById('liveTdsSlider').value = t.defaultTds;
+      document.getElementById('liveGpgSlider').value = t.defaultGpg;
+
+      renderContaminantFlipCards(t.cards);
+      updateLiveScorecard();
+      updatePackageBuilderUI();
+    }
+
+    function renderContaminantFlipCards(cards) {
+      const grid = document.getElementById('contaminantCardsGrid');
+      grid.innerHTML = cards.map(c => `
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
+                  <span style="font-size:11.5px; font-weight:800; color:var(--glacier-dim); text-transform:uppercase;">Detected in Tap</span>
+                  <span class="exceed-badge">${c.exceed}</span>
+                </div>
+                <div style="font-size:19px; font-weight:800; color:var(--glacier); margin-bottom:6px;">${c.name}</div>
+                <div class="meter-bar-track">
+                  <div class="meter-bar-fill" style="width:${c.pct}%;"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; color:var(--glacier-muted);">
+                  <span>Utility: <strong style="color:var(--coral-bright);">${c.detected}</strong></span>
+                  <span>EWG Goal: <strong style="color:var(--tiffany);">${c.goal}</strong></span>
+                  <span>EPA Limit: ${c.legal}</span>
+                </div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid rgba(255,255,255,0.08); font-size:12.5px; font-weight:800; color:var(--volt);">
+                <span>Tap Card to Flip for Health Impact &amp; Fix</span>
+                <span>↻</span>
+              </div>
+            </div>
+            <div class="flip-back">
+              <div>
+                <div style="font-size:11.5px; font-weight:800; color:var(--coral-bright); text-transform:uppercase; margin-bottom:4px;">
+                  Health &amp; Home Impact (${c.name})
+                </div>
+                <p style="font-size:13.5px; color:var(--glacier); margin-bottom:8px; line-height:1.4;">
+                  ${c.impact} <strong>${c.risk}</strong>
+                </p>
+              </div>
+              <div style="background:rgba(0,245,212,0.14); border:1px solid var(--tiffany); border-radius:10px; padding:9px 12px; font-size:13px; font-weight:800; color:var(--tiffany);">
+                ${c.fix}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // =====================================================
+    // SCREEN 2: BOTTLED WATER & MICROPLASTICS CALCULATOR
+    // =====================================================
+    function recalcBottleTrap() {
+      const casesWk = parseFloat(document.getElementById('casesSlider').value) || 2;
+      const costCase = parseFloat(document.getElementById('costCaseSlider').value) || 7.5;
+      appState.casesPerWeek = casesWk;
+      appState.costPerCase = costCase;
+
+      document.getElementById('casesPerWeekVal').textContent = `${casesWk} Cases / wk`;
+      document.getElementById('costPerCaseVal').textContent = `$${costCase.toFixed(2)} / case`;
+
+      const weeklySpend = casesWk * costCase;
+      const monthlySpend = Math.round(weeklySpend * 4.33);
+      const yr5Spend = Math.round(weeklySpend * 52 * 5);
+      const yr10Spend = yr5Spend * 2;
+      appState.monthlyBottleSpend = monthlySpend;
+
+      // 35 bottles per case average; 0.5L per bottle; 240,000 microplastics per liter
+      const bottles5Yr = Math.round(casesWk * 35 * 52 * 5);
+      const litersPerYear = casesWk * 35 * 0.5 * 52;
+      const microplasticsYr = Math.round(litersPerYear * 240000);
+
+      document.getElementById('outMonthlyBurn').textContent = monthlySpend.toLocaleString();
+      document.getElementById('out5YrBurn').textContent = '$' + yr5Spend.toLocaleString();
+      document.getElementById('out10YrBurn').textContent = '$' + yr10Spend.toLocaleString();
+      document.getElementById('outBottlesDumped').textContent = bottles5Yr.toLocaleString();
+      document.getElementById('outMicroplastics').textContent = microplasticsYr.toLocaleString();
+
+      updatePackageBuilderUI();
+    }
+
+    // =====================================================
+    // SCREEN 3: INTERACTIVE SYSTEM WALKTHROUGH
+    // =====================================================
+    function selectWalkStage(num) {
+      [1, 2, 3, 4].forEach(i => {
+        document.getElementById('walkBtn' + i).classList.toggle('active', i === num);
+      });
+      const d = WALK_STAGES[num];
+      document.getElementById('walkDetailTag').textContent = d.tag;
+      document.getElementById('walkDetailTitle').textContent = d.title;
+      document.getElementById('walkDetailBody').textContent = d.body;
+      document.getElementById('walkMetric1').textContent = d.m1;
+      document.getElementById('walkMetric2').textContent = d.m2;
+      document.getElementById('walkMetric3').textContent = d.m3;
+    }
+
+    function setPlumbingFlowMode(isClean) {
+      const pipe = document.getElementById('walkPipeNetwork');
+      pipe.setAttribute('stroke', isClean ? '#00F5D4' : '#FFB800');
+      document.getElementById('flowCleanBtn').style.borderColor = isClean ? 'var(--tiffany)' : 'rgba(255,255,255,0.15)';
+      document.getElementById('flowCleanBtn').style.color = isClean ? 'var(--tiffany)' : 'var(--glacier-muted)';
+      document.getElementById('flowRawBtn').style.borderColor = !isClean ? 'var(--coral-bright)' : 'rgba(255,255,255,0.15)';
+      document.getElementById('flowRawBtn').style.color = !isClean ? 'var(--coral-bright)' : 'var(--glacier-muted)';
+    }
+
+    // =====================================================
+    // SCREEN 4: LIVE SINK TEST SCORECARD
+    // =====================================================
+    function setChlorineLevel(val, btnIdx) {
+      appState.chlorine = val;
+      document.getElementById('liveClSlider').value = val;
+      [0, 1, 2, 3].forEach(i => {
+        document.getElementById('clBtn' + i).classList.toggle('active', i === btnIdx);
+      });
+      updateLiveScorecard();
+    }
+
+    function setTdsLevel(val) {
+      appState.tds = val;
+      updateLiveScorecard();
+    }
+
+    function setGpgLevel(val) {
+      appState.hardness = val;
+      appState.includeSoftener = val >= 8;
+      updateLiveScorecard();
+    }
+
+    function updateLiveScorecard() {
+      const cl = appState.chlorine;
+      const tds = appState.tds;
+      const gpg = appState.hardness;
+
+      const clDesc = cl >= 1.0 ? `${cl.toFixed(1)} mg/L (Pool Level)` : cl >= 0.4 ? `${cl.toFixed(1)} mg/L (Moderate)` : `${cl.toFixed(1)} mg/L (Low)`;
+      document.getElementById('liveClReadout').textContent = clDesc;
+      document.getElementById('liveTdsReadout').textContent = `${tds} ppm`;
+      document.getElementById('liveGpgReadout').textContent = gpg <= 3
+        ? `${gpg} GPG (Naturally Soft)`
+        : gpg <= 8 ? `${gpg} GPG (Moderately Hard)` : `${gpg} GPG (Severe Scale Zone)`;
+
+      // Calculate Smart Water Score (Penalizes Chlorine & DBPs in FoCo even when TDS/Hardness are low)
+      let score = 92;
+      score -= Math.min(cl * 32, 52); // 1.3 mg/L chlorine drops 41.6 pts
+      if (gpg > 3) score -= Math.min((gpg - 3) * 2.2, 28);
+      if (tds > 120) score -= Math.min((tds - 120) * 0.05, 18);
+      score = Math.max(Math.min(Math.round(score), 95), 18);
+
+      const arc = document.getElementById('scoreArcPath');
+      const totalLen = 392;
+      const offset = totalLen - (totalLen * (score / 100));
+      arc.style.strokeDashoffset = offset;
+
+      const numText = document.getElementById('scoreNumberText');
+      const gradeText = document.getElementById('scoreGradeText');
+      numText.textContent = `${score} / 100`;
+
+      if (score < 48) {
+        arc.setAttribute('stroke', '#FF1E56');
+        numText.setAttribute('fill', '#FF4D79');
+        gradeText.textContent = gpg >= 8
+          ? 'GRADE D • HEAVY CHLORINE + HARD ROCK SCALE'
+          : 'GRADE D • HEAVY CHLORINE & 447x EWG BYPRODUCTS';
+      } else if (score < 74) {
+        arc.setAttribute('stroke', '#FFB800');
+        numText.setAttribute('fill', '#FFB800');
+        gradeText.textContent = 'GRADE C • ELEVATED DISINFECTANT & BYPRODUCTS';
+      } else {
+        arc.setAttribute('stroke', '#00F5D4');
+        numText.setAttribute('fill', '#00F5D4');
+        gradeText.textContent = 'GRADE A • ALPINE TIDE PROTECTED RANGE';
+      }
+
+      const rxTitle = document.getElementById('rxSystemTitle');
+      const rxReason = document.getElementById('rxSystemReason');
+      if (gpg >= 8) {
+        rxTitle.textContent = 'Prescription: Alpine Tide AT-1000™ + High-Efficiency Softener + Kitchen AT-RO™';
+        rxReason.textContent = `Your water measured ${gpg} GPG hardness (${tds} ppm TDS) plus ${cl.toFixed(1)} mg/L chlorine. You need both Whole-House Catalytic Carbon/KDF + Ion-Exchange Softening to stop scale buildup, paired with Under-Sink RO for pure drinking water.`;
+      } else {
+        rxTitle.textContent = 'Prescription: Alpine Tide AT-1000™ Whole-House + Kitchen Sink AT-RO™ Combo';
+        rxReason.textContent = `Good news: at ${gpg} GPG, your water is naturally soft—you do NOT need a water softener. However, your ${cl.toFixed(1)} mg/L free chlorine and Fort Collins disinfection byproducts (HAA9 at 447x EWG limit, TTHMs at 253x) call for Whole-House Catalytic Carbon/KDF for chemical-free showers plus Under-Sink RO for fluoride-free drinking water.`;
+      }
+
+      updatePackageBuilderUI();
+    }
+
+    // =====================================================
+    // SCREEN 5: PACKAGE & MONTHLY PAYMENT BUILDER
+    // =====================================================
+    const TIER_PRICING = {
+      soft: {
+        1: { title: 'Alpine Tide AT-1000™ Whole-House System (Minus Kitchen RO)', monthly: 127, cash: '$5,999', fleetMonthly: 65, fleetCash: '$2,695 (Neighbor Route)' },
+        2: { title: 'Alpine Tide AT-1000™ Whole-House + Kitchen Sink AT-RO™ Combo', monthly: 152, cash: '$7,199', fleetMonthly: 89, fleetCash: '$3,895 (Neighbor Route — Retail $5,295)' }
+      },
+      hard: {
+        1: { title: 'Alpine Tide AT-1000™ + Salt Softener (Minus Kitchen RO)', monthly: 167, cash: '$7,899', fleetMonthly: 99, fleetCash: '$4,295 (Neighbor Route)' },
+        2: { title: 'Alpine Tide AT-1000™ + Softener + Kitchen Sink AT-RO™ Combo', monthly: 192, cash: '$9,099', fleetMonthly: 115, fleetCash: '$4,995 (Neighbor Route — Retail $6,495)' }
+      }
+    };
+
+    function selectPackageTier(tierNum) {
+      appState.selectedTier = tierNum;
+      updatePackageBuilderUI();
+    }
+
+    function toggleHardWaterAddon() {
+      appState.includeSoftener = !appState.includeSoftener;
+      if (appState.includeSoftener && appState.hardness < 8) {
+        appState.hardness = 18;
+        document.getElementById('liveGpgSlider').value = 18;
+      } else if (!appState.includeSoftener && appState.hardness >= 8) {
+        appState.hardness = 2;
+        document.getElementById('liveGpgSlider').value = 2;
+      }
+      updateLiveScorecard();
+      updatePackageBuilderUI();
+    }
+
+    function toggleFleetWaiver() {
+      appState.fleetWaiver = !appState.fleetWaiver;
+      const btn = document.getElementById('fleetDiscountBtn');
+      btn.textContent = appState.fleetWaiver
+        ? '✓ January Neighbor Fleet Waiver Applied (-$1,400)'
+        : '🏷️ Apply January Neighbor Fleet Discount (-$1,400)';
+      btn.style.background = appState.fleetWaiver ? 'rgba(223,255,0,0.2)' : 'rgba(18,21,30,0.9)';
+      updatePackageBuilderUI();
+    }
+
+    function updatePackageBuilderUI() {
+      const modeKey = appState.includeSoftener ? 'hard' : 'soft';
+      const p1 = TIER_PRICING[modeKey][1];
+      const p2 = TIER_PRICING[modeKey][2];
+
+      const softBtn = document.getElementById('softenerAddonBtn');
+      softBtn.textContent = appState.includeSoftener
+        ? '✓ Hard-Water Softener Included (Tap for City Soft Mode)'
+        : '➕ Add Hard-Water Softener (Wellington / Windsor)';
+      softBtn.style.borderColor = appState.includeSoftener ? 'var(--amber)' : 'rgba(255,255,255,0.15)';
+      softBtn.style.color = appState.includeSoftener ? 'var(--amber)' : 'var(--glacier-muted)';
+
+      const m1 = appState.fleetWaiver ? p1.fleetMonthly : p1.monthly;
+      const c1 = appState.fleetWaiver ? p1.fleetCash : `${p1.cash} cash (includes full installation)`;
+      const m2 = appState.fleetWaiver ? p2.fleetMonthly : p2.monthly;
+      const c2 = appState.fleetWaiver ? p2.fleetCash : `${p2.cash} cash (includes full installation)`;
+
+      const soapOffset = appState.includeSoftener ? 45 : 0;
+      const net1 = Math.max(m1 - appState.monthlyBottleSpend - soapOffset, 8);
+      const net2 = Math.max(m2 - appState.monthlyBottleSpend - soapOffset, 12);
+
+      document.getElementById('pkgTitle1').textContent = p1.title;
+      document.getElementById('pkgMonthly1').innerHTML = `$${m1}<span>/month</span>`;
+      document.getElementById('pkgCash1').textContent = `or ${c1}`;
+      document.getElementById('pkgNet1').innerHTML =
+        `After ditching $${appState.monthlyBottleSpend}/mo bottles${soapOffset ? ' + $45/mo soap waste' : ''}: <strong>Net cost ~$${net1}/mo (~$${(net1/30).toFixed(2)}/day)</strong>`;
+
+      document.getElementById('pkgTitle2').textContent = p2.title;
+      document.getElementById('pkgMonthly2').innerHTML = `$${m2}<span>/month</span>`;
+      document.getElementById('pkgCash2').textContent = `or ${c2}`;
+      document.getElementById('pkgNet2').innerHTML =
+        `After ditching $${appState.monthlyBottleSpend}/mo bottles${soapOffset ? ' + $45/mo soap waste' : ''}: <strong>Net cost ~$${net2}/mo (~$${(net2/30).toFixed(2)}/day)</strong>`;
+
+      document.getElementById('pkgCard1').classList.toggle('selected', appState.selectedTier === 1);
+      document.getElementById('pkgCard2').classList.toggle('selected', appState.selectedTier === 2);
+      document.getElementById('pkgBadge1').textContent = appState.selectedTier === 1 ? '✓ SELECTED' : 'TAP TO SELECT';
+      document.getElementById('pkgBadge1').style.color = appState.selectedTier === 1 ? 'var(--volt)' : 'var(--glacier-dim)';
+      document.getElementById('pkgBadge2').textContent = appState.selectedTier === 2 ? '✓ SELECTED' : 'TAP TO SELECT';
+      document.getElementById('pkgBadge2').style.color = appState.selectedTier === 2 ? 'var(--volt)' : 'var(--glacier-dim)';
+
+      const chosen = TIER_PRICING[modeKey][appState.selectedTier];
+      const chosenMonthly = appState.fleetWaiver ? chosen.fleetMonthly : chosen.monthly;
+      const chosenCash = appState.fleetWaiver ? chosen.fleetCash : `${chosen.cash} cash`;
+      const readingsStr = `Chlorine: ${appState.chlorine.toFixed(1)} mg/L • TDS: ${appState.tds} ppm • Hardness: ${appState.hardness} GPG`;
+
+      document.getElementById('sumReadingsText').textContent = readingsStr;
+      document.getElementById('sumPkgText').textContent = chosen.title;
+      document.getElementById('sumPriceText').textContent = `$${chosenMonthly}/mo (or ${chosenCash})`;
+
+      // Sync Printable PDF
+      document.getElementById('pdfCustName').textContent = document.getElementById('custName').value.trim() || 'Fort Collins Homeowner';
+      const contactParts = [document.getElementById('custAddress').value.trim(), document.getElementById('custPhone').value.trim()].filter(Boolean);
+      document.getElementById('pdfCustContact').textContent = contactParts.join(' • ') || 'Fort Collins, CO';
+      document.getElementById('pdfWaterReadings').textContent = readingsStr;
+      document.getElementById('pdfSelectedSystem').textContent = chosen.title;
+      document.getElementById('pdfSelectedPrice').textContent = `$${chosenMonthly}/mo (or ${chosenCash})`;
+    }
+
+    // =====================================================
+    // HTML5 CANVAS SIGNATURE PAD
+    // =====================================================
+    const sigCanvas = document.getElementById('sigCanvas');
+    const sigCtx = sigCanvas.getContext('2d');
+    let isDrawing = false;
+
+    function resizeSigCanvas() {
+      const rect = sigCanvas.parentElement.getBoundingClientRect();
+      if (!rect.width) return;
+      sigCanvas.width = rect.width;
+      sigCanvas.height = rect.height;
+      sigCtx.strokeStyle = '#00F5D4';
+      sigCtx.lineWidth = 2.5;
+      sigCtx.lineCap = 'round';
+      sigCtx.lineJoin = 'round';
+    }
+
+    function getSigPos(e) {
+      const rect = sigCanvas.getBoundingClientRect();
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: cx - rect.left, y: cy - rect.top };
+    }
+
+    sigCanvas.addEventListener('pointerdown', e => {
+      isDrawing = true;
+      appState.hasSignature = true;
+      const p = getSigPos(e);
+      sigCtx.beginPath();
+      sigCtx.moveTo(p.x, p.y);
+    });
+    sigCanvas.addEventListener('pointermove', e => {
+      if (!isDrawing) return;
+      const p = getSigPos(e);
+      sigCtx.lineTo(p.x, p.y);
+      sigCtx.stroke();
+    });
+    window.addEventListener('pointerup', () => { isDrawing = false; });
+
+    function clearSignature() {
+      sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+      appState.hasSignature = false;
+    }
+
+    // =====================================================
+    // GOHIGHLEVEL (GHL) CRM & INVOICING SYNC
+    // =====================================================
+    async function submitToGhlAndLock() {
+      appState.januaryLocked = true;
+      updatePackageBuilderUI();
+
+      const modeKey = appState.includeSoftener ? 'hard' : 'soft';
+      const chosen = TIER_PRICING[modeKey][appState.selectedTier];
+      const chosenMonthly = appState.fleetWaiver ? chosen.fleetMonthly : chosen.monthly;
+      const chosenCash = appState.fleetWaiver ? chosen.fleetCash : chosen.cash;
+
+      document.getElementById('sumSlotStatus').textContent = '✓ January Priority Slot Reserved (Price Locked)';
+      document.getElementById('sumSlotStatus').style.color = 'var(--volt)';
+      document.getElementById('lockInstallBtn').textContent = '✓ January Slot Locked & Dispatched to GHL CRM';
+
+      const payload = {
+        source: 'Alpine Tide 5-Screen Kitchen-Table Configurator',
+        timestamp: new Date().toISOString(),
+        full_name: document.getElementById('custName').value.trim() || 'Fort Collins Homeowner',
+        phone: document.getElementById('custPhone').value.trim(),
+        email: document.getElementById('custEmail').value.trim(),
+        address: document.getElementById('custAddress').value.trim(),
+        territory: appState.territory,
+        chlorine_mgl: appState.chlorine,
+        tds_ppm: appState.tds,
+        hardness_gpg: appState.hardness,
+        weekly_bottle_cases: appState.casesPerWeek,
+        monthly_bottle_spend: appState.monthlyBottleSpend,
+        selected_package: chosen.title,
+        monthly_investment: `$${chosenMonthly}/month`,
+        cash_investment: chosenCash,
+        fleet_route_waiver: appState.fleetWaiver,
+        signed_on_glass: appState.hasSignature,
+        signature_data_url: appState.hasSignature ? sigCanvas.toDataURL('image/png') : '',
+        tags: ['alpine-tide-close', 'january-install-slot', appState.territory]
+      };
+
+      const msgEl = document.getElementById('ghlSyncMsg');
+      const hook = localStorage.getItem('blacktide_ghl_webhook') || '';
+      const invUrl = localStorage.getItem('blacktide_ghl_invoice_url') || '';
+
+      if (hook) {
+        msgEl.textContent = 'Syncing contact, water test & package to GoHighLevel CRM...';
+        try {
+          await fetch(hook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          msgEl.textContent = '✓ Synced to GoHighLevel CRM! Contact & Invoice Workflow Triggered.';
+        } catch (err) {
+          queueOfflineLead(payload);
+          msgEl.textContent = '✓ Saved Offline! Will auto-sync to GHL when connection resumes.';
+        }
+      } else {
+        queueOfflineLead(payload);
+        msgEl.textContent = '✓ Estimate Locked Locally! (Paste your GHL Webhook in ⚙️ GHL CRM anytime)';
+      }
+
+      if (invUrl) {
+        setTimeout(() => window.open(invUrl, '_blank'), 850);
+      }
+    }
+
+    function queueOfflineLead(payload) {
+      const list = JSON.parse(localStorage.getItem('blacktide_offline_leads') || '[]');
+      list.push(payload);
+      localStorage.setItem('blacktide_offline_leads', JSON.stringify(list));
+      updateOfflineCount();
+    }
+
+    function updateOfflineCount() {
+      const list = JSON.parse(localStorage.getItem('blacktide_offline_leads') || '[]');
+      const el = document.getElementById('offlineQueueCount');
+      if (el) el.textContent = `${list.length} offline lead(s) queued`;
+    }
+
+    function openGhlModal() {
+      document.getElementById('ghlWebhookInput').value = localStorage.getItem('blacktide_ghl_webhook') || '';
+      document.getElementById('ghlInvoiceUrlInput').value = localStorage.getItem('blacktide_ghl_invoice_url') || '';
+      updateOfflineCount();
+      document.getElementById('ghlModal').classList.add('open');
+    }
+    function closeGhlModal() { document.getElementById('ghlModal').classList.remove('open'); }
+
+    async function saveGhlSettings() {
+      const hook = document.getElementById('ghlWebhookInput').value.trim();
+      const inv = document.getElementById('ghlInvoiceUrlInput').value.trim();
+      localStorage.setItem('blacktide_ghl_webhook', hook);
+      localStorage.setItem('blacktide_ghl_invoice_url', inv);
+
+      const list = JSON.parse(localStorage.getItem('blacktide_offline_leads') || '[]');
+      if (hook && list.length) {
+        const rem = [];
+        for (const item of list) {
+          try {
+            await fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(item) });
+          } catch (e) { rem.push(item); }
+        }
+        localStorage.setItem('blacktide_offline_leads', JSON.stringify(rem));
+      }
+      updateOfflineCount();
+      closeGhlModal();
+    }
+
+    // =====================================================
+    // QR CODE, SMS QUOTE & NEON THEME SWITCHER
+    // =====================================================
+    function getBaseUrl() {
+      const loc = window.location.href.split('?')[0];
+      return loc.substring(0, loc.lastIndexOf('/') + 1);
+    }
+
+    function setQrMode(mode) {
+      const base = getBaseUrl();
+      const ghl = encodeURIComponent(localStorage.getItem('blacktide_ghl_webhook') || '');
+      const url = mode === 'sink'
+        ? `${base}sink.html?cl=${appState.chlorine}&ghl=${ghl}`
+        : `${base}index.html?cl=${appState.chlorine}&tds=${appState.tds}&gpg=${appState.hardness}&tier=${appState.selectedTier}`;
+      document.getElementById('shareUrlBox').value = url;
+      document.getElementById('qrImage').src =
+        `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(url)}`;
+    }
+
+    function openQrModal() {
+      setQrMode('sink');
+      document.getElementById('qrModal').classList.add('open');
+    }
+    function closeQrModal() { document.getElementById('qrModal').classList.remove('open'); }
+
+    function sendSmsQuote() {
+      const phone = document.getElementById('custPhone').value.trim();
+      const modeKey = appState.includeSoftener ? 'hard' : 'soft';
+      const chosen = TIER_PRICING[modeKey][appState.selectedTier];
+      const monthly = appState.fleetWaiver ? chosen.fleetMonthly : chosen.monthly;
+      const cash = appState.fleetWaiver ? chosen.fleetCash : chosen.cash;
+      const link = `${getBaseUrl()}index.html?cl=${appState.chlorine}&tds=${appState.tds}&gpg=${appState.hardness}&tier=${appState.selectedTier}`;
+      const msg = `Hi! This is Fred Caldero with Alpine Tide Water Co. in Fort Collins. Here are your tap test results (Chlorine: ${appState.chlorine} mg/L, TDS: ${appState.tds} ppm, Hardness: ${appState.hardness} GPG) and written estimate for the ${chosen.title}: $${monthly}/mo (or ${cash}). Interactive summary: ${link}`;
+      window.location.href = `sms:${phone}?&body=${encodeURIComponent(msg)}`;
+    }
+
+    const THEMES = [
+      { cls: '', label: '⚡ Tiffany + Volt' },
+      { cls: 'theme-volt', label: '🎾 Pure Nike Volt' },
+      { cls: 'theme-tiffany', label: '💎 Electric Tiffany' }
+    ];
+    let themeIdx = 0;
+    function cycleNeonTheme() {
+      themeIdx = (themeIdx + 1) % THEMES.length;
+      document.body.classList.remove('theme-volt', 'theme-tiffany');
+      if (THEMES[themeIdx].cls) document.body.classList.add(THEMES[themeIdx].cls);
+      document.getElementById('neonThemeBtn').textContent = THEMES[themeIdx].label;
+    }
+
+    function toggleNotes() {
+      appState.notesOpen = !appState.notesOpen;
+      document.getElementById('notesDrawer').classList.toggle('open', appState.notesOpen);
+    }
+
+    function resetConfigurator() {
+      selectTerritory('foco');
+      document.getElementById('casesSlider').value = 2;
+      document.getElementById('costCaseSlider').value = 7.5;
+      recalcBottleTrap();
+      appState.fleetWaiver = false;
+      appState.selectedTier = 2;
+      document.getElementById('custName').value = '';
+      document.getElementById('custPhone').value = '';
+      document.getElementById('custEmail').value = '';
+      document.getElementById('custAddress').value = '';
+      document.getElementById('ghlSyncMsg').textContent = '';
+      clearSignature();
+      goToScreen(0);
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.key === 'ArrowRight') stepScreen(1);
+      else if (e.key === 'ArrowLeft') stepScreen(-1);
+      else if (e.key.toLowerCase() === 'n') toggleNotes();
+    });
+
+    // Hydrate from URL params or Sink Companion Lead
+    function initApp() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('mode') === 'hard') selectTerritory('wellington');
+      else selectTerritory('foco');
+
+      if (params.get('cl')) setChlorineLevel(parseFloat(params.get('cl')) || 1.3, -1);
+      if (params.get('tds')) setTdsLevel(parseInt(params.get('tds'), 10) || 85);
+      if (params.get('gpg')) setGpgLevel(parseInt(params.get('gpg'), 10) || 2);
+      if (params.get('tier') === '1') appState.selectedTier = 1;
+      if (params.get('name')) document.getElementById('custName').value = params.get('name');
+      if (params.get('phone')) document.getElementById('custPhone').value = params.get('phone');
+      if (params.get('address')) document.getElementById('custAddress').value = params.get('address');
+
+      const savedLead = localStorage.getItem('blacktide_last_customer');
+      if (savedLead && !params.get('name')) {
+        try {
+          const parsed = JSON.parse(savedLead);
+          if (parsed.full_name) document.getElementById('custName').value = parsed.full_name;
+          if (parsed.phone) document.getElementById('custPhone').value = parsed.phone;
+          if (parsed.email) document.getElementById('custEmail').value = parsed.email;
+          if (parsed.address) document.getElementById('custAddress').value = parsed.address;
+        } catch (e) {}
+      }
+
+      recalcBottleTrap();
+      goToScreen(0);
+      // Force unregister any old stale service workers so updates always load immediately
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          regs.forEach(r => r.update());
+        }).catch(() => {});
+      }
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
