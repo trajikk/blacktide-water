@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alpine Tide Water Co. — Fort Collins Field Sales & Training Manual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    @page {
+      size: letter;
+      margin: 0.55in 0.6in;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #FFFFFF;
+      color: #111827;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.48;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Clean Single-Color Executive Header */
+    .doc-header {
+      border-bottom: 2.5px solid #1E293B;
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .doc-brand {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+    }
+    .doc-sub {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+    .doc-meta {
+      text-align: right;
+      font-size: 9pt;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    /* Section & Typography */
+    .section-block {
+      margin-bottom: 20px;
+      page-break-inside: avoid;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+    .part-label {
+      font-size: 8.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #475569;
+      margin-bottom: 2px;
+    }
+    h1 {
+      font-size: 15pt;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: #0F172A;
+      border-bottom: 1.5px solid #CBD5E1;
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+    }
+    h3 {
+      font-size: 10.5pt;
+      font-weight: 800;
+      color: #1E293B;
+      margin: 12px 0 5px;
+    }
+    p {
+      margin-bottom: 8px;
+      color: #1F2937;
+    }
+    ul, ol {
+      padding-left: 18px;
+      margin-bottom: 10px;
+      color: #1F2937;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    strong {
+      color: #0F172A;
+      font-weight: 700;
+    }
+
+    /* Clean Monochrome / Slate Boxes & Grids */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .card-box {
+      background: #F8FAFC;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      padding: 11px 13px;
+      page-break-inside: avoid;
+    }
+    .card-box-title {
+      font-size: 9.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #0F172A;
+      border-bottom: 1px solid #E2E8F0;
+      padding-bottom: 4px;
+      margin-bottom: 7px;
+    }
+
+    .callout-box {
+      background: #F1F5F9;
+      border-left: 4px solid #1E293B;
+      border-top: 1px solid #CBD5E1;
+      border-right: 1px solid #CBD5E1;
+      border-bottom: 1px solid #CBD5E1;
+      border-radius: 4px;
+      padding: 11px 14px;
+      margin: 10px 0;
+      page-break-inside: avoid;
+    }
+
+    .script-box {
+      background: #FFFFFF;
+      border: 1.5px solid #94A3B8;
+      border-radius: 6px;
+      padding: 11px 14px;
+      margin: 8px 0 12px;
+      page-break-inside: avoid;
+    }
+    .speaker-tag {
+      font-weight: 800;
+      color: #0F172A;
+      text-transform: uppercase;
+      font-size: 9.5pt;
+    }
+    .stage-note {
+      font-style: italic;
+      color: #475569;
+      font-size: 9.5pt;
+      margin-bottom: 4px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 14px;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+    th {
+      background: #1E293B;
+      color: #FFFFFF;
+      font-weight: 700;
+      text-align: left;
+      padding: 7px 9px;
+      border: 1px solid #1E293B;
+    }
+    td {
+      padding: 6px 9px;
+      border: 1px solid #CBD5E1;
+      color: #111827;
+      vertical-align: top;
+    }
+    tr:nth-child(even) td {
+      background: #F8FAFC;
+    }
+
+    /* Q&A Blocks (Replaces Web Flashcards) */
+    .qa-item {
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      padding: 10px 13px;
+      margin-bottom: 9px;
+      background: #FFFFFF;
+      page-break-inside: avoid;
+    }
+    .qa-question {
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 4px;
+      font-size: 10pt;
+    }
+    .qa-answer {
+      color: #1F2937;
+      font-size: 9.8pt;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 5px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px solid #E2E8F0;
+      font-size: 10pt;
+    }
+    .check-box {
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid #1E293B;
+      border-radius: 2px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="doc-header">
+    <div>
+      <div class="doc-brand">ALPINE TIDE WATER CO.</div>
+      <div class="doc-sub">Fort Collins &amp; Northern Colorado Field Sales &amp; Technical Training Manual</div>
+    </div>
+    <div class="doc-meta">
+      <div>Fred Caldero • Founder &amp; Local Specialist</div>
+      <div>Territory: Fort Collins (CO0135291), Timnath, Windsor &amp; Wellington</div>
+    </div>
+  </header>
+
+  <!-- SECTION 0: FAST-FACTS CHEAT SHEET -->
+  <section class="section-block">
+    <div class="part-label">Quick Reference • Memorize Before Knocking</div>
+    <h2>The 60-Second Fast-Facts &amp; Lab Numbers Cheat Sheet</h2>
+
+    <div class="two-col">
+      <div class="card-box">
+        <div class="card-box-title">1. Bottled Water &amp; Microplastics Facts</div>
+        <ul>
+          <li><strong>240,000 Plastic Particles / Liter:</strong> Researchers found ~240,000 micro- and nanoplastic particles per liter of bottled water (~90% are nanoplastics small enough to cross cell walls).</li>
+          <li><strong>93% of Bottled Brands Tested Positive</strong> for microplastic contamination.</li>
+          <li><strong>4.5x Heart Attack, Stroke &amp; Death Rate:</strong> A 2024 medical study found patients with microplastics in carotid artery plaque had a 4.5x higher rate of heart attack, stroke, or death.</li>
+          <li><strong>Detected in Human Tissue:</strong> Found in human blood, lungs, brain tissue, and placentas.</li>
+          <li><strong>60 Million Plastic Bottles Dumped Daily</strong> in the U.S. (under 30% recycled).</li>
+          <li><strong>The Cost Trap:</strong> A family of 4 spends <strong>$45–$84/month ($2,700–$5,040 over 5 years)</strong> paying <strong>$10–$12/gallon</strong> vs. <strong>~$0.04/gallon</strong> with Alpine Tide whole-house filtration.</li>
+        </ul>
+      </div>
+
+      <div class="card-box">
+        <div class="card-box-title">2. Fort Collins &amp; NoCo Tap Water Chemistry</div>
+        <ul>
+          <li><strong>Water Sources:</strong> Cache la Poudre River (affected by Cameron Peak wildfire ash/runoff) + Horsetooth Reservoir (seasonal algae blooms / Geosmin lake-dirt taste).</li>
+          <li><strong>Free Chlorine (~1.3 mg/L):</strong> Pool-level disinfectant (swimming pools run 1.0–3.0 mg/L). Absorbs into skin in 15 seconds and vaporizes into chemical steam in hot showers.</li>
+          <li><strong>Haloacetic Acids (HAA9 ~26.8 ppb / HAA5 ~22 ppb):</strong> <strong>220x to 447x above EWG health guidelines</strong>.</li>
+          <li><strong>Total Trihalomethanes (TTHMs ~31–38 ppb):</strong> <strong>206x to 253x above EWG health guidelines</strong> (EPA legal limit is 80 ppb). Both tied to long-term cancer risk.</li>
+          <li><strong>Fort Collins City Hardness &amp; TDS:</strong> Naturally soft (1.5–3 GPG) and low TDS (50–110 ppm) — <strong>NEVER test TDS/Hardness or pitch a softener inside FoCo city limits!</strong></li>
+          <li><strong>Hard Water Zones (Wellington 80549, Windsor 80550, Timnath 80547, Wells):</strong> 11–25+ GPG rock hardness, 260–750+ ppm TDS, wastes <strong>$40–$60/mo</strong> in extra soap.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Official EWG Tap Water Report: City of Fort Collins Utilities (PWS ID: CO0135291 — Serves ~179,901 People)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:24%;">Contaminant (CO0135291)</th>
+          <th style="width:23%;">FoCo Level vs. EWG Goal</th>
+          <th style="width:28%;">What Health &amp; Home Risks It Causes</th>
+          <th style="width:25%;">How Alpine Tide Eliminates It</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Haloacetic Acids (HAA9)</strong></td>
+          <td><strong>447x EWG Limit</strong> (26.8 vs 0.06 ppb)</td>
+          <td>Increased cancer risk; developmental &amp; reproductive toxicity</td>
+          <td>Tier 1 Whole-House Carbon + Tier 2 RO</td>
+        </tr>
+        <tr>
+          <td><strong>2. Total Trihalomethanes (TTHMs)</strong></td>
+          <td><strong>206x–253x EWG Limit</strong> (31–38 vs 0.15 ppb)</td>
+          <td>Bladder &amp; colorectal cancer; inhaled as chemical steam in hot showers</td>
+          <td>Tier 1 Whole-House Carbon (Every Shower)</td>
+        </tr>
+        <tr>
+          <td><strong>3. Haloacetic Acids (HAA5)</strong></td>
+          <td><strong>220x EWG Limit</strong> (22.0 vs 0.1 ppb)</td>
+          <td>Carcinogenic byproduct formed when chlorine hits Poudre wildfire ash</td>
+          <td>Tier 1 Whole-House Carbon + Tier 2 RO</td>
+        </tr>
+        <tr>
+          <td><strong>4. Trichloroacetic Acid</strong></td>
+          <td><strong>150x EWG Limit</strong> (15.0 vs 0.1 ppb)</td>
+          <td>Liver &amp; cellular toxicity; long-term cancer risk</td>
+          <td>Tier 1 Whole-House Carbon + Tier 2 RO</td>
+        </tr>
+        <tr>
+          <td><strong>5. Chloroform</strong></td>
+          <td><strong>97x EWG Limit</strong> (38.9 vs 0.4 ppb)</td>
+          <td>Volatile disinfection gas inhaled in shower steam; liver/kidney stress</td>
+          <td>Tier 1 Whole-House Catalytic Carbon</td>
+        </tr>
+        <tr>
+          <td><strong>6. Dichloroacetic Acid</strong></td>
+          <td><strong>63x EWG Limit</strong> (12.6 vs 0.2 ppb)</td>
+          <td>Increased cancer risk; metabolic &amp; reproductive concerns</td>
+          <td>Tier 1 Whole-House Carbon + Tier 2 RO</td>
+        </tr>
+        <tr>
+          <td><strong>7. Bromodichloromethane</strong></td>
+          <td><strong>54x EWG Limit</strong> (3.2–5.4 vs 0.06 ppb)</td>
+          <td>Carcinogenic trihalomethane; pregnancy &amp; fetal development risk</td>
+          <td>Tier 1 Whole-House Carbon + Tier 2 RO</td>
+        </tr>
+        <tr>
+          <td><strong>8. Bromochloro- &amp; Dibromoacetic Acid</strong></td>
+          <td><strong>15x–32x EWG Limit</strong> (&gt;0.02 ppb goal)</td>
+          <td>Brominated disinfection acids tied to cellular mutation &amp; cancer</td>
+          <td>Tier 1 Whole-House Carbon + Tier 2 RO</td>
+        </tr>
+        <tr>
+          <td><strong>9. Chromium-6 (Hexavalent) &amp; Nitrates</strong></td>
+          <td><strong>Exceeds 0.02 ppb EWG Goal</strong></td>
+          <td>Carcinogen, liver/GI toxicity, agricultural fertilizer runoff</td>
+          <td>Tier 2 Kitchen Under-Sink RO + KDF-55</td>
+        </tr>
+        <tr>
+          <td><strong>10. Free Chlorine, Fluoride &amp; Geosmin</strong></td>
+          <td><strong>~1.3 mg/L Chlorine • ~0.7 mg/L Fluoride</strong></td>
+          <td>Dry itchy winter skin, brittle hair, pool smell, Horsetooth dirt taste</td>
+          <td>Tier 1 Strips Chlorine • Tier 2 Strips Fluoride</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PART 1 & PART 2 -->
+  <section class="section-block page-break">
+    <div class="part-label">Part 1 &amp; Part 2 • Territory Intelligence &amp; Equipment Strategy</div>
+    <h2>Territory Strategy, Equipment Specs &amp; Filter Maintenance Guide</h2>
+
+    <div class="callout-box">
+      <strong>CRITICAL RULE FOR FORT COLLINS CITY LIMITS (80521, 80524, 80525, 80526, 80528):</strong><br/>
+      Fort Collins municipal water is naturally soft (1.5–3 GPG) and has low TDS (50–110 ppm). <strong>Do NOT pull out a TDS meter or hardness test in Fort Collins city limits</strong>, or the water will look great on the meter and kill your sale. In Fort Collins city limits, you ONLY test <strong>Free Chlorine (the 2-Cup 15-Second Finger Test)</strong> and show the <strong>EWG CO0135291 Disinfection Byproduct Report</strong>. Save your TDS meter and Hardness drops for <strong>Wellington (80549), Windsor (80550), Timnath (80547), and rural wells</strong>.
+    </div>
+
+    <div class="two-col">
+      <div class="card-box">
+        <div class="card-box-title">How to Position Alpine Tide Hardware (Avoid the "Google Check")</div>
+        <ul>
+          <li><strong>Never pitch a retail online brand name:</strong> Pitch the <strong>"Alpine Tide AT-1000™ Complete Home System"</strong> and <strong>"Alpine Tide AT-RO™ Under-Sink Drinking System."</strong></li>
+          <li><strong>Stage 1 — Alpine Tide AT-1000™ (Basement/Garage Main Line):</strong> 4-Stage Coconut Shell Catalytic Carbon + KDF-55 vessel + 5-micron sediment pre-filter. Flows at <strong>9.0 GPM</strong> (beats Aquasana Rhino's 7 GPM), lasts <strong>1,000,000 gallons (~10 years)</strong>, removes 99.9% of chlorine, chloroform steam, HAA9, TTHMs, and Horsetooth odor.</li>
+          <li><strong>Stage 2 — Alpine Tide AT-RO™ (Kitchen Sink):</strong> Whole-house carbon does not remove dissolved fluoride or nitrates. The 4-stage Under-Sink RO strips fluoride, chromium-6, and TDS down near zero for coffee, ice cubes, and drinking water.</li>
+          <li><strong>Wholesale Pro Option:</strong> You can also source unbranded commercial <strong>Clack WS1 + Enpress Vortech</strong> catalytic carbon/KDF tanks from local plumbing supply houses (~$450–$650 wholesale) which cannot be price-shopped online.</li>
+        </ul>
+      </div>
+
+      <div class="card-box">
+        <div class="card-box-title">Filter Replacement Costs &amp; 2-Min DIY Swaps (No Plumber Needed!)</div>
+        <ul>
+          <li><strong>Main AT-1000™ Carbon/KDF Tank:</strong> <strong>$0 for 10 Years</strong> (1,000,000-gallon media capacity—zero annual service required).</li>
+          <li><strong>Whole-House 5-Micron Sediment Pre-Filter (4.5" x 10" Big Blue):</strong>
+            <ul>
+              <li><strong>Cost:</strong> ~$12–$18 wholesale (Pentek/Hydronix polyspun) or ~$25 retail.</li>
+              <li><strong>Schedule:</strong> Swap every 6 to 9 months.</li>
+              <li><strong>How to Swap (2 Minutes by Hand):</strong> Turn the built-in shutoff valve on top of the filter housing to OFF, press pressure-relief button, untwist housing with plastic hand wrench, drop in new filter, twist hand-tight.</li>
+            </ul>
+          </li>
+          <li><strong>Under-Sink AT-RO™ Filters (Tier 2):</strong>
+            <ul>
+              <li><strong>Pre/Post Carbon Pack:</strong> ~$45–$65/year (every 6–12 months).</li>
+              <li><strong>RO Membrane:</strong> ~$45 (lasts 2 to 3 years).</li>
+              <li><strong>How to Swap (60 Seconds):</strong> Encapsulated twist-and-lock cartridges twist out 1/4 turn like a lightbulb without shutting off the main water.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 3 & PART 4: DOOR SCRIPT & KITCHEN SINK DEMO -->
+  <section class="section-block">
+    <div class="part-label">Part 3 &amp; Part 4 • Door-to-Door Approach &amp; Kitchen Sink Theater</div>
+    <h2>Word-for-Word Fort Collins Door Script &amp; 3-Step Sink Demo</h2>
+
+    <div class="script-box">
+      <div class="stage-note">[Knock firmly, step back 4 feet down the steps, glance at your iPad, smile warmly. Rule: Sell the 90-second test, NEVER pitch price on the porch!]</div>
+      <p><span class="speaker-tag">YOU:</span> "Hey there! How’s it going? I’m Fred with Alpine Tide Water here in FoCo—don't worry, you're not in trouble, I’ll be super quick. Are you guys the homeowners here?"</p>
+      <p><span class="speaker-tag">HOMEOWNER:</span> "Yeah, what's this about?"</p>
+      <p><span class="speaker-tag">YOU:</span> "Perfect. So we’re actually setting up an install right around the corner on [Nearby Street] in January for the [Last Name] family. When we tested their tap water last week, their chlorine and runoff byproducts from Horsetooth tested way higher than normal for this zip code."</p>
+      <div class="stage-note">[Point casually toward their kitchen]</div>
+      <p style="margin-bottom:0;"><span class="speaker-tag">YOU:</span> "Since our trucks are already going to be in the neighborhood next month, we're checking the surrounding homes to see if it’s an issue with the whole street main or just their line. It takes literally 90 seconds right at your kitchen faucet, totally free, and I’ll show you the exact levels right in front of you. You got two minutes so I can check your tap real quick?"</p>
+    </div>
+
+    <h3>The 3-Step Kitchen Sink Demo Theater (Once Inside)</h3>
+    <ol>
+      <li><strong>Step 1 — Send Them the Sink Link (`sink.html`) &amp; Run the 15-Second 2-Cup Finger Chlorine Test:</strong>
+        <ul>
+          <li>Fill two clear plastic cups halfway with cold tap water. Have the homeowner swirl two fingers in <strong>Cup A</strong> for 15 seconds.</li>
+          <li>Add 4 drops of OTO (yellow) or DPD packet (bright pink) to both cups. <strong>Cup B</strong> turns bright yellow/pink (pool chlorine). <strong>Cup A</strong> stays 100% crystal clear!</li>
+          <li><strong>Say:</strong> <em>"Wait—why did the untouched cup turn bright yellow with pool chlorine, and the one you touched stay completely clear? Where did the chlorine go? ... It absorbed straight into your fingers in 15 seconds. Every time you or your kids take a 10-minute hot shower, your pores open and you absorb and inhale more chlorine and chloroform steam than drinking 8 glasses of pool water."</em></li>
+        </ul>
+      </li>
+      <li><strong>Step 2 — The EWG `CO0135291` Zip Code Shock:</strong> Show Screen 1 of the iPad app (or `sink.html` on their phone) highlighting <strong>HAA9 (447x limit)</strong>, <strong>TTHMs (253x limit)</strong>, and <strong>Chloroform (97x limit)</strong>—and point out that EWG lists <strong>Activated Carbon + Reverse Osmosis</strong> as the exact removal fix.</li>
+      <li><strong>Step 3 — The Freezer Ice Cube Smell Test:</strong> Have them drop a handful of freezer ice cubes into a dry cup and smell them (freezing concentrates trapped chlorine and Horsetooth Geosmin lake odor).</li>
+    </ol>
+  </section>
+
+  <!-- PART 5 & PART 6: 2-TIER PRICING, OBJECTION DECODER & NEXTDOOR ADS -->
+  <section class="section-block page-break">
+    <div class="part-label">Part 5 &amp; Part 6 • The 2-Tier Close &amp; 5-Screen Objection Decoder</div>
+    <h2>Simple 2-Tier Pricing Structure &amp; Screen Drop-Off Diagnostic Matrix</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Package Tier</th>
+          <th>What It Includes</th>
+          <th>Standard Price (FoCo Soft)</th>
+          <th>Jan. Neighbor Route Price (FoCo)</th>
+          <th>Hard Water Zone (+ Softener)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tier 1: Whole-House Only</strong><br/>(Minus Kitchen Sink RO)</td>
+          <td>Alpine Tide AT-1000™ 4-Stage Carbon/KDF Tank + 5-Micron Pre-Filter on Main Line (9 GPM, 1M Gallons)</td>
+          <td><strong>$127 / month</strong><br/>(or $5,999 cash)</td>
+          <td><strong>~$65 / month</strong><br/>($2,695 Fleet Rate)</td>
+          <td>$167/mo Standard<br/>~$99/mo ($4,295 Fleet)</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 2: Whole-House + Kitchen Sink RO Combo ★</strong></td>
+          <td>Everything in Tier 1 PLUS Dedicated Under-Sink 4-Stage Alpine Tide AT-RO™ Drinking Faucet &amp; Ice Line</td>
+          <td><strong>$152 / month</strong><br/>(or $7,199 cash)</td>
+          <td><strong>~$89 / month</strong><br/>($3,895 Fleet Rate)</td>
+          <td>$192/mo Standard<br/>~$115/mo ($4,995 Fleet)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="script-box">
+      <p style="margin-bottom:0;"><span class="speaker-tag">WORD-FOR-WORD 2-TIER CLOSE:</span> "We keep our options super simple—just two ways to set up your home. Tier 1 does the entire house—every shower, bathtub, and washing machine—so 99.9% of that chlorine and Horsetooth runoff is gone before it enters your pipes. Tier 2 adds the dedicated Reverse Osmosis drinking faucet right at your kitchen sink for ultra-pure coffee, ice cubes, and drinking water. Because we're already bringing our master plumber's truck out here in January for your neighbor, if you pair your install on the same route and let us put a small Alpine Tide yard sign out front for 14 days, we waive the $800 install fee and drop Tier 1 to $65/mo ($2,695) or the full Combo with the kitchen sink RO to $89/mo ($3,895). Do you guys want the kitchen sink drinking tap included, or just the whole-house system?" <em>(Stop talking and wait for them to choose.)</em></p>
+    </div>
+
+    <h3>5-Screen Demo Drop-Off Decoder: Know Their Objection by Where They Stop</h3>
+    <div class="qa-item">
+      <div class="qa-question">1. If They Stop on Screen 1 (Local Tap Water X-Ray) → Objection: "The Rocky Mountain Water Myth"</div>
+      <div class="qa-answer"><strong>Rebuttal:</strong> "Fort Collins water IS naturally soft—that's why we never sell softeners in city limits. The issue isn't hardness; it's the 1.3 mg/L of pool chlorine the city pumps in after the Cameron Peak fire and Horsetooth algae blooms, creating HAA9 at 447x the health limit. Let's do the 15-second 2-cup finger test at your sink so you can see where that chlorine goes."</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">2. If They Stop on Screen 2 (Bottled Water &amp; Microplastics) → Objection: "We Use Our Fridge Filter or a Brita Pitcher"</div>
+      <div class="qa-answer"><strong>Rebuttal:</strong> "That's great that you aren't lugging plastic cases! Here's the catch with a fridge filter or Brita: first, basic carbon doesn't strip out dissolved fluoride or chromium-6. Second—and way more important—you don't shower in your Brita pitcher. In one 10-minute hot shower, your pores open up and you inhale more chlorine and chloroform steam than drinking 8 glasses of tap water."</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">3. If They Stop on Screen 3 (Interactive System Walkthrough) → Objection: "Space Anxiety or Plumber Maintenance Costs"</div>
+      <div class="qa-answer"><strong>Rebuttal:</strong> "The main AT-1000 tank only takes up a 12-inch footprint where your main line enters the basement or garage, and you don't touch it for 10 years (1,000,000 gallons). Better yet, you NEVER need a plumber for filter changes. The pre-filter is ~$18 and twists off by hand in 2 minutes, and the under-sink RO cartridges twist out like a lightbulb in 60 seconds."</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">4. If They Stop on Screen 4 (Live Sink Scorecard) → Objection: "Bracing for an $8,000 National Company Quote"</div>
+      <div class="qa-answer"><strong>Rebuttal:</strong> "Seeing a 38/100 score is eye-opening, right? Before we look at the two packages on Screen 5, remember: because our master plumber's truck is already going to be in your neighborhood in January, we waive the entire $800 install fee and apply the $600 fleet discount."</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">5. If They Stop on Screen 5 (Package Builder) → Objection: "Price / Monthly Budget / Need to Talk to Spouse"</div>
+      <div class="qa-answer"><strong>Rebuttal:</strong> "If the $89/mo Combo with the kitchen RO is a stretch right now, start with Tier 1 (Whole-House Minus Kitchen Sink) for just $65/mo ($2,695)—every shower, bath, and pipe is 99.9% chlorine-free, and we can add the kitchen RO anytime later. Let's lock in your refundable January neighborhood slot today so you don't lose the $1,400 fleet waiver while you two sleep on it."</div>
+    </div>
+  </section>
+
+  <!-- PART 7: NEXTDOOR & META ADS + BAG CHECKLIST -->
+  <section class="section-block page-break">
+    <div class="part-label">Part 7 • Inbound Lead Scripts &amp; Daily Field Checklist</div>
+    <h2>Nextdoor &amp; Facebook/Instagram Ad Scripts for Fort Collins</h2>
+
+    <div class="card-box" style="margin-bottom:12px;">
+      <div class="card-box-title">Nextdoor Post #1: Organic "Neighbor PSA / Chlorine Spike" Post (Free to Post on Nextdoor)</div>
+      <p><strong>Subject:</strong> Anyone else in [Midtown / South FoCo / Old Town] noticing heavy chlorine smell or super dry skin after showers lately?</p>
+      <p style="margin-bottom:0;">"Hey neighbors! Fred Caldero here (local Fort Collins resident and founder of Alpine Tide Water Co.). Over the past two weeks I’ve tested kitchen taps for several neighbors around [Nearby Cross Street / 80525 &amp; 80528], and free chlorine levels are testing between 1.3 and 1.8 mg/L—which is literally swimming-pool strength. While our city water IS naturally soft (so never let a national company sell you a softener in Fort Collins city limits!), the city has to dose heavy chlorine to treat post-wildfire organic runoff from the Poudre and seasonal algae from Horsetooth Reservoir. When that chlorine reacts with organic runoff, it forms disinfection byproducts (HAA9 and TTHMs) that test 200x to 447x above EWG health guidelines and vaporize into steam in every hot shower. Since my truck is already running routes here in FoCo this week, I’m doing 10 FREE 2-Minute Kitchen Sink Chlorine &amp; EWG Water Checks for neighbors (zero sales pitch, takes 90 seconds at your tap, and you get to see the 2-cup chlorine absorption test with your own eyes). Drop a comment or DM me your cross-streets if you want me to swing by and test your tap for free this week!"</p>
+    </div>
+
+    <div class="card-box" style="margin-bottom:12px;">
+      <div class="card-box-title">Nextdoor Sponsored Deal / Facebook Ad #2: "January Model Home Fleet Route ($1,400 Off)"</div>
+      <p><strong>Headline:</strong> Fort Collins, Timnath &amp; Windsor Neighbors: $1,400 Off Whole-House Water Filtration + Free 2-Min Tap Test</p>
+      <p style="margin-bottom:0;">"Hi Neighbors! I’m Fred Caldero with Alpine Tide Water Co. right here in Fort Collins. We are finalizing our January Master Plumber Installation Route across Fort Collins, Timnath, Windsor, and Wellington. Because half the cost of a whole-house water install is truck mobilization and staging, we are looking for 4 more homes on our January neighborhood route to pair with existing installs. If your home qualifies, we waive our entire $800 installation fee and apply a $600 Neighbor Fleet Credit on our 9 GPM Alpine Tide AT-1000 Whole-House Catalytic Carbon System (and Under-Sink Reverse Osmosis drinking tap)—bringing it down to just $65–$89/month installed with a Lifetime Tank &amp; Valve Warranty. Message me or tap 'Claim Offer' to grab a free 2-minute kitchen tap test and lock in a January Fleet Route spot!"</p>
+    </div>
+
+    <h3>Fred’s Daily Door-to-Door Bag &amp; iPad Readiness Checklist</h3>
+    <div class="check-row"><span class="check-box"></span> <span><strong>20+ Clear Plastic Cups</strong> (for the 2-Cup 15-Second Finger Chlorine Absorption Test at the kitchen sink)</span></div>
+    <div class="check-row"><span class="check-box"></span> <span><strong>Fresh OTO Chlorine Drops (Yellow) or DPD #1 Rapid Packets (Bright Pink)</strong></span></div>
+    <div class="check-row"><span class="check-box"></span> <span><strong>Digital TDS Meter &amp; Hardness Drops</strong> (Keep in pocket ONLY for Wellington 80549, Windsor 80550, Timnath 80547, or wells)</span></div>
+    <div class="check-row"><span class="check-box"></span> <span><strong>iPad / Phone Charged 100%</strong> with <code>https://trajikk.github.io/blacktide-water/app.html</code> loaded &amp; GHL Webhook saved</span></div>
+    <div class="check-row"><span class="check-box"></span> <span><strong>Know Your Anchor Street &amp; Local Zip Code</strong> (`80521`, `80524`, `80525`, `80526`, `80528`) before knocking the first door</span></div>
+  </section>
+
+</body>
+</html>
