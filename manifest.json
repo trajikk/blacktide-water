@@ -1,18 +1,17 @@
 {
-  "name": "Blacktide Water Co. | Fort Collins Presentation & Field Suite",
-  "short_name": "Blacktide",
+  "name": "Alpine Tide Water Co. | Fort Collins Presentation & Field Suite",
+  "short_name": "Alpine Tide",
   "description": "Kitchen-Table Water Presentation, Homeowner Sink Companion & Fort Collins Field Training Playbook",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0F172A",
-  "theme_color": "#0284C7",
+  "background_color": "#08090C",
+  "theme_color": "#00F5D4",
   "orientation": "any",
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='28' fill='%230F172A'/%3E%3Cpath d='M64 20 L98 54 A48 48 0 1 1 30 54 Z' fill='%230284C7'/%3E%3C/svg%3E",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='28' fill='%2308090C'/%3E%3Cpath d='M64 20 L98 54 A48 48 0 1 1 30 54 Z' fill='%2300F5D4'/%3E%3C/svg%3E",
       "sizes": "192x192",
       "type": "image/svg+xml"
     }
   ]
 }
-

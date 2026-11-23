@@ -5,30 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Blacktide Water Treatment | Fort Collins, CO</title>
+  <title>Alpine Tide Water Co. | Fort Collins, CO</title>
   <link rel="manifest" href="./manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy: #0F172A;
-      --navy-card: #1E293B;
-      --navy-light: #334155;
+      /* Matte Carbon / Brushed Graphite Base + Tiffany Mint & Nike Volt Day-Glow Highlights */
+      --navy: #090A0F;
+      --navy-card: #12141C;
+      --navy-light: #1E2230;
       --glacier: #F8FAFC;
       --glacier-muted: #CBD5E1;
       --glacier-dim: #94A3B8;
-      --teal: #0284C7;
-      --teal-bright: #38BDF8;
-      --teal-glow: rgba(2, 132, 199, 0.35);
-      --coral: #E11D48;
-      --coral-bright: #FB7185;
-      --coral-glow: rgba(225, 29, 72, 0.25);
-      --amber: #F59E0B;
-      --emerald: #059669;
-      --emerald-bright: #34D399;
-      --emerald-glow: rgba(5, 150, 105, 0.35);
+      --teal: #00D2B8;
+      --teal-bright: #00F5D4;
+      --teal-glow: rgba(0, 245, 212, 0.35);
+      --coral: #FF1E56;
+      --coral-bright: #FF4D79;
+      --coral-glow: rgba(255, 30, 86, 0.3);
+      --amber: #FFB800;
+      --emerald: #A8E600;
+      --emerald-bright: #DFFF00;
+      --emerald-glow: rgba(223, 255, 0, 0.32);
       --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Optional Theme 2: Pure Nike Volt Primary */
+    body.theme-volt {
+      --teal: #B8E600;
+      --teal-bright: #DFFF00;
+      --teal-glow: rgba(223, 255, 0, 0.35);
+      --emerald: #00D2B8;
+      --emerald-bright: #00F5D4;
+      --emerald-glow: rgba(0, 245, 212, 0.35);
+    }
+
+    /* Optional Theme 3: Pure Tiffany Mint & Neon Emerald */
+    body.theme-tiffany {
+      --teal: #0ABAB5;
+      --teal-bright: #00F5D4;
+      --teal-glow: rgba(0, 245, 212, 0.38);
+      --emerald: #00C875;
+      --emerald-bright: #00FF87;
+      --emerald-glow: rgba(0, 255, 135, 0.35);
     }
 
     * {
@@ -41,7 +62,7 @@
     html, body {
       width: 100%;
       height: 100%;
-      background-color: #060A12;
+      background-color: #050608;
       color: var(--glacier);
       font-family: var(--font-main);
       overflow: hidden;
@@ -57,7 +78,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at 50% 20%, #13203B 0%, #070B14 100%);
+      background:
+        radial-gradient(circle at 20% 15%, rgba(0, 245, 212, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 80% 85%, rgba(223, 255, 0, 0.07) 0%, transparent 45%),
+        linear-gradient(180deg, #0B0D13 0%, #050608 100%);
     }
 
     .stage-viewport {
@@ -66,9 +90,11 @@
       height: min(100vh, 56.25vw);
       max-width: 1600px;
       max-height: 900px;
-      background: var(--navy);
+      background:
+        radial-gradient(circle at 85% 12%, rgba(0, 245, 212, 0.07) 0%, transparent 40%),
+        linear-gradient(165deg, #0E1017 0%, #08090D 100%);
       border-radius: 16px;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(0, 245, 212, 0.18);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -263,8 +289,8 @@
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      background: rgba(30, 41, 59, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(20, 23, 31, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 11px 16px;
       border-radius: 12px;
     }
@@ -282,9 +308,9 @@
       font-size: 13px;
     }
 
-    .dot-teal { background: rgba(2, 132, 199, 0.25); color: var(--teal-bright); border: 1px solid var(--teal); }
-    .dot-coral { background: rgba(225, 29, 72, 0.22); color: var(--coral-bright); border: 1px solid var(--coral); }
-    .dot-emerald { background: rgba(5, 150, 105, 0.25); color: var(--emerald-bright); border: 1px solid var(--emerald); }
+    .dot-teal { background: rgba(0, 245, 212, 0.16); color: var(--teal-bright); border: 1px solid var(--teal-bright); box-shadow: 0 0 10px var(--teal-glow); }
+    .dot-coral { background: rgba(255, 30, 86, 0.18); color: var(--coral-bright); border: 1px solid var(--coral-bright); box-shadow: 0 0 10px var(--coral-glow); }
+    .dot-emerald { background: rgba(223, 255, 0, 0.16); color: var(--emerald-bright); border: 1px solid var(--emerald-bright); box-shadow: 0 0 10px var(--emerald-glow); }
 
     .split-grid {
       display: grid;
@@ -296,8 +322,8 @@
     }
 
     .visual-card {
-      background: linear-gradient(160deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(160deg, rgba(22, 25, 34, 0.95) 0%, rgba(11, 13, 18, 0.98) 100%);
+      border: 1px solid rgba(0, 245, 212, 0.18);
       border-radius: 16px;
       padding: 20px;
       height: 100%;
@@ -306,7 +332,7 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
     }
 
     .hard-only { display: none !important; }
@@ -737,7 +763,7 @@
     }
 
     /* ==========================================
-       SLIDE 7: HOW BLACKTIDE ALPINE-PURE STACKS UP
+       SLIDE 7: HOW ALPINE TIDE ALPINE-PURE STACKS UP
     ========================================== */
     .race-bar-wrap { margin-bottom: 14px; }
     .race-bar-fill {
@@ -1177,10 +1203,13 @@
               <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
             </svg>
           </div>
-          <span>BLACKTIDE</span>
+          <span>ALPINE TIDE</span>
           <span class="brand-loc">Fort Collins, CO • Fred Caldero</span>
         </div>
         <div class="top-status-pills">
+          <button type="button" class="top-pill-link" id="neonThemeBtn" onclick="cycleNeonTheme()" style="border-color: var(--emerald-bright); color: var(--emerald-bright);">
+            ⚡ Neon: Tiffany + Volt
+          </button>
           <a href="./sink.html" class="top-pill-link" title="Homeowner Sink Demo Companion">📱 Sink Link</a>
           <a href="./training.html" class="top-pill-link" title="Fort Collins Sales Training Playbook">📘 Training Book</a>
           <span class="mode-pill-indicator" id="topModeBadge">City Water (Soft) • 10 Slides</span>
@@ -1194,8 +1223,8 @@
              SLIDE 1: TITLE SLIDE
         ====================================================== -->
         <section class="slide active" data-slide-id="1"
-          data-notes-city="Thanks for letting me come by and test your water. I live right here in town, and I started Blacktide because I got tired of seeing big national water companies treat neighbors like a sales target. We just looked at your real numbers on the meter and drops. In the next five minutes, I'll show you what those numbers mean for your family, put the exact price on paper, and let you decide."
-          data-notes-hard="Thanks for letting me come by and test your water. I live right here in town, and I started Blacktide because I got tired of seeing big national water companies treat neighbors like a sales target. We just looked at your real numbers on the meter and drops. In the next five minutes, I'll show you what those numbers mean for your family, put the exact price on paper, and let you decide.">
+          data-notes-city="Thanks for letting me come by and test your water. I live right here in town, and I started Alpine Tide because I got tired of seeing big national water companies treat neighbors like a sales target. We just looked at your real numbers on the meter and drops. In the next five minutes, I'll show you what those numbers mean for your family, put the exact price on paper, and let you decide."
+          data-notes-hard="Thanks for letting me come by and test your water. I live right here in town, and I started Alpine Tide because I got tired of seeing big national water companies treat neighbors like a sales target. We just looked at your real numbers on the meter and drops. In the next five minutes, I'll show you what those numbers mean for your family, put the exact price on paper, and let you decide.">
           <div class="slide-1-content">
             <div class="neighbor-badge">
               <span>●</span> Fort Collins Local Water Report &amp; Kitchen-Table Estimate
@@ -1205,7 +1234,7 @@
             <div class="fred-card">
               <div class="fred-avatar">FC</div>
               <div>
-                <div style="font-size: 20px; font-weight: 800; color: var(--glacier);">Blacktide | Fort Collins, CO</div>
+                <div style="font-size: 20px; font-weight: 800; color: var(--glacier);">Alpine Tide | Fort Collins, CO</div>
                 <div style="font-size: 16px; color: var(--teal-bright); font-weight: 600;">Fred Caldero, Local Neighbor &amp; Installer</div>
               </div>
             </div>
@@ -1286,7 +1315,7 @@
               </div>
               <div class="bar-labels">
                 <div style="flex:1; color: var(--coral-bright);">Grocery Store Cases</div>
-                <div style="flex:1; color: var(--emerald-bright);">Blacktide Whole-House</div>
+                <div style="flex:1; color: var(--emerald-bright);">Alpine Tide Whole-House</div>
               </div>
               <div class="burned-counter-box">
                 <div>
@@ -1566,10 +1595,10 @@
              SLIDE 5: THE FIX — WHOLE-HOUSE PROTECTION
         ====================================================== -->
         <section class="slide" data-slide-id="5"
-          data-notes-city="Here is the permanent fix: the Blacktide Alpine-Pure AP-1000 System installed right on your main water line in the basement or garage. Instead of a tiny pitcher in the fridge, every single drop entering your home passes through four stages of catalytic carbon and KDF-55 filtration before it ever hits your kitchen sink, your kids' bath, or your washing machine. It flows at 9 gallons a minute so your shower pressure stays strong, and includes custom copper/PEX bypass integration and a lifetime tank and valve warranty."
-          data-notes-hard="Here is the permanent fix: the Blacktide Alpine-Pure AP-1000 System installed right on your main water line—paired with our high-efficiency Alpine-Soft conditioning vessel for your hard water. Every single drop entering your home passes through four stages of filtration and ion-exchange softening before it hits your showers, kitchen sink, or appliances. It flows at 9 gallons a minute with a lifetime warranty.">
+          data-notes-city="Here is the permanent fix: the Alpine Tide Alpine-Pure AT-1000 System installed right on your main water line in the basement or garage. Instead of a tiny pitcher in the fridge, every single drop entering your home passes through four stages of catalytic carbon and KDF-55 filtration before it ever hits your kitchen sink, your kids' bath, or your washing machine. It flows at 9 gallons a minute so your shower pressure stays strong, and includes custom copper/PEX bypass integration and a lifetime tank and valve warranty."
+          data-notes-hard="Here is the permanent fix: the Alpine Tide Alpine-Pure AT-1000 System installed right on your main water line—paired with our high-efficiency Alpine-Soft conditioning vessel for your hard water. Every single drop entering your home passes through four stages of filtration and ion-exchange softening before it hits your showers, kitchen sink, or appliances. It flows at 9 gallons a minute with a lifetime warranty.">
           <div>
-            <div class="slide-eyebrow" style="color: var(--emerald-bright);">The Fix — Blacktide Alpine-Pure™ Turnkey Buildout</div>
+            <div class="slide-eyebrow" style="color: var(--emerald-bright);">The Fix — Alpine Tide Alpine-Pure™ Turnkey Buildout</div>
             <h2 class="slide-headline city-only">Clean Water From Every Tap in the House.</h2>
             <h2 class="slide-headline hard-only">Clean, Soft Water From Every Tap in the House.</h2>
           </div>
@@ -1578,7 +1607,7 @@
             <ul class="bullet-list">
               <li>
                 <span class="bullet-dot dot-emerald">✓</span>
-                <span><strong>Blacktide Alpine-Pure™ AP-1000 4-Stage Catalytic Carbon/KDF System</strong> <span class="hard-only" style="display:inline; color:var(--teal-bright);">(+ High-Efficiency Salt Water Softener)</span></span>
+                <span><strong>Alpine Tide Alpine-Pure™ AT-1000 4-Stage Catalytic Carbon/KDF System</strong> <span class="hard-only" style="display:inline; color:var(--teal-bright);">(+ High-Efficiency Salt Water Softener)</span></span>
               </li>
               <li>
                 <span class="bullet-dot dot-emerald">✓</span>
@@ -1613,7 +1642,7 @@
                 <rect x="103" y="103" width="58" height="22" rx="4" fill="rgba(56, 189, 248, 0.35)"/>
                 <rect x="103" y="131" width="58" height="22" rx="4" fill="rgba(5, 150, 105, 0.35)"/>
                 <rect x="103" y="159" width="58" height="22" rx="4" fill="rgba(52, 211, 153, 0.4)"/>
-                <text x="132" y="228" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">Alpine-Pure AP-1000</text>
+                <text x="132" y="228" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">Alpine-Pure AT-1000</text>
 
                 <g id="svgSoftenerGroup" style="opacity: 0.22; transition: opacity 0.3s ease;">
                   <line x1="169" y1="65" x2="205" y2="65" stroke="#0284C7" stroke-width="8"/>
@@ -1708,8 +1737,8 @@
              SLIDE 6: INTERACTIVE 3-STORY HOME X-RAY & 2-TIER SETUP
         ====================================================== -->
         <section class="slide" data-slide-id="6"
-          data-notes-city="Tap any of the glowing touchpoints on this home diagram with me. Touchpoint 1 shows where we tuck the Blacktide Alpine-Pure tank right where your main line enters the basement or garage. Touchpoint 2 shows your upstairs showers—where you stop inhaling vaporized chlorine and chloroform steam. Touchpoint 3 is your kitchen sink, where Tier 2 adds the Alpine-RO drinking faucet for coffee, cooking, and ice cubes. And Touchpoint 4 shows how you ditch the 240,000 microplastics per liter in grocery store plastic bottles."
-          data-notes-hard="Tap any of the glowing touchpoints on this home diagram with me. Touchpoint 1 shows where we tuck the Blacktide Alpine-Pure and Softener tanks on your main line in the basement or garage. Touchpoint 2 shows your upstairs showers—zero chlorine steam and zero hard-water soap scum. Touchpoint 3 is your kitchen sink RO tap, and Touchpoint 4 replaces plastic water bottles forever.">
+          data-notes-city="Tap any of the glowing touchpoints on this home diagram with me. Touchpoint 1 shows where we tuck the Alpine Tide Alpine-Pure tank right where your main line enters the basement or garage. Touchpoint 2 shows your upstairs showers—where you stop inhaling vaporized chlorine and chloroform steam. Touchpoint 3 is your kitchen sink, where Tier 2 adds the Alpine-RO drinking faucet for coffee, cooking, and ice cubes. And Touchpoint 4 shows how you ditch the 240,000 microplastics per liter in grocery store plastic bottles."
+          data-notes-hard="Tap any of the glowing touchpoints on this home diagram with me. Touchpoint 1 shows where we tuck the Alpine Tide Alpine-Pure and Softener tanks on your main line in the basement or garage. Touchpoint 2 shows your upstairs showers—zero chlorine steam and zero hard-water soap scum. Touchpoint 3 is your kitchen sink RO tap, and Touchpoint 4 replaces plastic water bottles forever.">
           <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:8px;">
             <div>
               <div class="slide-eyebrow">Interactive Guided Home Water X-Ray • Tap Any Room Hotspot</div>
@@ -1720,7 +1749,7 @@
                 ⚠️ Unfiltered Tap Flow
               </button>
               <button type="button" class="subtle-btn active-toggle" id="deckShieldOnBtn" onclick="toggleDeckHouseShield(true)">
-                🛡️ Blacktide Alpine-Pure™ Active
+                🛡️ Alpine Tide Alpine-Pure™ Active
               </button>
             </div>
           </div>
@@ -1799,7 +1828,7 @@
                   Touchpoint #1 • Basement Utility Room or Garage Main Line
                 </div>
                 <div style="font-size:19px; font-weight:800; color:var(--glacier); margin:4px 0 6px;" id="deckTpTitle">
-                  Blacktide Alpine-Pure™ AP-1000 Main-Line Installation
+                  Alpine Tide Alpine-Pure™ AT-1000 Main-Line Installation
                 </div>
                 <p style="font-size:15px; color:var(--glacier-muted); line-height:1.42;" id="deckTpBody">
                   Installed cleanly in your basement utility room or garage right where your main line enters. Strips out 99.9% of chlorine, chloroform (97x EWG limit), HAA9 (447x limit), and TTHMs (253x limit) at 9 GPM for 1,000,000 gallons (~10 years).
@@ -1822,7 +1851,7 @@
                   <span style="color: var(--emerald-bright);">★ MOST POPULAR</span>
                 </div>
                 <p class="body-text" style="font-size:15px;">
-                  Adds the Blacktide Alpine-RO™ Under-Sink drinking faucet &amp; ice-maker line for near-zero TDS coffee, ice &amp; cooking.
+                  Adds the Alpine Tide Alpine-RO™ Under-Sink drinking faucet &amp; ice-maker line for near-zero TDS coffee, ice &amp; cooking.
                 </p>
               </div>
             </div>
@@ -1830,13 +1859,13 @@
         </section>
 
         <!-- =====================================================
-             SLIDE 7: HOW BLACKTIDE ALPINE-PURE STACKS UP
+             SLIDE 7: HOW ALPINE TIDE ALPINE-PURE STACKS UP
         ====================================================== -->
         <section class="slide" data-slide-id="7"
-          data-notes-city="Here is how our commercial-grade Blacktide Alpine-Pure AP-1000 stacks up against retail filters and old-school national water companies. Our commercial catalytic carbon and KDF-55 vessel is rated 4.8 out of 5 by WaterFilterGeek and 92 out of 100 by AquaVerdict. It flows at 9 gallons a minute compared to Aquasana's 7. And unlike national outfits like Culligan, Kinetico, or RainSoft—who hold you hostage at your kitchen table for two hours before dropping an eight- or nine-thousand-dollar quote—I put the exact turnkey installed price right in front of you."
-          data-notes-hard="Here is how our commercial-grade Blacktide Alpine-Pure AP-1000 stacks up against retail filters and old-school national water companies. It flows at 9 gallons a minute compared to Aquasana's 7, carries a lifetime tank and valve warranty, and unlike Culligan, Kinetico, or RainSoft, we print our exact turnkey installed price right in front of you.">
+          data-notes-city="Here is how our commercial-grade Alpine Tide Alpine-Pure AT-1000 stacks up against retail filters and old-school national water companies. Our commercial catalytic carbon and KDF-55 vessel is rated 4.8 out of 5 by WaterFilterGeek and 92 out of 100 by AquaVerdict. It flows at 9 gallons a minute compared to Aquasana's 7. And unlike national outfits like Culligan, Kinetico, or RainSoft—who hold you hostage at your kitchen table for two hours before dropping an eight- or nine-thousand-dollar quote—I put the exact turnkey installed price right in front of you."
+          data-notes-hard="Here is how our commercial-grade Alpine Tide Alpine-Pure AT-1000 stacks up against retail filters and old-school national water companies. It flows at 9 gallons a minute compared to Aquasana's 7, carries a lifetime tank and valve warranty, and unlike Culligan, Kinetico, or RainSoft, we print our exact turnkey installed price right in front of you.">
           <div>
-            <div class="slide-eyebrow">How Blacktide Stacks Up</div>
+            <div class="slide-eyebrow">How Alpine Tide Stacks Up</div>
             <h2 class="slide-headline">Commercial-Grade Hardware. Zero Hidden Pricing.</h2>
           </div>
 
@@ -1844,11 +1873,11 @@
             <ul class="bullet-list">
               <li>
                 <span class="bullet-dot dot-emerald">★</span>
-                <span><strong>Blacktide Alpine-Pure™ AP-1000:</strong> Top-Rated 4-Stage Catalytic Carbon &amp; KDF-55 Vessel of 2026 (Editor's Choice <strong>4.8/5</strong>, AquaVerdict <strong>92/100</strong>)</span>
+                <span><strong>Alpine Tide Alpine-Pure™ AT-1000:</strong> Top-Rated 4-Stage Catalytic Carbon &amp; KDF-55 Vessel of 2026 (Editor's Choice <strong>4.8/5</strong>, AquaVerdict <strong>92/100</strong>)</span>
               </li>
               <li>
                 <span class="bullet-dot dot-teal">⚡</span>
-                <span><strong>Flow Rate:</strong> Blacktide AP-1000 <strong>9 GPM</strong> vs. Aquasana Rhino <strong>7 GPM</strong></span>
+                <span><strong>Flow Rate:</strong> Alpine Tide AT-1000 <strong>9 GPM</strong> vs. Aquasana Rhino <strong>7 GPM</strong></span>
               </li>
               <li>
                 <span class="bullet-dot dot-coral">!</span>
@@ -1867,7 +1896,7 @@
 
               <div class="race-bar-wrap">
                 <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:700; margin-bottom:5px;">
-                  <span>Blacktide Alpine-Pure™ AP-1000</span>
+                  <span>Alpine Tide Alpine-Pure™ AT-1000</span>
                   <span style="color: var(--emerald-bright);">9.0 GPM</span>
                 </div>
                 <div class="gauge-track" style="height: 28px;">
@@ -1900,7 +1929,7 @@
                 </div>
                 <div id="flipBack" style="display: none;">
                   <div style="font-size: 13px; font-weight: 800; color: var(--emerald-bright); text-transform: uppercase; margin-bottom: 4px;">
-                    The Blacktide Neighbor Promise
+                    The Alpine Tide Neighbor Promise
                   </div>
                   <div style="font-size: 18px; font-weight: 800; color: var(--glacier);">
                     5-Minute Water Test • Printed Price Upfront • 10-Yr Local Labor Guarantee
@@ -1915,7 +1944,7 @@
              SLIDE 8: STRAIGHTFORWARD PRICING (INTERACTIVE CLOSE)
         ====================================================== -->
         <section class="slide" data-slide-id="8"
-          data-notes-city="Here is the exact investment, plain and simple. Remember: if you're already spending $60 to $80 a month on bottled water, you're already paying most of this every month with nothing to show for it. And if we pair your install on our January neighborhood route and put a small Blacktide yard sign out front for 14 days, you can tap the Fleet Route button right there to apply the neighborhood install waiver. Which of these two setups makes the most sense for your family?"
+          data-notes-city="Here is the exact investment, plain and simple. Remember: if you're already spending $60 to $80 a month on bottled water, you're already paying most of this every month with nothing to show for it. And if we pair your install on our January neighborhood route and put a small Alpine Tide yard sign out front for 14 days, you can tap the Fleet Route button right there to apply the neighborhood install waiver. Which of these two setups makes the most sense for your family?"
           data-notes-hard="Here is the exact investment, plain and simple. Remember: if you're already spending $60 to $80 a month on bottled water—plus $40 to $60 in extra soap and detergent fighting hard water—you're already paying most of this every month with nothing to show for it. Which of these two setups makes the most sense for your family?">
           <div style="display:flex; justify-content:space-between; align-items:flex-end;">
             <div>
@@ -1937,7 +1966,7 @@
                   <span id="priceCheck1" style="font-size: 14px; font-weight: 800; color: var(--emerald-bright);">✓ SELECTED</span>
                 </div>
                 <div id="card1Title" style="font-size: 22px; font-weight: 800; margin-top: 4px;">
-                  Whole-House Clean Water (CF1)
+                  Whole-House Clean Water (AT-1000)
                 </div>
                 <div class="hero-monthly-price" id="card1Monthly">
                   $127<span>/month</span>
@@ -1946,7 +1975,7 @@
                   or $5,999 cash (includes full installation)
                 </div>
                 <p class="body-text" id="card1Desc" style="font-size: 16px; color: var(--glacier-muted);">
-                  Blacktide Alpine-Pure™ AP-1000 4-Stage Filter • 9 GPM • 1M-Gallon Capacity • Custom Copper/PEX Bypass &amp; Lifetime Tank Warranty
+                  Alpine Tide Alpine-Pure™ AT-1000 4-Stage Filter • 9 GPM • 1M-Gallon Capacity • Custom Copper/PEX Bypass &amp; Lifetime Tank Warranty
                 </p>
               </div>
               <div class="net-diff-callout" id="card1NetDiff">
@@ -1962,7 +1991,7 @@
                   <span id="priceCheck2" style="font-size: 14px; font-weight: 800; color: var(--glacier-dim);">TAP TO SELECT</span>
                 </div>
                 <div id="card2Title" style="font-size: 22px; font-weight: 800; margin-top: 4px;">
-                  The Combo (CF1 + Under-Sink RO)
+                  The Combo (AT-1000 + Under-Sink RO)
                 </div>
                 <div class="hero-monthly-price" id="card2Monthly">
                   $152<span>/month</span>
@@ -2046,7 +2075,7 @@
                 </div>
                 <div class="summary-row">
                   <span class="summary-label">Selected Home System</span>
-                  <span class="summary-val" id="sumSystemName" style="color: var(--teal-bright);">Whole-House Clean Water (CF1)</span>
+                  <span class="summary-val" id="sumSystemName" style="color: var(--teal-bright);">Whole-House Clean Water (AT-1000)</span>
                 </div>
                 <div class="summary-row">
                   <span class="summary-label">Monthly / Cash Investment</span>
@@ -2058,7 +2087,7 @@
                 </div>
                 <div class="summary-row" style="border-bottom: none;">
                   <span class="summary-label">Installed By</span>
-                  <span class="summary-val">Fred Caldero • Blacktide (Fort Collins)</span>
+                  <span class="summary-val">Fred Caldero • Alpine Tide (Fort Collins)</span>
                 </div>
               </div>
 
@@ -2121,7 +2150,7 @@
       <section id="printablePdfSheet">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom: 3px solid #0284C7; padding-bottom: 14px; margin-bottom: 18px;">
           <div>
-            <div style="font-size: 24px; font-weight: 800; color: #0F172A;">BLACKTIDE WATER CO. — FORT COLLINS, CO</div>
+            <div style="font-size: 24px; font-weight: 800; color: #0F172A;">Alpine Tide Water Co. — FORT COLLINS, CO</div>
             <div style="font-size: 14px; font-weight: 700; color: #0284C7;">Fred Caldero, Local Neighbor &amp; Water Treatment Specialist</div>
           </div>
           <div style="text-align:right; font-size: 13px; color: #334155; font-weight: 600;">
@@ -2142,7 +2171,7 @@
 
           <div style="border: 2px solid #059669; background: #F0FDF4; border-radius: 10px; padding: 14px;">
             <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #059669; margin-bottom: 6px;">2. Selected 2-Tier System &amp; Written Price</div>
-            <div style="font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 4px;" id="pdfSelectedSystem">Option 1: Whole-House Clean Water (CF1)</div>
+            <div style="font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 4px;" id="pdfSelectedSystem">Option 1: Whole-House Clean Water (AT-1000)</div>
             <div style="font-size: 20px; font-weight: 800; color: #059669; margin-bottom: 4px;" id="pdfSelectedPrice">$127/mo (or $5,999 cash)</div>
             <div style="font-size: 13px; color: #334155;">✓ Turnkey installation by licensed local Fort Collins master plumber</div>
             <div style="font-size: 13px; color: #334155;">✓ Lifetime warranty on tanks &amp; valves + easy twist-off DIY filter swaps</div>
@@ -2164,7 +2193,7 @@
                 <li><strong>4.5x Heart Attack &amp; Stroke Risk:</strong> A 2024 medical study found patients with microplastics in artery plaque had ~4.5x higher risk of heart attack, stroke, or death.</li>
                 <li><strong>Detected in human tissue:</strong> Found in human blood, lungs, brains, and placentas.</li>
                 <li><strong>60 Million bottles dumped daily</strong> in the U.S. (under 30% recycled).</li>
-                <li><strong>The Cost Trap:</strong> A family of 4 spends <strong>$45–$84/mo</strong> ($2,700–$5,040 over 5 yrs) paying <strong>$10–$12/gallon</strong> vs. <strong>~$0.04/gallon</strong> with Blacktide whole-house filtration.</li>
+                <li><strong>The Cost Trap:</strong> A family of 4 spends <strong>$45–$84/mo</strong> ($2,700–$5,040 over 5 yrs) paying <strong>$10–$12/gallon</strong> vs. <strong>~$0.04/gallon</strong> with Alpine Tide whole-house filtration.</li>
               </ul>
 
               <div style="font-weight: 800; color: #0284C7; margin-bottom: 4px;">B. Fort Collins &amp; NoCo Tap Water Facts</div>
@@ -2179,8 +2208,8 @@
             <div>
               <div style="font-weight: 800; color: #059669; margin-bottom: 4px;">C. Two Simple System Tiers &amp; Equipment Specs</div>
               <ul style="padding-left: 18px; margin-bottom: 10px;">
-                <li><strong>Tier 1 — Whole-House System (Minus Kitchen RO):</strong> Blacktide Alpine-Pure™ AP-1000 4-Stage Catalytic Carbon + KDF-55 tank + 5-micron sediment pre-filter on your main water line. Flows at <strong>9 GPM</strong> (vs. Aquasana Rhino's 7 GPM), <strong>1,000,000-gallon capacity</strong> (~10 years), removes 99.9% of chlorine, chloramine, Horsetooth taste, and TTHMs/HAA9 at every shower and bathroom tap.</li>
-                <li><strong>Tier 2 — Whole-House + Kitchen Sink RO Combo:</strong> Adds the dedicated 4-stage Blacktide Alpine-RO™ system under your kitchen sink with a designer faucet to strip out dissolved solids, fluoride, chromium-6, and nitrates for near-zero TDS drinking, coffee, ice cubes, and cooking water.</li>
+                <li><strong>Tier 1 — Whole-House System (Minus Kitchen RO):</strong> Alpine Tide Alpine-Pure™ AT-1000 4-Stage Catalytic Carbon + KDF-55 tank + 5-micron sediment pre-filter on your main water line. Flows at <strong>9 GPM</strong> (vs. Aquasana Rhino's 7 GPM), <strong>1,000,000-gallon capacity</strong> (~10 years), removes 99.9% of chlorine, chloramine, Horsetooth taste, and TTHMs/HAA9 at every shower and bathroom tap.</li>
+                <li><strong>Tier 2 — Whole-House + Kitchen Sink RO Combo:</strong> Adds the dedicated 4-stage Alpine Tide Alpine-RO™ system under your kitchen sink with a designer faucet to strip out dissolved solids, fluoride, chromium-6, and nitrates for near-zero TDS drinking, coffee, ice cubes, and cooking water.</li>
                 <li><strong>Top Independent Ratings:</strong> Editor's Choice (4.8/5) &amp; AquaVerdict (92/100) with a Lifetime Warranty on tanks and valves.</li>
               </ul>
 
@@ -2189,7 +2218,7 @@
                 <li><strong>Main Whole-House Tank:</strong> Zero maintenance for <strong>1,000,000 gallons (~10 years)</strong>.</li>
                 <li><strong>Whole-House 5-Micron Sediment Pre-Filter:</strong> Costs only <strong>~$15–$25</strong> (swap every 6–9 months). Has a built-in shutoff valve—twist the housing off by hand in 2 minutes, drop in the new cartridge, twist back on.</li>
                 <li><strong>Kitchen Under-Sink RO Filters (Tier 2):</strong> Pre/post carbon filters cost <strong>~$45–$65/year</strong> (swap every 6–12 months); RO membrane costs <strong>~$45</strong> (lasts 2–3 years). Twist-and-lock cartridges swap like a lightbulb in 60 seconds without turning off the main house water.</li>
-                <li><strong>Your Choice:</strong> We show you how to swap them yourself in 3 minutes on install day, or Blacktide can handle your annual filter swap for you.</li>
+                <li><strong>Your Choice:</strong> We show you how to swap them yourself in 3 minutes on install day, or Alpine Tide can handle your annual filter swap for you.</li>
               </ul>
             </div>
           </div>
@@ -2211,7 +2240,7 @@
                 <th style="padding:6px;">Contaminant Detected in CO0135291</th>
                 <th style="padding:6px;">Utility Level vs. EWG Guideline</th>
                 <th style="padding:6px;">Primary Health Risk (EWG / Toxicological Data)</th>
-                <th style="padding:6px;">How Blacktide Eliminates It</th>
+                <th style="padding:6px;">How Alpine Tide Eliminates It</th>
               </tr>
             </thead>
             <tbody>
@@ -2280,7 +2309,7 @@
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px solid #CBD5E1; padding-top: 10px; font-size: 13px; color: #334155;">
-          <div><strong>Fred Caldero • Blacktide Water Co.</strong> | Fort Collins, Colorado</div>
+          <div><strong>Fred Caldero • Alpine Tide Water Co.</strong> | Fort Collins, Colorado</div>
           <div>January Priority Installation Guarantee • No 2-Hour Sales Pitch • Upfront Written Pricing</div>
         </div>
       </section>
@@ -2398,7 +2427,7 @@
             Environmental Working Group (EWG) Tap Water Database • PWS ID: CO0135291
           </div>
           <h3 style="font-size:22px; font-weight:800; color:var(--glacier);">
-            City of Fort Collins Utilities — Detected Contaminants, Health Risks &amp; Blacktide Elimination
+            City of Fort Collins Utilities — Detected Contaminants, Health Risks &amp; Alpine Tide Elimination
           </h3>
           <div style="font-size:13px; color:var(--glacier-muted);">
             Serves ~179,901 Residents • Surface Water (Cache la Poudre River &amp; Horsetooth Reservoir) • Meets EPA Legal Limits, Exceeds 10 EWG Health Guidelines
@@ -2414,7 +2443,7 @@
               <th style="padding:10px 12px;">Contaminant (CO0135291)</th>
               <th style="padding:10px 12px;">Fort Collins vs. EWG Guideline</th>
               <th style="padding:10px 12px;">What It Causes (Health &amp; Home Risk)</th>
-              <th style="padding:10px 12px;">Blacktide Elimination Stage</th>
+              <th style="padding:10px 12px;">Alpine Tide Elimination Stage</th>
             </tr>
           </thead>
           <tbody>
@@ -2514,15 +2543,15 @@
     const PRICING = {
       city: {
         1: {
-          title: 'Tier 1: Blacktide Alpine-Pure™ Whole-House (Minus Kitchen RO)',
+          title: 'Tier 1: Alpine Tide Alpine-Pure™ Whole-House (Minus Kitchen RO)',
           monthly: 127,
           cash: '$5,999',
           fleetMonthly: 65,
           fleetCash: '$2,695 (January Neighbor Route)',
-          desc: 'Blacktide Alpine-Pure™ AP-1000 4-Stage Catalytic Carbon/KDF System on Main Line • Every Shower, Bath & Laundry Tap • 9 GPM • 1M-Gallon Capacity • Lifetime Tank Warranty'
+          desc: 'Alpine Tide Alpine-Pure™ AT-1000 4-Stage Catalytic Carbon/KDF System on Main Line • Every Shower, Bath & Laundry Tap • 9 GPM • 1M-Gallon Capacity • Lifetime Tank Warranty'
         },
         2: {
-          title: 'Tier 2: Blacktide Alpine-Pure™ + Kitchen Sink RO Combo',
+          title: 'Tier 2: Alpine Tide Alpine-Pure™ + Kitchen Sink RO Combo',
           monthly: 152,
           cash: '$7,199',
           fleetMonthly: 89,
@@ -2532,15 +2561,15 @@
       },
       hard: {
         1: {
-          title: 'Tier 1: Blacktide Alpine-Pure™ + Softener (Minus Kitchen RO)',
+          title: 'Tier 1: Alpine Tide Alpine-Pure™ + Softener (Minus Kitchen RO)',
           monthly: 167,
           cash: '$7,899',
           fleetMonthly: 99,
           fleetCash: '$4,295 (January Neighbor Route)',
-          desc: 'Blacktide Alpine-Pure™ 4-Stage Filter + Paired Salt-Based Water Softener on Main Line • 9 GPM • Lifetime Tank & Valve Warranty'
+          desc: 'Alpine Tide Alpine-Pure™ 4-Stage Filter + Paired Salt-Based Water Softener on Main Line • 9 GPM • Lifetime Tank & Valve Warranty'
         },
         2: {
-          title: 'Tier 2: Blacktide Alpine-Pure™ + Softener + Kitchen Sink RO',
+          title: 'Tier 2: Alpine Tide Alpine-Pure™ + Softener + Kitchen Sink RO',
           monthly: 192,
           cash: '$9,099',
           fleetMonthly: 115,
@@ -2553,7 +2582,7 @@
     const DECK_HOTSPOTS = {
       1: {
         eyebrow: 'Touchpoint #1 • Basement Utility Room or Garage Main Line',
-        title: 'Blacktide Alpine-Pure™ AP-1000 Main-Line Installation',
+        title: 'Alpine Tide Alpine-Pure™ AT-1000 Main-Line Installation',
         body: 'Installed cleanly in your basement utility room or garage right where your main line enters. Strips out 99.9% of chlorine, chloroform (97x EWG limit), HAA9 (447x limit), and TTHMs (253x limit) at 9 GPM for 1,000,000 gallons (~10 years).'
       },
       2: {
@@ -2563,7 +2592,7 @@
       },
       3: {
         eyebrow: 'Touchpoint #3 • Main Floor Kitchen Sink, Coffee & Ice Maker',
-        title: '🚰 Tier 2: Blacktide Alpine-RO™ Under-Sink Drinking Faucet',
+        title: '🚰 Tier 2: Alpine Tide Alpine-RO™ Under-Sink Drinking Faucet',
         body: 'Tier 2 adds a dedicated 4-stage Reverse Osmosis system neatly under your kitchen sink (and connects to your fridge ice maker). Strips out fluoride, chromium-6, nitrates, and Horsetooth lake odor for near-zero TDS drinking, coffee, and ice cubes.'
       },
       4: {
@@ -2627,7 +2656,7 @@
       if (params.get('phone')) document.getElementById('custPhone').value = params.get('phone');
       if (params.get('address')) document.getElementById('custAddress').value = params.get('address');
 
-      const savedLead = localStorage.getItem('blacktide_last_customer');
+      const savedLead = localStorage.getItem('Alpine Tide_last_customer');
       if (savedLead && !params.get('name')) {
         try {
           const parsed = JSON.parse(savedLead);
@@ -2638,8 +2667,8 @@
         } catch (e) {}
       }
 
-      document.getElementById('ghlWebhookInput').value = localStorage.getItem('blacktide_ghl_webhook') || '';
-      document.getElementById('ghlInvoiceUrlInput').value = localStorage.getItem('blacktide_ghl_invoice_url') || '';
+      document.getElementById('ghlWebhookInput').value = localStorage.getItem('Alpine Tide_ghl_webhook') || '';
+      document.getElementById('ghlInvoiceUrlInput').value = localStorage.getItem('Alpine Tide_ghl_invoice_url') || '';
       updateOfflineQueueBadge();
     }
 
@@ -2987,7 +3016,7 @@
       const cash = state.fleetDiscountMode ? chosen.fleetCash : chosen.cash;
 
       const payload = {
-        source: 'Blacktide Kitchen-Table Presentation Close',
+        source: 'Alpine Tide Kitchen-Table Presentation Close',
         timestamp: new Date().toISOString(),
         full_name: document.getElementById('custName').value.trim() || 'Fort Collins Homeowner',
         phone: document.getElementById('custPhone').value.trim(),
@@ -3004,12 +3033,12 @@
         january_slot_locked: true,
         signed_on_glass: state.hasSignature,
         signature_data_url: state.hasSignature ? sigCanvas.toDataURL('image/png') : '',
-        tags: ['blacktide-kitchen-close', 'january-install-slot', state.hardWaterMode ? 'hard-water' : 'foco-city-water']
+        tags: ['Alpine Tide-kitchen-close', 'january-install-slot', state.hardWaterMode ? 'hard-water' : 'foco-city-water']
       };
 
       const statusBox = document.getElementById('ghlSyncStatus');
-      const webhookUrl = localStorage.getItem('blacktide_ghl_webhook') || '';
-      const invoiceUrl = localStorage.getItem('blacktide_ghl_invoice_url') || '';
+      const webhookUrl = localStorage.getItem('Alpine Tide_ghl_webhook') || '';
+      const invoiceUrl = localStorage.getItem('Alpine Tide_ghl_invoice_url') || '';
 
       if (webhookUrl) {
         statusBox.textContent = 'Syncing contact, water test & estimate to GoHighLevel CRM...';
@@ -3037,14 +3066,14 @@
     }
 
     function queueOfflineLead(payload) {
-      const existing = JSON.parse(localStorage.getItem('blacktide_offline_leads') || '[]');
+      const existing = JSON.parse(localStorage.getItem('Alpine Tide_offline_leads') || '[]');
       existing.push(payload);
-      localStorage.setItem('blacktide_offline_leads', JSON.stringify(existing));
+      localStorage.setItem('Alpine Tide_offline_leads', JSON.stringify(existing));
       updateOfflineQueueBadge();
     }
 
     function updateOfflineQueueBadge() {
-      const existing = JSON.parse(localStorage.getItem('blacktide_offline_leads') || '[]');
+      const existing = JSON.parse(localStorage.getItem('Alpine Tide_offline_leads') || '[]');
       const el = document.getElementById('offlineQueueCount');
       if (el) el.textContent = `${existing.length} offline lead(s) queued`;
     }
@@ -3063,13 +3092,28 @@
       document.getElementById('ewgModal').classList.remove('open');
     }
 
+    const NEON_THEMES = [
+      { cls: '', label: '⚡ Neon: Tiffany + Volt' },
+      { cls: 'theme-volt', label: '🎾 Neon: Nike Volt' },
+      { cls: 'theme-tiffany', label: '💎 Neon: Tiffany Mint' }
+    ];
+    let currentThemeIdx = 0;
+    function cycleNeonTheme() {
+      currentThemeIdx = (currentThemeIdx + 1) % NEON_THEMES.length;
+      document.body.classList.remove('theme-volt', 'theme-tiffany');
+      if (NEON_THEMES[currentThemeIdx].cls) {
+        document.body.classList.add(NEON_THEMES[currentThemeIdx].cls);
+      }
+      document.getElementById('neonThemeBtn').textContent = NEON_THEMES[currentThemeIdx].label;
+    }
+
     async function saveGhlSettings() {
       const hook = document.getElementById('ghlWebhookInput').value.trim();
       const inv = document.getElementById('ghlInvoiceUrlInput').value.trim();
-      localStorage.setItem('blacktide_ghl_webhook', hook);
-      localStorage.setItem('blacktide_ghl_invoice_url', inv);
+      localStorage.setItem('Alpine Tide_ghl_webhook', hook);
+      localStorage.setItem('Alpine Tide_ghl_invoice_url', inv);
 
-      const queued = JSON.parse(localStorage.getItem('blacktide_offline_leads') || '[]');
+      const queued = JSON.parse(localStorage.getItem('Alpine Tide_offline_leads') || '[]');
       if (hook && queued.length > 0) {
         const remaining = [];
         for (const item of queued) {
@@ -3083,7 +3127,7 @@
             remaining.push(item);
           }
         }
-        localStorage.setItem('blacktide_offline_leads', JSON.stringify(remaining));
+        localStorage.setItem('Alpine Tide_offline_leads', JSON.stringify(remaining));
       }
       updateOfflineQueueBadge();
       closeGhlModal();
@@ -3099,7 +3143,7 @@
 
     function setQrTarget(type) {
       const base = getBaseUrl();
-      const ghl = encodeURIComponent(localStorage.getItem('blacktide_ghl_webhook') || '');
+      const ghl = encodeURIComponent(localStorage.getItem('Alpine Tide_ghl_webhook') || '');
       let targetUrl = '';
       if (type === 'sink') {
         targetUrl = `${base}sink.html?cl=${state.chlorine}&ghl=${ghl}`;
@@ -3134,7 +3178,7 @@
       const base = getBaseUrl();
       const link = `${base}index.html?mode=${modeKey}&cl=${state.chlorine}&tds=${state.tds}&opt=${state.selectedOption}`;
 
-      const body = `Hi! This is Fred Caldero with Blacktide Water Co. in Fort Collins. Here are your kitchen tap test results (Chlorine: ${state.chlorine} mg/L, TDS: ${state.tds} ppm) and your written estimate for the ${chosen.title}: $${monthly}/mo (or ${cash}). View your interactive summary here: ${link}`;
+      const body = `Hi! This is Fred Caldero with Alpine Tide Water Co. in Fort Collins. Here are your kitchen tap test results (Chlorine: ${state.chlorine} mg/L, TDS: ${state.tds} ppm) and your written estimate for the ${chosen.title}: $${monthly}/mo (or ${cash}). View your interactive summary here: ${link}`;
       window.location.href = `sms:${phone}?&body=${encodeURIComponent(body)}`;
     }
 

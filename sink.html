@@ -4,30 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>Interactive Home Water X-Ray & Live Sink Test | Blacktide Water Co.</title>
+  <title>Interactive Home Water X-Ray & Live Sink Test | Alpine Tide Water Co.</title>
   <link rel="manifest" href="./manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy: #0F172A;
-      --navy-card: #1E293B;
+      --navy: #090A0F;
+      --navy-card: #12141C;
       --glacier: #F8FAFC;
       --glacier-muted: #CBD5E1;
       --glacier-dim: #94A3B8;
-      --teal: #0284C7;
-      --teal-bright: #38BDF8;
-      --coral: #E11D48;
-      --coral-bright: #FB7185;
-      --amber: #F59E0B;
-      --emerald: #059669;
-      --emerald-bright: #34D399;
+      --teal: #00D2B8;
+      --teal-bright: #00F5D4;
+      --coral: #FF1E56;
+      --coral-bright: #FF4D79;
+      --amber: #FFB800;
+      --emerald: #A8E600;
+      --emerald-bright: #DFFF00;
       --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
-      background: #070B14;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(0, 245, 212, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 90%, rgba(223, 255, 0, 0.06) 0%, transparent 45%),
+        #06070A;
       color: var(--glacier);
       font-family: var(--font);
       line-height: 1.5;
@@ -278,7 +281,7 @@
   <header class="header">
     <div class="brand">
       <div class="brand-badge">💧</div>
-      <span>BLACKTIDE WATER CO.</span>
+      <span>Alpine Tide Water Co.</span>
     </div>
     <span style="font-size: 12.5px; font-weight: 700; color: var(--teal-bright);">Fort Collins, CO</span>
   </header>
@@ -286,7 +289,7 @@
   <main class="container">
     <div class="hero-pill">● Self-Guided Home Water X-Ray &amp; Sink Companion</div>
     <h1>See What Happens Inside Your Home’s Pipes &amp; Tap</h1>
-    <p class="lead">Tap any room in the house below to see how municipal chlorine, shower steam, and plastic bottles affect your home—and where your Blacktide Alpine-Pure™ system installs.</p>
+    <p class="lead">Tap any room in the house below to see how municipal chlorine, shower steam, and plastic bottles affect your home—and where your Alpine Tide Alpine-Pure™ system installs.</p>
 
     <!-- STEP 0: SELF-SELLING INTERACTIVE HOUSE X-RAY -->
     <section class="step-card" style="border-color: rgba(56, 189, 248, 0.4);">
@@ -298,7 +301,7 @@
           ⚠️ Current Unfiltered Tap
         </button>
         <button type="button" class="xray-mode-btn" id="btnProtected" onclick="setHouseShield(true)">
-          🛡️ With Blacktide Alpine-Pure™
+          🛡️ With Alpine Tide Alpine-Pure™
         </button>
       </div>
 
@@ -321,7 +324,7 @@
         <!-- Plumbing Pipe Network -->
         <path id="housePipeLine" class="flow-anim" d="M10,275 L125,275 L125,128 L240,128 M125,200 L390,200" stroke="#F59E0B" stroke-width="5" fill="none" stroke-linecap="round"/>
 
-        <!-- Hotspot 1: Basement / Garage Blacktide Alpine-Pure System -->
+        <!-- Hotspot 1: Basement / Garage Alpine Tide Alpine-Pure System -->
         <g onclick="selectHotspot(1)" style="cursor:pointer;">
           <circle class="pulse-ring" cx="125" cy="270" r="18" fill="rgba(56,189,248,0.35)"/>
           <circle cx="125" cy="270" r="16" fill="#0284C7" stroke="#F8FAFC" stroke-width="2"/>
@@ -376,10 +379,10 @@
           Touchpoint #1 • Basement Utility Room or Garage Main Line
         </div>
         <div style="font-size:17px; font-weight:800; margin:3px 0 6px;" id="tpTitle">
-          Where Your Blacktide Alpine-Pure™ Tank Installs
+          Where Your Alpine Tide Alpine-Pure™ Tank Installs
         </div>
         <div style="font-size:14.5px; color:var(--glacier-muted);" id="tpBody">
-          We tuck your Blacktide Alpine-Pure™ AP-1000 4-Stage system right where the main water line enters your basement or garage. Every drop of water entering your home is stripped of 99.9% of chlorine, chloroform, HAA9 (447x limit), and TTHMs (253x limit) at 9 GPM before it ever branches to a single shower or faucet.
+          We tuck your Alpine Tide Alpine-Pure™ AT-1000 4-Stage system right where the main water line enters your basement or garage. Every drop of water entering your home is stripped of 99.9% of chlorine, chloroform, HAA9 (447x limit), and TTHMs (253x limit) at 9 GPM before it ever branches to a single shower or faucet.
         </div>
       </div>
     </section>
@@ -434,7 +437,7 @@
           </div>
           <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
             <strong>Detected:</strong> 26.8 ppb (EWG Goal: 0.06 ppb) • <strong>Health Risk:</strong> Cancer, developmental &amp; reproductive risk.<br/>
-            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Blacktide Tier 1 Whole-House Carbon + Tier 2 RO</span>
+            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Alpine Tide Tier 1 Whole-House Carbon + Tier 2 RO</span>
           </div>
         </div>
 
@@ -445,7 +448,7 @@
           </div>
           <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
             <strong>Detected:</strong> 31–38 ppb (EWG Goal: 0.15 ppb) • <strong>Health Risk:</strong> Bladder &amp; colorectal cancer risk; turns into inhalable chemical steam in hot showers.<br/>
-            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Blacktide Tier 1 Whole-House Carbon (Every Shower)</span>
+            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Alpine Tide Tier 1 Whole-House Carbon (Every Shower)</span>
           </div>
         </div>
 
@@ -456,7 +459,7 @@
           </div>
           <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
             <strong>Detected:</strong> 22.0 ppb (EWG Goal: 0.1 ppb) • <strong>Health Risk:</strong> Long-term cancer risk formed when chlorine hits Poudre River wildfire runoff.<br/>
-            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Blacktide Tier 1 Whole-House Carbon + Tier 2 RO</span>
+            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Alpine Tide Tier 1 Whole-House Carbon + Tier 2 RO</span>
           </div>
         </div>
 
@@ -467,7 +470,7 @@
           </div>
           <div style="font-size: 13px; color: var(--glacier-muted); margin-top: 3px;">
             <strong>Detected:</strong> 38.9 ppb Chloroform (97x), 15.0 ppb TCAA (150x) • <strong>Health Risk:</strong> Volatile shower gases linked to liver, metabolic &amp; cancer risk.<br/>
-            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Blacktide Tier 1 Whole-House Catalytic Carbon</span>
+            <span style="color:var(--emerald-bright); font-weight:700;">✓ Eliminated By: Alpine Tide Tier 1 Whole-House Catalytic Carbon</span>
           </div>
         </div>
       </div>
@@ -528,8 +531,8 @@
     const HOTSPOTS = {
       1: {
         eyebrow: 'Touchpoint #1 • Basement Utility Room or Garage Main Line',
-        title: 'Where Your Blacktide Alpine-Pure™ System Installs',
-        body: 'We tuck your Blacktide Alpine-Pure™ AP-1000 4-Stage Catalytic Carbon & KDF-55 tank right where the main water line enters your basement or garage. It filters 1,000,000 gallons (~10 years) at a full 9 GPM pressure with a commercial 3-valve bypass and Lifetime Tank & Valve Warranty.'
+        title: 'Where Your Alpine Tide Alpine-Pure™ System Installs',
+        body: 'We tuck your Alpine Tide Alpine-Pure™ AT-1000 4-Stage Catalytic Carbon & KDF-55 tank right where the main water line enters your basement or garage. It filters 1,000,000 gallons (~10 years) at a full 9 GPM pressure with a commercial 3-valve bypass and Lifetime Tank & Valve Warranty.'
       },
       2: {
         eyebrow: 'Touchpoint #2 • 2nd Floor Master & Kids’ Showers',
@@ -539,7 +542,7 @@
       3: {
         eyebrow: 'Touchpoint #3 • Main Floor Kitchen Sink, Coffee & Ice Maker',
         title: '🚰 Ultra-Pure Cooking, Coffee & Crystal-Clear Ice Cubes',
-        body: 'Tier 2 adds the Blacktide Alpine-RO™ Under-Sink Reverse Osmosis system right under your kitchen sink with a designer drinking faucet and refrigerator ice-line connection. It strips out dissolved solids, fluoride, chromium-6, and Horsetooth lake odor (Geosmin) for near-zero TDS water.'
+        body: 'Tier 2 adds the Alpine Tide Alpine-RO™ Under-Sink Reverse Osmosis system right under your kitchen sink with a designer drinking faucet and refrigerator ice-line connection. It strips out dissolved solids, fluoride, chromium-6, and Horsetooth lake odor (Geosmin) for near-zero TDS water.'
       },
       4: {
         eyebrow: 'Touchpoint #4 • Grocery Store Plastic Bottled Water Cases',
@@ -566,7 +569,7 @@
     }
 
     const params = new URLSearchParams(window.location.search);
-    const ghlWebhookFromUrl = params.get('ghl') || localStorage.getItem('blacktide_ghl_webhook') || '';
+    const ghlWebhookFromUrl = params.get('ghl') || localStorage.getItem('Alpine Tide_ghl_webhook') || '';
     if (params.get('cl')) document.getElementById('leadChlorine').value = params.get('cl');
 
     function updateZipReport() {
@@ -588,7 +591,7 @@
       btn.textContent = 'Sending Report...';
 
       const payload = {
-        source: 'Blacktide Kitchen-Sink Homeowner Companion',
+        source: 'Alpine Tide Kitchen-Sink Homeowner Companion',
         timestamp: new Date().toISOString(),
         full_name: document.getElementById('leadName').value.trim(),
         phone: document.getElementById('leadPhone').value.trim(),
@@ -600,7 +603,7 @@
         tags: ['kitchen-sink-test', 'fort-collins-water-test', 'january-route']
       };
 
-      localStorage.setItem('blacktide_last_customer', JSON.stringify(payload));
+      localStorage.setItem('Alpine Tide_last_customer', JSON.stringify(payload));
 
       if (ghlWebhookFromUrl) {
         try {
